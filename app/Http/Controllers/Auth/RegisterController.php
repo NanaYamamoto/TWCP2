@@ -8,10 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Auth\Events\Registered; //追加
 
 class RegisterController extends Controller
 {
@@ -33,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'members/login';
 
     /**
      * Create a new controller instance.
@@ -43,7 +39,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('guest:admin');
     }
 
     /**
@@ -58,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'icon_url' => ['nullable', 'file','mimes:jpeg,png,jpg,bmb','max:2048']
+            'icon_url' => ['image', 'mimes:jpeg,png,jpg,bmb', 'nullable']
         ]);
     }
 
@@ -70,64 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        date_default_timezone_set('Asia/Tokyo');
+        $originalName = request()->file('icon_url')->getClientOriginalName();
+        $fileName =  date("Ymd_His") . '.' . $originalName;
+        $temp_path = request()->file('icon_url')->storeAs('public/members/' . $data['name'], $fileName);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'icon_url' => $data['icon_url']
+            'icon_url' => $temp_path,
+            'active' => 1,
         ]);
     }
-
-    
-    /**
-     * 管理者ログイン用
-     */
-    protected function adminValidator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'icon_url' => ['nullable', 'file','mimes:jpeg,png,jpg,bmb','max:2048']
-        ]);
-    }
-
-    public function showAdminRegisterForm()
-    {
-        return view('auth.register', ['authgroup' => 'admin']);
-    }
-
-    public function registerAdmin(Request $request)
-    {
-        $this->adminValidator($request->all())->validate();
-
-        event(new Registered($user = $this->createAdmin($request->all())));
-
-        Auth::guard('admin')->login($user);
-
-        if ($response = $this->registeredAdmin($request, $user)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect(RouteServiceProvider::ADMINHOME);
-    }
-
-    protected function createAdmin(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'type' => $data['type'] = 2,
-            'icon_url' => $data['icon_url']
-        ]);
-    }
-
-    protected function registeredAdmin(Request $request, $user)
-    {
-        //
-    }
-
 }
