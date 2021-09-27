@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Information;
 
 use App\Http\TakemiLibs\InterfaceSearch;
@@ -9,28 +8,24 @@ use \Form;
 /**
  * お知らせ管理画面の検索条件入力フォーム
  */
-class Search implements InterfaceSearch
-{
+class Search implements InterfaceSearch{
 
-    public function build(array $data = []): array
-    {
-        //dd($data);
+    public function build(array $data = []): array {
         $form = [];
         $opt = ['class' => 'form_control'];
 
         //お知らせタイトル
-        $form['title'] = Form::text('title', $data['title'] ?? '', $opt);
+        $form['title'] = Form::text('title', $data['title'] ?? '', $opt );
 
-        $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.info.type'), $opt);
+        $form['type'] = SimpleForm::radio('type', $data['type']??'', __('define.info.type'), $opt );
 
-        $form['publish'] = SimpleForm::radio('publish', $data['publish'] ?? '', __('define.publish'), $opt);
-        //dd($form['type']);
+        $form['publish'] = SimpleForm::radio('publish', $data['publish']??'', __('define.publish'), $opt );
         return $form;
     }
 
-    public function getRule(array $data = []): array
-    {
+    public function getRule(array $data = []): array {
         $ret = [];
         return $ret;
+        
     }
 }
