@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Message;
-use App\Models\Tag;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //全てのメソッドが全てのメソッドがよばれる前に先に呼ぶメソッド
-        // 前処理ができるイメージ
-        
+        //
     }
 }

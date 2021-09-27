@@ -1,8 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public/uploads
-
 /storage/logs
 /storage/app
 /storage/framework
@@ -17,7 +15,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/.history
-/.DS_Store
-
 

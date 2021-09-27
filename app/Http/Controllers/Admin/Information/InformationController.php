@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin\Information;
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
+
 /**
  * お知らせ管理コントローラー`
  */
-class InformationController extends Controller{
+class InformationController extends Controller
+{
     protected $session_key = 'information';
 
     /**
@@ -16,40 +18,45 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function index( Request $request ){
+    public function index(Request $request)
+    {
         $search = new Search();
-        $service= new InformationService();
+        $service = new InformationService();
 
-        $ses_key = $this->session_key.'.serach';
+        $ses_key = $this->session_key . '.search';
 
-        if( $request->has('btnSearch') ) {
+        if ($request->has('btnSearch')) {
             $search_val = $request->all();
+            //dd($search_val);
+
             //検索値のバリデーション
-            $ret = SimpleForm::validation( $search_val, $search->getRule() );
-            if( $ret !== true ) {
+            $ret = SimpleForm::validation($search_val, $search->getRule());
+            if ($ret !== true) {
                 //バリデーションエラーあり
-                foreach( $ret->errors() as $i => $v ) unset( $search_val[$i]);
+                foreach ($ret->errors() as $i => $v) unset($search_val[$i]);
             }
             //検索値をセッションに保存
-            session()->put( $ses_key.'.input', $search_val );
+            session()->put($ses_key . '.input', $search_val);
         }
-        if( $request->has('btnSearchClear') ) {
+        if ($request->has('btnSearchClear')) {
             session()->forget("{$ses_key}");
         }
 
-        $search_val = session()->get( "{$ses_key}.input", [] );
-        $form = $search->build( $search_val );
+        $search_val = session()->get("{$ses_key}.input", []);
+        //var_dump($search_val);
 
-        $def['publish'] = __('define.publish');
+        $form = $search->build($search_val);
+
+        $def['publish'] = __('define.publish'); //(連想配列)
         $def['type'] = __('define.info.type');
 
-        $rows = $service->getList( $search_val );
+        $rows = $service->getList($search_val);
 
         $view = view('admin.info.list');
 
-        $view->with('rows', $rows );
-        $view->with('form', $form );
-        $view->with('def', $def );
+        $view->with('rows', $rows);
+        $view->with('form', $form);
+        $view->with('def', $def);
 
         return $view;
     }
@@ -61,18 +68,18 @@ class InformationController extends Controller{
      * @param int $id
      * @return void
      */
-    public function detail( Request $request, int $id )
+    public function detail(Request $request, int $id)
     {
         $form = new Form();
         $service = new InformationService();
-        $data = $service->get( $id );
+        $data = $service->get($id);
 
-        if( !$data ){
+        if (!$data) {
             return redirect()->route('admin.information');
         }
 
         $view = view('admin.info.detail');
-        $view->with( 'form', $form->getHtml( $data->toArray() ) );
+        $view->with('form', $form->getHtml($data->toArray()));
 
         return $view;
     }
@@ -82,15 +89,19 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function regist( Request $request ){
+    public function regist(Request $request)
+    {
         $form = new Form();
 
-        $ses_key = $this->session_key.'.regist';
+        $ses_key = $this->session_key . '.regist';
 
-        $input = session()->get("{$ses_key}.input", [] );
+        $input = session()->get("{$ses_key}.input", []);
+        //dd($input);
 
         $view = view('admin.info.regist');
-        $view->with('form', $form->buildRegist( $input ) );
+        $view->with('form', $form->buildRegist($input));
+        //dd($form->buildRegist($input));
+
 
         return $view;
     }
@@ -100,22 +111,22 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function regist_confirm( Request $request )
+    public function regist_confirm(Request $request)
     {
         $form = new Form();
 
-        $ses_key = $this->session_key.'.regist';
+        $ses_key = $this->session_key . '.regist';
 
         //入力値をセッションに保存
         $data = $request->all();
-        session()->put("{$ses_key}.input", $data );
+        session()->put("{$ses_key}.input", $data); //(->flashにすると一回だけセッションが保たれる)
 
         //バリデーション
-        $request->validate( $form->getRuleRegist( $data ) );
+        $request->validate($form->getRuleRegist($data));
 
         //確認画面表示
         $view = view('admin.info.regist_confirm');
-        $view->with('form', $form->getHtml( $data ) );
+        $view->with('form', $form->getHtml($data));
 
         return $view;
     }
@@ -126,32 +137,32 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function regist_proc( Request $request )
+    public function regist_proc(Request $request)
     {
         $form = new Form();
         $service = new InformationService();
 
         $ses_key = "{$this->session_key}.regist";
 
-        $data = session()->get( "{$ses_key}.input", null );
+        $data = session()->get("{$ses_key}.input", null);
 
-        //データがない場合は入寮画面に戻る
-        if( empty( $data ) ){
+        //データがない場合は入力画面に戻る
+        if (empty($data)) {
             return redirect()->route('admin.information.regist');
         }
 
         //バリデーション
-        $ret = SimpleForm::validation($data, $form->getRuleRegist($data) );
-        if( $ret !== true ) {
+        $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
+        if ($ret !== true) {
             //入力画面にリダイレクト
             return redirect()->route('admin.information.regist')->withErrors($ret);
         }
 
         //登録処理
-        $service->regist( $data );
+        $service->regist($data);
 
         //セッション削除
-        session()->forget( "{$ses_key}" );
+        session()->forget("{$ses_key}");
 
         return redirect()->route('admin.information.regist.complete');
     }
@@ -161,13 +172,13 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function regist_complete( Request $request )
+    public function regist_complete(Request $request)
     {
         $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('admin.information') );
+        $view->with('back', route('admin.information'));
 
         return $view;
     }
@@ -178,24 +189,25 @@ class InformationController extends Controller{
      * @param int $id
      * @return void
      */
-    public function update( Request $request, $id ){
+    public function update(Request $request, $id)
+    {
         $form = new Form();
         $service = new InformationService();
 
-        $ses_key = $this->session_key.'.update';
+        $ses_key = $this->session_key . '.update';
 
-        if( $id ) {
-            $data = $service->get( $id );
+        if ($id) {
+            $data = $service->get($id);
             session()->put("{$ses_key}.id", $id);
         }
 
-        $input = session()->get("{$ses_key}.input", [] );
-        if( !$input ) {
+        $input = session()->get("{$ses_key}.input", []);
+        if (!$input) {
             $input = $data->toArray();
         }
         $view = view('admin.info.update');
-        $view->with('form', $form->build( $input ) );
-        $view->with('data', $data );
+        $view->with('form', $form->build($input));
+        $view->with('data', $data);
 
         return $view;
     }
@@ -205,27 +217,27 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function update_confirm( Request $request )
+    public function update_confirm(Request $request)
     {
         $form = new Form();
         $service = new InformationService();
 
-        $ses_key = $this->session_key.'.update';
+        $ses_key = $this->session_key . '.update';
 
         //入力値をセッションに保存
         $input = $request->all();
-        session()->put("{$ses_key}.input", $input );
+        session()->put("{$ses_key}.input", $input);
 
         //バリデーション
-        $request->validate( $form->getRuleRegist( $input ) );
+        $request->validate($form->getRuleRegist($input));
 
         //
-        $data = $service->get( session()->get("{$ses_key}.id") );
+        $data = $service->get(session()->get("{$ses_key}.id"));
 
         //確認画面表示
         $view = view('admin.info.update_confirm');
-        $view->with('form', $form->getHtml( $input ) );
-        $view->with('data', $data );
+        $view->with('form', $form->getHtml($input));
+        $view->with('data', $data);
 
         return $view;
     }
@@ -236,33 +248,33 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function update_proc( Request $request )
+    public function update_proc(Request $request)
     {
         $form = new Form();
         $service = new InformationService();
 
         $ses_key = "{$this->session_key}.update";
 
-        $data = session()->get( "{$ses_key}.input", null );
+        $data = session()->get("{$ses_key}.input", null);
 
         //データがない場合は入寮画面に戻る
-        if( empty( $data ) ){
+        if (empty($data)) {
             return redirect()->route('admin.information.update');
         }
 
         //バリデーション
-        $ret = SimpleForm::validation($data, $form->getRuleRegist($data) );
-        if( $ret !== true ) {
+        $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
+        if ($ret !== true) {
             //入力画面にリダイレクト
             return redirect()->route('admin.information.update')->withErrors($ret);
         }
 
         //登録処理
-        $id = session()->get( "{$ses_key}.id");
-        $service->update( $id, $data );
+        $id = session()->get("{$ses_key}.id");
+        $service->update($id, $data);
 
         //セッション削除
-        session()->forget( "{$ses_key}" );
+        session()->forget("{$ses_key}");
 
         return redirect()->route('admin.information.update.complete');
     }
@@ -272,13 +284,13 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function update_complete( Request $request )
+    public function update_complete(Request $request)
     {
         $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('admin.information') );
+        $view->with('back', route('admin.information'));
 
         return $view;
     }
@@ -289,21 +301,21 @@ class InformationController extends Controller{
      * @param int $id
      * @return void
      */
-    public function delete_confirm( Request $request, int $id )
+    public function delete_confirm(Request $request, int $id)
     {
         $form = new Form();
         $service = new InformationService();
         $ses_key = "{$this->session_key}.delete";
-        $data = $service->get( $id );
+        $data = $service->get($id);
 
-        if( !$data ){
+        if (!$data) {
             return redirect()->route('admin.information');
         }
 
-        session()->put( "{$ses_key}.id", $id);
+        session()->put("{$ses_key}.id", $id);
 
         $view = view('admin.info.delete_confirm');
-        $view->with( 'form', $form->getHtml( $data->toArray() ) );
+        $view->with('form', $form->getHtml($data->toArray()));
 
         return $view;
     }
@@ -314,25 +326,25 @@ class InformationController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function delete_proc( Request $request )
+    public function delete_proc(Request $request)
     {
         $form = new Form();
         $service = new InformationService();
 
         $ses_key = "{$this->session_key}.delete";
 
-        $id = session()->get( "{$ses_key}.id", null );
+        $id = session()->get("{$ses_key}.id", null);
 
         //データがない場合は入寮画面に戻る
-        if( empty( $id ) ){
+        if (empty($id)) {
             return redirect()->route('admin.information');
         }
 
         //削除処理
-        $service->delete( $id );
+        $service->delete($id);
 
         //セッション削除
-        session()->forget( "{$ses_key}" );
+        session()->forget("{$ses_key}");
 
         return redirect()->route('admin.information.update.complete');
     }
