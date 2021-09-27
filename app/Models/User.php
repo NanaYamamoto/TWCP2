@@ -20,6 +20,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'active',
+        'icon_url',
+        'publish_at'
     ];
 
     /**
