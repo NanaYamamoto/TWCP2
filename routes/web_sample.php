@@ -1,30 +1,27 @@
 <?php
 
 use App\Http\Controllers\Admin\Information\InformationController;
-use App\Http\Controllers\Admin\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
-
-
 //お知らせ管理
-Route::any('admin/info/regist', [InformationController::class, 'regist'])->name('admin.information.regist');
+//新規登録
+Route::any ('admin/info/regist', [InformationController::class, 'regist'])->name('admin.information.regist');
 Route::post('admin/info/regist/confirm', [InformationController::class, 'regist_confirm'])->name('admin.information.regist.confirm');
 Route::post('admin/info/regist/proc', [InformationController::class, 'regist_proc'])->name('admin.information.regist.proc');
-Route::any('admin/info/regist/complete', [InformationController::class, 'regist_complete'])->name('admin.information.regist.complete');
-
+Route::any ('admin/info/regist/complete', [InformationController::class, 'regist_complete'])->name('admin.information.regist.complete');
+//変更
 Route::post('admin/info/update/confirm', [InformationController::class, 'update_confirm'])->name('admin.information.update.confirm');
 Route::post('admin/info/update/proc', [InformationController::class, 'update_proc'])->name('admin.information.update.proc');
-Route::any('admin/info/update/complete', [InformationController::class, 'update_complete'])->name('admin.information.update.complete');
-Route::any('admin/info/update/{id}', [InformationController::class, 'update'])->name('admin.information.update');
-
+Route::any ('admin/info/update/complete', [InformationController::class, 'update_complete'])->name('admin.information.update.complete');
+Route::any ('admin/info/update/{id}', [InformationController::class, 'update'])->name('admin.information.update');
+//削除
 Route::post('admin/info/delete/proc', [InformationController::class, 'delete_proc'])->name('admin.information.delete.proc');
-Route::any('admin/info/delete/complete', [InformationController::class, 'delete_complete'])->name('admin.information.delete.complete');
-Route::any('admin/info/delete/{id}', [InformationController::class, 'delete_confirm'])->name('admin.information.delete.confirm');
+Route::any ('admin/info/delete/complete', [InformationController::class, 'delete_complete'])->name('admin.information.delete.complete');
+Route::any ('admin/info/delete/{id}', [InformationController::class, 'delete_confirm'])->name('admin.information.delete.confirm');
+//詳細
+Route::any ('admin/info/{id}', [InformationController::class, 'detail'])->name('admin.information.detail');
 
-Route::any('admin/info/{id}', [InformationController::class, 'detail'])->name('admin.information.detail');
-
-Route::any('admin/info', [InformationController::class, 'index'])->name('admin.information');
-
+Route::any ('admin/info', [InformationController::class, 'index'])->name('admin.information'); 
 
 //ユーザー管理
 Route::any('admin/users/regist', [UsersController::class, 'regist'])->name('admin.users.regist');

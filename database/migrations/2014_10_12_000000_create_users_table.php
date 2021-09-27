@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('active')->comment('利用可能フラグ');
             $table->string('icon_url')->nullable()->comment('アイコン');
             $table->rememberToken()->comment('パスワード再発行トークン');
-            $table->timestamps();
         });
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Operate\Members\MembersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//メンバー管理
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::any('operate/members/regist', [MembersController::class, 'regist'])->name('operate.members.regist');
 Route::post('operate/members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('operate.members.regist.confirm');
