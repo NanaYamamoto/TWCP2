@@ -23,4 +23,21 @@ Route::any ('admin/info/{id}', [InformationController::class, 'detail'])->name('
 
 Route::any ('admin/info', [InformationController::class, 'index'])->name('admin.information'); 
 
-///a
+//ユーザー管理
+Route::any('admin/users/regist', [UsersController::class, 'regist'])->name('admin.users.regist');
+Route::post('admin/users/regist/confirm', [UsersController::class, 'regist_confirm'])->name('admin.users.regist.confirm');
+Route::post('admin/users/regist/proc', [UsersController::class, 'regist_proc'])->name('admin.users.regist.proc');
+Route::any('admin/users/regist/complete', [UsersController::class, 'regist_complete'])->name('admin.users.regist.complete');
+
+Route::post('admin/users/update/confirm', [UsersController::class, 'update_confirm'])->name('admin.users.update.confirm');
+Route::post('admin/users/update/proc', [UsersController::class, 'update_proc'])->name('admin.users.update.proc');
+Route::any('admin/users/update/complete', [UsersController::class, 'update_complete'])->name('admin.users.update.complete');
+Route::any('admin/users/update/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+
+Route::post('admin/users/delete/proc', [UsersController::class, 'delete_proc'])->name('admin.users.delete.proc');
+Route::any('admin/users/delete/complete', [UsersController::class, 'delete_complete'])->name('admin.users.delete.complete');
+Route::any('admin/users/delete/{id}', [UsersController::class, 'delete_confirm'])->name('admin.users.delete.confirm');
+
+Route::any('admin/users/{id}', [UsersController::class, 'detail'])->name('admin.users.detail');
+
+Route::any('admin/users', [UsersController::class, 'index'])->name('admin.users');
