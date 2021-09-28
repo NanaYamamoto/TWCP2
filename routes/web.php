@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Operate\Members\MembersController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,42 +37,35 @@ Route::any('operate/members/{id}', [MembersController::class, 'detail'])->name('
 
 Route::any('operate/members', [MembersController::class, 'index'])->name('operate.members');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
 include 'web_sample.php';
+
+//ログイン、新規登録を自作
+Route::get('/loginForm', [AuthController::class, 'showLogin'])->name('showLogin');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// AuthRouteMethods.phpのルートを手動で記述
-//新規登録
-Route::get('members/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('members/register', 'Auth\RegisterController@register');
-// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('user.resister_show');
-// Route::post('register', 'Auth\RegisterController@post')->name('user.resister_post');
-// Route::get('register/confirm', 'Auth\RegisterController@confirm')->name('user.register_confirm');
-// Route::post('register/confirm', 'Auth\RegisterController@register')->name('user.resister_resister');
-// Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.register_complete');
+// // AuthRouteMethods.phpのルートを手動で記述
+// //新規登録
+// Route::get('members/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('members/register', 'Auth\RegisterController@register');
 
-//ログイン
-Route::get('members/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('members/login', 'Auth\LoginController@login');
+// //ログイン
+// Route::get('members/login', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::post('members/login', 'Auth\LoginController@login');
 
-//ログアウト
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// //ログアウト
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-//パスワードリセット
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// //パスワードリセット
+// Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-//メール認証も実装している場合は以下も追加
-Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+// //メール認証も実装している場合は以下も追加
+// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+// Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
