@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
-
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -18,6 +17,10 @@ class PostsController extends Controller
 {
     protected $session_key = 'post';
 
+    public function index1(Request $request)
+    {
+        return view ('team.team');
+    }
     /**
      * 検索一覧画面
      * @param Request $request
@@ -75,6 +78,19 @@ class PostsController extends Controller
         return view('admin.post.login');
     }
 
+    public function postlogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        if (\Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            return redirect()->route('post.profile');
+        }
+        return redirect()->back();
+    }
+
 
     public function profile(Request $request)
     {
@@ -126,7 +142,6 @@ class PostsController extends Controller
         $view->with('user', $users);
 
         return $view;
-        
     }
 
 
@@ -252,7 +267,7 @@ class PostsController extends Controller
 
         $ses_key = "{$this->session_key}.regist";
 
-        
+
         $data = $request->except('img');
         //dd($request->file('img'));
         //$imagefile = $request->file('img');
@@ -294,7 +309,7 @@ class PostsController extends Controller
             return redirect()->route('post.regist')->withErrors($ret);
         }
 
-        
+
 
         //登録処理
         $service->regist($data);

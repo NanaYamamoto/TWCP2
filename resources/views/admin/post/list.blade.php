@@ -1,11 +1,11 @@
-@extends('layouts.post')
+@extends('team.team')
 
 
 
 
 @section('contents')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3 mb-3 border-bottom">
-    <h1 class="h2"><i class="fas fa-user-lock"></i> ユーザー管理</h1>
+    <h1 class="h2"><i class="fas fa-list"></i> 投稿一覧</h1>
 
 </div>
 <div class="card">
@@ -52,37 +52,77 @@
 
 <div class="card" style="margin-top:10px;">
     <div class="card-header">
-        <h6 class="card-title">データ一覧</h6>
+        <h6 class="card-title">投稿一覧</h6>
     </div>
     <div class="dard-body">
         @if( count($rows) )
-        <table class="table table-bordered table-hover dataTable dtr-inline" role="grid">
-            <thead>
-                <tr role="row">
-                    <th>ID</th>
-                    <th>名前</th>
-                    <th>カテゴリー</th>
-                    <th>本文</th>
-                    <th>最終更新日時<br />作成日時</th>
-                    <th>操作</th>
-                </tr>
-                @foreach( $rows as $row )
-                <tr>
-                    <td>{{$row->id}}</td>
-                    <td>{{$row->user->name}}</td>
-                    <td>{{$row->category}}</td>
-                    <td>{{$row->content}}</td>
-                    <td>{{$row->updated_at}}<br />{{$row->created_at}}</td>
-                    <td>
-                        <a href="{{route('post.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
-                        <a href="{{route('post.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
-                        <a href="{{route('post.delete.proc', $row->id)}}" class="btn btn-outline-primary">削除</a>
-                    </td>
-                </tr>
-                @endforeach
-            </thead>
-        </table>
-        {{$rows->links()}}
+        <div class="row">
+            <div class="col-md mb-4">
+                <div class="card row-card">
+                    <!-- このリンククリック範囲が親<div>全体まで広がる -->
+
+                    @foreach( $rows as $row )
+                    <div class="card-body d-flex flex-row row">
+                        <div class="col-2 text-center">
+                            <a href="{{ route('post.profile', ['name' => $row->user->name]) }}" class="in-link text-dark">
+                                <img class="user-icon rounded-circle" src="{{ $row->user->icon_url }}" style="width: 50px; height: 50px;">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <p class="mb-1">
+                                <a href="{{ route('post.profile', ['name' => $row->user->name]) }}" class="font-weight-bold user-name-link text-dark mr-4">
+                                    {{ $row->user->name }}
+                                </a>
+                                <span class="font-weight-lighter">{{ $row->created_at }}</span>
+                            </p>
+
+                        </div>
+
+
+
+                        @if( Auth::id() === $row->user_id )
+                        <!-- dropdown -->
+                        <div class="col-1 card-text">
+                            <div class="dropdown text-center">
+                                <a class="in-link p-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-lg"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ route('post.update', $row->id) }}">
+                                        <i class="fas fa-pen mr-1"></i>投稿を編集する
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="{{ route('post.delete.proc', $row->id) }}">
+                                        <i class="fas fa-trash-alt mr-1"></i>投稿を削除する
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- dropdown -->
+
+
+
+                        @endif
+
+                    </div>
+
+                    <div class="card-body pt-0">
+                        <div class="px-3">
+                            {!! ($row->content) !!}
+                        </div>
+
+                    </div>
+                    <div class="card-footer py-1 d-flex justify-content-end bg-white">
+
+                        <!-- いいねアイコン -->
+                        <div class="d-flex align-items-center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
         @else
         <span>データがありません</span>
         @endif

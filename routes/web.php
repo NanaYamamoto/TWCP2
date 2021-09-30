@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Operate\Members\MembersController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,14 +47,14 @@ Route::any('operate/members', [MembersController::class, 'index'])->name('operat
 
 include 'web_sample.php';
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // AuthRouteMethods.phpのルートを手動で記述
 //新規登録
-Route::get('members/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('members/register', 'Auth\RegisterController@register');
+Route::get('members/register', [RegisterController::class,'showRegistrationForm'])->name('register');
+Route::post('members/register', [RegisterController::class,'register']);
 // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('user.resister_show');
 // Route::post('register', 'Auth\RegisterController@post')->name('user.resister_post');
 // Route::get('register/confirm', 'Auth\RegisterController@confirm')->name('user.register_confirm');
@@ -58,11 +62,11 @@ Route::post('members/register', 'Auth\RegisterController@register');
 // Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.register_complete');
 
 //ログイン
-Route::get('members/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('members/login', 'Auth\LoginController@login');
+Route::get('members/login', [LoginController::class,'showLoginForm'])->name('login');
+Route::post('members/login', [LoginController::class,'login']);
 
-//ログアウト
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// //ログアウト
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //パスワードリセット
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
