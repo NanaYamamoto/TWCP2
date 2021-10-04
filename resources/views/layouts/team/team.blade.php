@@ -44,6 +44,7 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('css/team.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
@@ -51,10 +52,7 @@
 
 <body>
     <!--ローディング画面-->
-    <div id="splash">
-        <div id="splash_text"></div>
-        <!--/splash-->
-    </div>
+    
     <div id="container">
 
         <!--タイトル壁紙-->
@@ -71,17 +69,17 @@
             <img src="/images/画像/table.jpeg" alt="">
 
             <!--ページトップ-->
-            <nav class="navbar navbar-expand navbar-dark tempting-azure-gradient sticky-top">
+            <nav class="navbar navbar-expand navbar-dark tempting-azure-gradient" style="z-index: 100;">
 
                 <div class="container d-flex justify-content-center px-4">
                     <a class="navbar-brand mr-auto" href="/" style="font-size:1.5rem;"><i class="fas fa-sun mr-1"></i>暮らしのまとめ</a>
 
 
 
-                    <form method="GET" action="{{ route('operate.user') }}" class="search-form form-inline w-25 d-none d-md-flex">
+                    <!-- <form method="GET" action="{{ route('operate.user') }}" class="search-form form-inline w-25 d-none d-md-flex">
                         <span></span>
                         <input class="form-control w-100" name="free_word" type="search" placeholder="投稿を検索" value="{{ $freeWord ?? old('free_word') }}">
-                    </form>
+                    </form> -->
 
 
 
@@ -92,17 +90,17 @@
 
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
+                            <a class="nav-link" href="{{ route('post.register') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link mr-2" href="{{ route('login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
+                            <a class="nav-link mr-2" href="{{ route('post.login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
                         </li>
 
 
                         @endguest
 
-                        @auth
+                        @auth()
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.regist') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
                         </li>
@@ -117,11 +115,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- <img class="user-mini-icon  rounded-circle" src="{{ Auth::user()->icon_url }}"> -->
-                                {{ Auth::user()->name }}さん
+                                @isset($authgroup)
+                                    {{ Auth::guard($authgroup)->user()->name }}さん
+                                    @else
+                                    {{ Auth::user()->name }}さん
+                                @endisset
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <button class="dropdown-item" type="button">
-
+                                <button form="mypage-button" class="dropdown-item" type="submit">
                                     マイページ
                                 </button>
 
@@ -131,6 +132,9 @@
                                 </button>
                             </div>
                         </li>
+                        <form id="mypage-button" method="POST" action="{{ route('post.profile') }}">
+                            @csrf
+                        </form>
                         <form id="logout-button" method="POST" action="{{ route('logout') }}">
                             @csrf
                         </form>

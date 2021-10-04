@@ -2,7 +2,7 @@
 
 <style>
     body {
-        background-image: linear-gradient(to right, #4e8dff, #3e68ff, #2b8aff, #1d8dff, #23ddf9);
+        background-image: linear-gradient(to right, #ff4e50, #ff713e, #ff932b, #ffb41d, #f9d423);
     }
 </style>
 

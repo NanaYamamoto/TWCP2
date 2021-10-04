@@ -42,12 +42,50 @@ class LoginController extends Controller
         }
     }
 
+    public function showPostLoginForm()
+    {
+        return view('admin.post.login');
+    }
+
+    public function postlogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if (Auth::guard('post')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => [1], 'active' => [1]], $request->get('remember'))) 
+        {
+            return redirect()->intended('/post');
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return back()->withInput($request->only('email', 'remember'));
+        
+    }
+
     /**
      * 管理者ログイン用
      */
     public function showAdminLoginForm()
     {
-        return view('auth.login', ['authgroup' => 'admin']);
+        return view('auth.adminlogin', ['authgroup' => 'admin']);
     }
 
     public function adminLogin(Request $request)
@@ -126,7 +164,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    
 
     /**
      * Create a new controller instance.
@@ -137,5 +175,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:post')->except('logout');
     }
 }

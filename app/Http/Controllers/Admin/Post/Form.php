@@ -77,4 +77,15 @@ class Form implements InterfaceForm
         
         return $data;
     }
+
+    public function store($icon_image)
+    {
+        date_default_timezone_set('Asia/Tokyo');
+
+        $originalName = $icon_image->getClientOriginalName();
+        $fileName =  date("Ymd_His") . '.' . $originalName;
+        $temp_path = $icon_image->storeAs('public/temp/members', $fileName);
+
+        return $temp_path;
+    }
 }

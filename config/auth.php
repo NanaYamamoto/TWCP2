@@ -60,6 +60,11 @@ return [
             'provider' => 'admins', //追加
         ],
 
+        'post' => [ //追加
+            'driver' => 'session', //追加
+            'provider' => 'posts', //追加
+        ],
+
     ],
 
     /*
@@ -87,6 +92,11 @@ return [
 
 
         'admins' => [ //追加
+            'driver' => 'eloquent', //追加
+            'model' => App\Models\User::class, //追加
+        ],
+
+        'posts' => [ //追加
             'driver' => 'eloquent', //追加
             'model' => App\Models\User::class, //追加
         ],

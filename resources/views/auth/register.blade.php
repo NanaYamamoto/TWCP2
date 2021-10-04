@@ -1,5 +1,11 @@
 @extends('layouts.auth')
 
+<style>
+    body {
+        background-image: linear-gradient(to right, #4e8dff, #3e68ff, #2b8aff, #1d8dff, #23ddf9);
+    }
+</style>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

@@ -48,6 +48,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function posts()
+{
+    return $this->hasMany('App\Models\Post');
+}
+
     public function myContent($user_id){
         $user = \Request::query('users');
         // タグがなければ、その人が持っているメモを全て取得

@@ -26,16 +26,25 @@
 </head>
 
 <body>
-    
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-            
-                <form method="POST" action="{{ route('login') }}">
+
+                <form method="POST" action="{{ route('post.register') }}" enctype="multipart/form-data">
                     @csrf
-                    <h1><span>暮らしのアプリ</span> ログイン</h1>
+                    <h1><span>暮らしのアプリ</span> 新規作成</h1>
                     <div class="form-group row">
-                        <input placeholder="メールアドレス" type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input placeholder="名前" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group row">
+                        <input placeholder="メールアドレス" type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -53,20 +62,32 @@
                         @enderror
                     </div>
 
-                    <button class="btn">ログイン</button>
-                    @if (Route::has('password.request'))
-                    <button class="reset-btn" href="{{ route('password.request') }}">
-                        {{ __('パスワードを忘れた場合') }}
-                    </button>
-                    @endif
+                    <div class="form-group row">
+                        <input placeholder="もう一度パスワードを入力" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    </div>
+
+                    <div class="form-group row">
+                        <input id="icon_url" type="file" name="icon_url" class="@error('icon_url') is-invalid @enderror">
+                        @error('icon_url')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn">{{ __('作成') }}</button>
+
+                    
+
                 </form>
-            
+
             </div>
         </div>
     </div>
 
     <footer>
-        <h5><a target="_blank" href="{{ route('post.home') }}">ホームに戻る</a></h5><!--href="http://lifes.gd"-->
+        <h5><a target="_blank" href="{{ route('post.home') }}">ホームに戻る</a></h5>
+        <!--href="http://lifes.gd"-->
     </footer>
 
 </body>

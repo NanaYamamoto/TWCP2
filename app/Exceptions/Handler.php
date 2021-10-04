@@ -44,8 +44,12 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['message' => $exception->getMessage()], 401);
         }
-        if ($request->is('operate') || $request->is('operate/admin/*')) {
+        if ($request->is('member/post/') || $request->is('member/post/*') ) {
+            return redirect()->guest('/post/login');
+        }
+        if ($request->is('operate/admin') || $request->is('operate/admin/*')) {
             return redirect()->guest('/login/admin');
+            // operateだけだとoperate/membersも含まれるのでこの記述
         }
 
         return redirect()->guest($exception->redirectTo() ?? route('login'));

@@ -65,15 +65,6 @@
                 <div class="container d-flex justify-content-center px-4">
                     <a class="navbar-brand mr-auto" href="/" style="font-size:1.5rem;"><i class="fas fa-sun mr-1"></i>暮らしのまとめ</a>
 
-
-
-                    <form method="GET" action="{{ route('operate.user') }}" class="search-form form-inline w-25 d-none d-md-flex">
-                        <span></span>
-                        <input class="form-control w-100" name="free_word" type="search" placeholder="投稿を検索" value="{{ $freeWord ?? old('free_word') }}">
-                    </form>
-
-
-
                     <!-- 検索フォームを表示しない -->
 
 
@@ -85,7 +76,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link mr-2" href="{{ route('login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
+                            <a class="nav-link mr-2" href="{{ route('post.login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
                         </li>
 
 
@@ -109,11 +100,11 @@
                                 {{ Auth::user()->name }}さん
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a href="route{{ ('post.profile') }}">
                                 <button class="dropdown-item" type="button">
-
                                     マイページ
                                 </button>
-
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <button form="logout-button" class="dropdown-item" type="submit">
                                     ログアウト
