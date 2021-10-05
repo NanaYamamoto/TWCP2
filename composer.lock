@@ -1021,7 +1021,7 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
+
             "version": "v8.62.0",
             "source": {
                 "type": "git",
@@ -1032,18 +1032,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/60a7e00488167ce2babf3a2aeb3677e48aaf39be",
                 "reference": "60a7e00488167ce2babf3a2aeb3677e48aaf39be",
-=======
-            "version": "v8.61.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "3d528d3d3c8ecb444b50a266c212a52973a6669b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3d528d3d3c8ecb444b50a266c212a52973a6669b",
-                "reference": "3d528d3d3c8ecb444b50a266c212a52973a6669b",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -1201,7 +1189,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
+
             "time": "2021-09-28T13:30:25+00:00"
         },
         {
@@ -1262,9 +1250,6 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "time": "2021-09-29T13:25:52+00:00"
-=======
-            "time": "2021-09-14T13:31:32+00:00"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
         },
         {
             "name": "laravel/tinker",
@@ -1999,8 +1984,6 @@
                 }
             ],
             "time": "2021-09-06T09:29:23+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "nette/schema",
@@ -2148,7 +2131,6 @@
                 "source": "https://github.com/nette/utils/tree/v3.2.5"
             },
             "time": "2021-09-20T10:50:11+00:00"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
         },
         {
             "name": "nikic/php-parser",
@@ -3749,7 +3731,6 @@
         },
         {
             "name": "symfony/http-kernel",
-<<<<<<< HEAD
             "version": "v5.3.9",
             "source": {
                 "type": "git",
@@ -3760,18 +3741,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/ceaf46a992f60e90645e7279825a830f733a17c5",
                 "reference": "ceaf46a992f60e90645e7279825a830f733a17c5",
-=======
-            "version": "v5.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "a3a78e37935a527b50376c22ac1cec35b57fe787"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/a3a78e37935a527b50376c22ac1cec35b57fe787",
-                "reference": "a3a78e37935a527b50376c22ac1cec35b57fe787",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -3854,11 +3823,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-kernel/tree/v5.3.9"
-=======
-                "source": "https://github.com/symfony/http-kernel/tree/v5.3.7"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
             },
             "funding": [
                 {
@@ -3874,7 +3839,6 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-09-28T10:25:11+00:00"
         },
         {
@@ -3889,22 +3853,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mime/zipball/a756033d0a7e53db389618653ae991eba5a19a11",
                 "reference": "a756033d0a7e53db389618653ae991eba5a19a11",
-=======
-            "time": "2021-08-30T12:37:19+00:00"
-        },
-        {
-            "name": "symfony/mime",
-            "version": "v5.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/mime.git",
-                "reference": "ae887cb3b044658676129f5e97aeb7e9eb69c2d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/ae887cb3b044658676129f5e97aeb7e9eb69c2d8",
-                "reference": "ae887cb3b044658676129f5e97aeb7e9eb69c2d8",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -3958,11 +3906,7 @@
                 "mime-type"
             ],
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/mime/tree/v5.3.8"
-=======
-                "source": "https://github.com/symfony/mime/tree/v5.3.7"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
             },
             "funding": [
                 {
@@ -3978,11 +3922,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-09-10T12:30:38+00:00"
-=======
-            "time": "2021-08-20T11:40:01+00:00"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5108,7 +5048,6 @@
         },
         {
             "name": "symfony/translation",
-<<<<<<< HEAD
             "version": "v5.3.9",
             "source": {
                 "type": "git",
@@ -5119,18 +5058,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/translation/zipball/6e69f3551c1a3356cf6ea8d019bf039a0f8b6886",
                 "reference": "6e69f3551c1a3356cf6ea8d019bf039a0f8b6886",
-=======
-            "version": "v5.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/translation.git",
-                "reference": "4d595a6d15fd3a2c67f6f31d14d15d3b7356d7a6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/4d595a6d15fd3a2c67f6f31d14d15d3b7356d7a6",
-                "reference": "4d595a6d15fd3a2c67f6f31d14d15d3b7356d7a6",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -5196,11 +5123,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/translation/tree/v5.3.9"
-=======
-                "source": "https://github.com/symfony/translation/tree/v5.3.7"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
             },
             "funding": [
                 {
@@ -5298,7 +5221,6 @@
         },
         {
             "name": "symfony/var-dumper",
-<<<<<<< HEAD
             "version": "v5.3.8",
             "source": {
                 "type": "git",
@@ -5309,18 +5231,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eaaea4098be1c90c8285543e1356a09c8aa5c8da",
                 "reference": "eaaea4098be1c90c8285543e1356a09c8aa5c8da",
-=======
-            "version": "v5.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "3ad5af4aed07d0a0201bbcfc42658fe6c5b2fb8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3ad5af4aed07d0a0201bbcfc42658fe6c5b2fb8f",
-                "reference": "3ad5af4aed07d0a0201bbcfc42658fe6c5b2fb8f",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -5379,11 +5289,7 @@
                 "dump"
             ],
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/var-dumper/tree/v5.3.8"
-=======
-                "source": "https://github.com/symfony/var-dumper/tree/v5.3.7"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
             },
             "funding": [
                 {
@@ -5399,11 +5305,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-09-24T15:59:58+00:00"
-=======
-            "time": "2021-08-04T23:19:25+00:00"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -7306,7 +7208,6 @@
         },
         {
             "name": "laravel/sail",
-<<<<<<< HEAD
             "version": "v1.10.2",
             "source": {
                 "type": "git",
@@ -7317,18 +7218,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/0b9ddae87b5867e0ca3a68f3b645079054c7ace3",
                 "reference": "0b9ddae87b5867e0ca3a68f3b645079054c7ace3",
-=======
-            "version": "v1.10.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "267fafeaf0e0311952316ae0f3c765abc7516469"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/267fafeaf0e0311952316ae0f3c765abc7516469",
-                "reference": "267fafeaf0e0311952316ae0f3c765abc7516469",
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
                 "shasum": ""
             },
             "require": {
@@ -7375,11 +7264,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
             "time": "2021-09-28T15:33:02+00:00"
-=======
-            "time": "2021-08-23T13:43:27+00:00"
->>>>>>> 51dcbecf992ff4ee9037aea52209aba65e8a86ef
         },
         {
             "name": "maximebf/debugbar",
