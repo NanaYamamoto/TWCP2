@@ -44,7 +44,87 @@
                 </form>
             </div>
 
-<div class="l-main-container" data-main-container="true" style="margin-top:40px;">
+
+            <div class="card" style="margin-top:10px;">
+                <div class="card-header">
+                    <h6 class="card-title">投稿一覧</h6>
+                </div>
+                <div class="card-body">
+                    @if( count($rows) )
+                    @foreach( $rows as $row )
+                    <div class="row">
+                        <div class="col-md mb-4">
+                            <div class="card row-card">
+                                <!-- このリンククリック範囲が親<div>全体まで広がる -->
+
+
+                                <div class="card-body d-flex flex-row row">
+                                    <div class="col-2 text-center">
+
+                                        @if (!empty($row->user->icon_url))
+                                        <img src="/storage/members/{{$row->user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 60px; height: 60px;">
+                                        @else
+                                        <img src="/images/blank_profile.png" class="rounded-circle" style="object-fit: cover; width: 60px; height: 60px;">
+                                        @endif
+
+                                    </div>
+                                    <div class="col-7">
+                                        <p class="mb-1">
+                                            <a href="{{ route('post.profile', ['name' => $row->user->name]) }}" class="font-weight-bold user-name-link text-dark mr-4">
+                                                {{ $row->user->name }}
+                                            </a>
+                                            <span class="font-weight-lighter">{{ $row->created_at }}</span>
+                                        </p>
+                                        <div>
+                                            {!! ($row->content) !!}
+                                        </div>
+
+                                    </div>
+
+
+
+                                    @if( Auth::id() === $row->user_id )
+                                    <!-- dropdown -->
+                                    <div class="col-1 card-text">
+                                        <div class="dropdown text-center">
+                                            <a class="in-link p-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-lg"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="{{ route('post.update', $row->id) }}">
+                                                    <i class="fas fa-pen mr-1"></i>投稿を編集する
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="{{ route('post.delete.proc', $row->id) }}">
+                                                    <i class="fas fa-trash-alt mr-1"></i>投稿を削除する
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- dropdown -->
+                                    @endif
+                                </div>
+
+
+                                <div class="card-footer py-1 d-flex justify-content-end bg-white">
+
+                                    <!-- いいねアイコン -->
+                                    <div class="d-flex align-items-center pr-5">
+                                        <i class="far fa-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    <span>データがありません</span>
+                    @endif
+                </div>
+            </div>
+            
+
+            <div class="l-main-container" data-main-container="true" style="margin-top:40px;">
     <main class="l-main" data-main="true" data-transition="fadeIn">
         <div class="box-index-container" data-article-index-container="true">
             <div class="box-index-section" data-article-index="true">
@@ -90,83 +170,4 @@
         </div>
     </main>
 </div>
-
-
-            <div class="card" style="margin-top:10px;">
-                <div class="card-header">
-                    <h6 class="card-title">投稿一覧</h6>
-                </div>
-                <div class="card-body">
-                    @if( count($rows) )
-                    @foreach( $rows as $row )
-                    <div class="row">
-                        <div class="col-md mb-4">
-                            <div class="card row-card">
-                                <!-- このリンククリック範囲が親<div>全体まで広がる -->
-
-
-                                <div class="card-body d-flex flex-row row">
-                                    <div class="col-2 text-center">
-
-                                        @if (!empty($row->user->icon_url))
-                                        <img src="/storage/members/{{$row->user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 60px; height: 60px;">
-                                        @else
-                                        <img src="/images/blank_profile.png" class="rounded-circle" style="object-fit: cover; width: 60px; height: 60px;">
-                                        @endif
-
-                                    </div>
-                                    <div class="col-7">
-                                        <p class="mb-1">
-                                            <!-- <a href="{{ route('post.profile', ['name' => $row->user->name]) }}" class="font-weight-bold user-name-link text-dark mr-4"> -->
-                                                {{ $row->user->name }}
-                                            <!-- </a> -->
-                                            <span class="font-weight-lighter">{{ $row->created_at }}</span>
-                                        </p>
-                                        <div>
-                                            {!! ($row->content) !!}
-                                        </div>
-
-                                    </div>
-
-
-
-                                    @if( Auth::id() === $row->user_id )
-                                    <!-- dropdown -->
-                                    <div class="col-1 card-text">
-                                        <div class="dropdown text-center">
-                                            <a class="in-link p-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-lg"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ route('post.update', $row->id) }}">
-                                                    <i class="fas fa-pen mr-1"></i>投稿を編集する
-                                                </a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="{{ route('post.delete.proc', $row->id) }}">
-                                                    <i class="fas fa-trash-alt mr-1"></i>投稿を削除する
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- dropdown -->
-                                    @endif
-                                </div>
-
-
-                                <div class="card-footer py-1 d-flex justify-content-end bg-white">
-
-                                    <!-- いいねアイコン -->
-                                    <div class="d-flex align-items-center">
-                                        <i class="far fa-heart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    @else
-                    <span>データがありません</span>
-                    @endif
-                </div>
-            </div>
-            @endsection
+@endsection

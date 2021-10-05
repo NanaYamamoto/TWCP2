@@ -1,3 +1,6 @@
+.l-main{
+    animation: pageIn .4s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
 .box-index-section__inner {
     margin-right: auto;
     margin-left: auto;
@@ -6,6 +9,10 @@
     grid-auto-flow: column;
     grid-template-columns: 50px 1fr 50px;
     grid-column-gap: 1em;
+    padding-right: 20px;
+    padding-left: 20px;
+    position: relative;
+    justify-self: center;
 }
 
 .box-index-section_list {
@@ -13,7 +20,7 @@
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     list-style-type: none;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .list-index__item {

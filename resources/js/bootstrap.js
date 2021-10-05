@@ -1,5 +1,7 @@
 window._ = require('lodash');
-
+require('jquery-ui/ui/widgets/dialog.js');
+require('jquery-ui/ui/widgets/sortable.js');
+require('jquery-ui/ui/widgets/tooltip.js');
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

@@ -19,8 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email', 100)->unique();
             $table->datetime('email_verified_at')->nullable()->comment('メールアドレス確認日時');
             $table->string('password', 100);
+            $table->tinyInteger('type')->default(1)->comment('メンバータイプ');
+            $table->tinyInteger('active')->comment('利用可能フラグ');
+            $table->string('icon_url')->nullable()->comment('アイコン');
             $table->rememberToken()->comment('パスワード再発行トークン');
-            $table->timestamps();
         });
     }
 

@@ -150,7 +150,7 @@
         <!--ラインナップ-->
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="card-header text-center mt-2"><i class="fas fa-tags mr-2"></i>タグ</div>
                     <div class="card-body py-3 mx-auto">
                         <ul class="nav flex-column">
@@ -193,12 +193,32 @@
                         </ul>
 
                     </div>
-                </nav>
+                </nav> -->
 
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> -->
+                <main class="col-md-10 col-lg-10 offset-1 px-md-4">
                     @yield('contents')
                 </main>
             </div>
+            <footer id="globalfooter">
+        <div class="lib-wrap">
+            <div class="box-lid-menu">
+                <div class="openbtn"><span></span><span></span><span></span></div>
+                <nav id="g-nav" class="">
+                    <div id="category-list"><!--ナビの数が増えた場合縦スクロールするためのdiv-->
+                        <ul>
+                            <li><a href="#">インテリア</a></li> 
+                            <li><a href="#">キッチン</a></li>
+                            <li><a href="#">スポーツ</a></li> 
+                            <li><a href="#">ファッション</a></li>
+                            <li><a href="#">ぺット</a></li>
+                            <li>etc...</li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </footer>
         </div>
 
 

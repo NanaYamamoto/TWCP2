@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
