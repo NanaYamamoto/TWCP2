@@ -109,7 +109,7 @@
                                 <div class="card-footer py-1 d-flex justify-content-end bg-white">
 
                                     <!-- いいねアイコン -->
-                                    <div class="d-flex align-items-center pr-5">
+                                    <div class="d-flex align-items-center">
                                         <i class="far fa-heart"></i>
                                     </div>
                                 </div>
@@ -151,13 +151,13 @@
                                     <time datetime="2021-10-04T09:03">{{ $row->created_at }}</time>
                                 </div>
                             </a>
-                            <div class="list-index__detail">
+                            <!-- <div class="list-index__detail">
                                 <a href="https://io3000.com/bm/dcs/" data-transition-type="overlay" data-article-index-item-elem="detail" class="list-index__detail-target" data-fetch-link="true">
                                     <svg width="20" height="20" viewBox="0 0 20 20" class="list-index__detail-icon" aria-label="Detail">
                                         <use xlink:href="#svg-icon-detail"></use>
                                     </svg>
                                 </a>
-                            </div>
+                            </div> -->
                         </li>
                         @endforeach
                     @else

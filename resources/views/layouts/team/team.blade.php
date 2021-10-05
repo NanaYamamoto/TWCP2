@@ -206,7 +206,9 @@
                 <div class="openbtn"><span></span><span></span><span></span></div>
                 <nav id="g-nav" class="">
                     <div id="category-list"><!--ナビの数が増えた場合縦スクロールするためのdiv-->
+                    
                         <ul>
+                        <li><i class="fas fa-tags mb-2"></i>タグ</li>
                             <li><a href="#">インテリア</a></li> 
                             <li><a href="#">キッチン</a></li>
                             <li><a href="#">スポーツ</a></li> 
