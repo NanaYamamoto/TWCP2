@@ -45,42 +45,8 @@ Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 //新規登録
-Route::middleware(['middleware' => ['web']], function () {
-    Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
-    Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
+Route::get('/regist', [LoginController::class, 'showRegist'])->name('showRegist');
+Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
+Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
 
-    Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
-});
-// Route::get('/regist', [LoginController::class, 'showRegist'])->name('showRegist');
-// Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
-// Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
-
-// Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
-
-
-//Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// // AuthRouteMethods.phpのルートを手動で記述
-// //新規登録
-// Route::get('members/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-// Route::post('members/register', 'Auth\RegisterController@register');
-
-// //ログイン
-// Route::get('members/login', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::post('members/login', 'Auth\LoginController@login');
-
-// //ログアウト
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// //パスワードリセット
-// Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-
-// //メール認証も実装している場合は以下も追加
-// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-// Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
