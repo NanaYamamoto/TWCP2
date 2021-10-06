@@ -92,7 +92,6 @@ class MembersController extends Controller
         $ses_key = $this->session_key . '.regist';
 
         $input = session()->get("{$ses_key}.input", []);
-        var_dump($input);
 
         $view = view('operate.members.regist');
         $view->with('form', $form->buildRegist($input));

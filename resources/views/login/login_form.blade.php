@@ -13,14 +13,14 @@
     <link href="{{ asset('css/sign.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="text-center">
     
     <main class="form-signin">
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <h1 class="h3 mb-3 fw-normal">ログイン</h1>
+        <h1 class="h3 mb-5 fw-normal">ログイン</h1>
 
-        <!--バリデーションエラーの表示-->
+        <!--入力フォームバリデーションエラーの表示-->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -31,17 +31,31 @@
             </div>
         @endif
 
-        <label for="inputEmail" class="visually-hidden">メールアドレス</label>
-        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
-        <label for="inputPassword" class="visually-hidden">パスワード</label>
-        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
-                               
+        <!--ログインエラーの表示-->
+        @if (session('login_error'))
+            <div class="alert alert-danger">
+                {{ session('login_error')}}
+            </div>
+        @endif
+        
+        <div class="mb-3">
+            {{-- <label for="inputEmail" class="visually-hidden">メールアドレス</label> --}}
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="メールアドレス" autofocus>
+        </div>
+        <div class="mb-3">
+            {{-- <label for="inputPassword" class="visually-hidden">パスワード</label> --}}
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="パスワード">
+        </div>
+
         <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me"> Remember me
         </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
+        <div class="m-3">
+            <a href="{{ route('showRegist')}}">新規登録する</a>
+        </div>
     </form>
     </main>
 

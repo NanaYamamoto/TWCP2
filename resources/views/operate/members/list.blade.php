@@ -7,6 +7,13 @@
         <a href="{{route('operate.members.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
     </div>
 </div>
+    <!--ログイン成功メッセージ-->
+    @if (session('login_success'))
+            <div class="alert alert-success">
+                {{ session('login_success')}}
+            </div>
+    @endif
+
 <div class="card">
     <div class="card-header">
         <h6 class="card-title">検索条件</h6>

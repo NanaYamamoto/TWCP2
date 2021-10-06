@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Operate\Members\MembersController;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,9 +39,23 @@ Route::any('operate/members', [MembersController::class, 'index'])->name('operat
 
 include 'web_sample.php';
 
-//ログイン、新規登録を自作
-Route::get('/loginForm', [AuthController::class, 'showLogin'])->name('showLogin');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+//ログイン
+Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+//新規登録
+Route::middleware(['middleware' => ['web']], function () {
+    Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
+    Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
+
+    Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
+});
+// Route::get('/regist', [LoginController::class, 'showRegist'])->name('showRegist');
+// Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
+// Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
+
+// Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
+
 
 //Auth::routes();
 
