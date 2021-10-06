@@ -3,6 +3,7 @@
 use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Operate\Members\MembersController;
 
 /*
 |--------------------------------------------------------------------------
