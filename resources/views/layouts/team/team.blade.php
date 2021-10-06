@@ -209,11 +209,10 @@
                     
                         <ul>
                         <li><i class="fas fa-tags mb-2"></i>タグ</li>
-                            <li><a href="#">インテリア</a></li> 
-                            <li><a href="#">キッチン</a></li>
-                            <li><a href="#">スポーツ</a></li> 
-                            <li><a href="#">ファッション</a></li>
-                            <li><a href="#">ぺット</a></li>
+                        @foreach( $categories as $category )
+                            <li><a href="#">{{ $category }}</a></li> 
+
+                        @endforeach
                             <li>etc...</li>
                         </ul>
                     </div>

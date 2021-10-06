@@ -137,7 +137,7 @@
                     @if( count($rows) )
                     @foreach( $rows as $row )
                         <li class="list-index__item" data-article-index-item="true">
-                            <a href="https://www.dcs.co.jp/" target="_blank" rel="noopener" class="list-index__target" data-article-index-item-elem="link" data-fetch-link="true">
+                            <a href="#" target="_blank" rel="noopener" class="list-index__target" data-article-index-item-elem="link" data-fetch-link="true">
                                 <figure class="list-index__image">
                                     <img width="890" height="650" src="/storage/members/{{$row->user->icon_url}}" class="attachment- size- wp-post-image" alt="" loading="lazy" data-article-index-item-elem="image"  sizes="(max-width: 890px) 100vw, 890px"> <span class="list-index__image-icon">
                                         <svg width="24" height="19" viewBox="0 0 24 19" class="list-index__image-icon-svg">

@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Post;
+
+use App\Models\Category;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-
 
 class PostsController extends Controller
 {
@@ -30,6 +30,7 @@ class PostsController extends Controller
         $ses_key = $this->session_key . '.serach';
         
         $user = \Auth::user();
+        $categories = Category::select('id','name')->get()->pluck('name','id');
 
         if ($request->has('btnSearch')) {
             $search_val = $request->all();
@@ -62,6 +63,7 @@ class PostsController extends Controller
         $view->with('form', $form);
         $view->with('def', $def);
         $view->with('user', $user);
+        $view->with('categories', $categories);
 
         return $view;
     }
@@ -235,7 +237,7 @@ class PostsController extends Controller
         $user = \Auth::id();
 
         $ses_key = "{$this->session_key}.regist";
-
+        $read_temp_path = null;
 
         $data = $request->except('img');
         //dd($request->file('img'));
@@ -250,7 +252,7 @@ class PostsController extends Controller
         }
         //dd($fileName);
         $data = array(
-            'category' => $request->category,
+            'category_id' => $request->category_id,
             'content' => $request->content,
             'img' => $read_temp_path ?? '',
             'user_id' => $user,

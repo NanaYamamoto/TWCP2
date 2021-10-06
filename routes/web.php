@@ -131,8 +131,9 @@ Route::group(['prefix' => 'member'], function () {
     // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 
-    Route::any('post', [PostsController::class, 'index'])->name('post.home');
 });
+Route::any('', [PostsController::class, 'index'])->name('post.home');
+
 Route::get('post/login', [LoginController::class, 'showPostLoginForm'])->name('post.login');
 Route::post('post/login', [LoginController::class, 'postlogin'])->name('post.login');
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');

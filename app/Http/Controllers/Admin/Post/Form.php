@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Post;
 use App\Http\TakemiLibs\SimpleForm;
 use App\Http\TakemiLibs\InterfaceForm;
 use \Form as FormF;
+use App\Models\Category;
 
 class Form implements InterfaceForm
 {
@@ -12,13 +13,14 @@ class Form implements InterfaceForm
     {
         // $user = User::query();
         $user = \Auth::id();
-
+        $categories = Category::select('id','name')->get()->pluck('name','id');
+        
         $form = [];
         $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
 
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
-        $form['category'] = FormF::text('category', $data['category'] ?? '', $opt);
+        $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
 
@@ -50,7 +52,7 @@ class Form implements InterfaceForm
     public function getRuleRegist(array $data = []): array
     {
         $rule = [];
-        $rule['category'] = ['required', 'max:200'];
+        $rule['category_id'] = ['required'];
         $rule['content'] = ['required'];
         // $rule['type'] = ['required'];
         $rule['publish'] = ['required'];

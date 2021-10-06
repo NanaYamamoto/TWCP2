@@ -14,10 +14,10 @@ if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1
 </div>
 
 <div class="form-group row">
-    <label for="category" class="col-sm-2 col-form-label">カテゴリー</label>
+    <label for="category_id" class="col-sm-2 col-form-label">カテゴリー</label>
     <div class="col-sm-10">
-        {!! $form['category'] !!}
-@error('category')
+        {!! $form['category_id'] !!}
+@error('category_id')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
 @enderror
     </div>

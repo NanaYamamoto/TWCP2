@@ -49,7 +49,7 @@
     <link href="dashboard.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="height: 100vh;">
     
     <div id="container">
 
