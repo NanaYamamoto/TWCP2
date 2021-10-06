@@ -148,9 +148,9 @@ return [
             'max' => 'パスワードは30文字以内で入力してください。',
             'min' => 'パスワードは8文字以上で入力してください。',
         ],
-        'icon_url' => [
-            'file' => '画像ファイルを指定してください。',
-            'mimes:jpeg,png,jpg,bmb' => '画像ファイルはjpeg,png,jpg,bmbのものをしておしてください。',
+        'icon' => [
+            'image' => '画像ファイルを指定してください。',
+            'mimes:jpeg,png,jpg,bmb' => '画像ファイルはjpeg,png,jpg,bmbのものを指定してください。',
         ]
     ],
 
