@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\Operate\Members\MembersController;
+use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
+
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Admin\Administrator\AdministratorsController;
 use App\Http\Controllers\Admin\Post\PostsController;
-use App\Http\Controllers\Auth\LoginController;
+
 use App\Http\Controllers\Auth\RegisterController;
+
 
 
 
@@ -34,6 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 
 // 山本さん作成のusersページ
@@ -101,10 +105,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'operate'], function (
     Route::any('admin/{id}', [AdministratorsController::class, 'detail'])->name('operate.user.detail');
     Route::any('admin', [AdministratorsController::class, 'index'])->name('operate.user');
 });
-Route::get('login/admin', [LoginController::class, 'showAdminLoginForm'])->name('admin.login');;
+Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');;
 Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm']);
 
-Route::post('login/admin', [LoginController::class, 'adminLogin'])->name('admin.login');
+Route::post('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
 
 
@@ -134,7 +138,21 @@ Route::group(['prefix' => 'member'], function () {
 });
 Route::any('', [PostsController::class, 'index'])->name('post.home');
 
-Route::get('post/login', [LoginController::class, 'showPostLoginForm'])->name('post.login');
-Route::post('post/login', [LoginController::class, 'postlogin'])->name('post.login');
+Route::get('post/login', [App\Http\Controllers\Auth\LoginController::class, 'showPostLoginForm'])->name('post.login');
+Route::post('post/login', [App\Http\Controllers\Auth\LoginController::class, 'postlogin'])->name('post.login');
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');
 Route::post('post/register', [RegisterController::class, 'postregister'])->name('post.register');
+
+include 'web_sample.php';
+
+//ログイン
+Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+//新規登録
+Route::get('/regist', [LoginController::class, 'showRegist'])->name('showRegist');
+Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
+Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
+
+Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
+
