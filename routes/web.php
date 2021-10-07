@@ -4,14 +4,13 @@ use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
 
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\Administrator\AdministratorsController;
 use App\Http\Controllers\Admin\Post\PostsController;
 
 use App\Http\Controllers\Auth\RegisterController;
-
-
 
 
 
