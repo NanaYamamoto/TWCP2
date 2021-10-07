@@ -8,6 +8,7 @@ use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 //メール送信
 use App\Mail\ConfirmMail;
 use Illuminate\Contracts\Cache\Store;
@@ -53,7 +54,7 @@ class LoginController extends Controller
                 return back()->withErrors([
                     'login_error' => 'このアカウントは使用できません。',
                 ]);
-            } elseif ($user->password !== $request->password) {
+            } elseif (!Hash::check($request->password, $user->password)) {
                 //パスワード打ち間違い
                 return back()->withErrors([
                     'login_error' => 'パスワードが間違っています。',
