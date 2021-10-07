@@ -1,8 +1,8 @@
-@extends('layouts.post')
+@extends('layouts.team.team2')
 
 @section('contents')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">お知らせ管 >> 新規作成</h1>
+    <h1 class="h2">新規投稿</h1>
 </div>
 <div class="row">
     <form action="{{route('post.regist.proc')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">

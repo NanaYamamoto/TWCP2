@@ -22,7 +22,6 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('active')->unsigned()->default(1)->comment('利用可能');
             $table->tinyInteger('publish')->default(1)->unsigned()->comment('公開フラグ');
             $table->timestamps();
-            
         });
     }
 

@@ -1,0 +1,513 @@
+@charset "utf-8";
+/* Loading背景画面設定*/
+
+#splash {
+    /*fixedで全面に固定*/
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    text-align: center;
+    color: #fff;
+}
+
+/*====== スクロール =======*/
+
+/*スクロールダウン位置*/
+
+.scrolldown1 {
+    position: absolute;
+    left: 50%;
+    bottom: 170px;
+    /* height: 180px; */
+}
+
+/*Scrollテキストの描写*/
+
+.scrolldown1 span {
+    /*描画位置*/
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    /*テキストの形状*/
+    color: #eee;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+
+/* 線の描写 */
+
+.scrolldown1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 30px;
+    background: black;
+    animation: pathmove 1.4s ease-in-out infinite;
+    opacity: 0;
+}
+
+/*高さ・位置・透過が変化して線が上から下に動く*/
+
+@keyframes pathmove {
+    0% {
+        height: 0;
+        top: 0;
+        opacity: 0;
+    }
+    30% {
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        height: 0;
+        top: 50px;
+        opacity: 0;
+    }
+}
+
+/*========= 壁紙 ===============*/
+
+.wallpaper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /*相対配置*/
+    top: 0;
+    left: 0;
+}
+
+.scrolldown1 span {
+    color: black;
+    font-size: small;
+}
+
+.wallpaper p {
+    position: absolute;
+    top: 400px;
+    left: 590px;
+    font-size: 55px;
+}
+
+img, svg {
+    vertical-align: middle;
+    width: 100%;
+    height: 800px;
+}
+
+/*========= 背景グラデーション ===============*/
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    /* animation: fadeIn 1.0s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards; */
+    background: linear-gradient(45deg, #7ceeee,#c786dfbb,#87e2d6f1);
+    /*グラデーションを定義*/
+    /* background-size: 5% 120%; */
+    background-size: 170% 170%;
+    /*色の間隔調整*/
+    animation: bggradient 20s ease infinite;
+}
+
+@keyframes bggradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.mt-3 {
+    margin-top: 0rem!important;
+}
+
+/*========= ロゴ文字 ===============*/
+
+.navbar-brand {
+    font-size: 1.5em;
+    /* フォントサイズ */
+    font-weight: 400;
+    /* フォント太さ */
+    padding-top: .1em;
+    padding-bottom: .1em;
+    margin-bottom: 1em;
+    align-items: baseline;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+/*========= ナビゲーションのためのCSS ===============*/
+
+#g-nav {
+    /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+    position: fixed;
+    z-index: 999;
+    /*ナビのスタート位置と形状*/
+    top: 0;
+    right: -120%;
+    width: 100%;
+    height: 100vh;
+    /*ナビの高さ*/
+    background: rgb(218, 213, 213);
+    /*動き*/
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+/*アクティブクラスがついたら位置を0に*/
+
+#g-nav.panelactive {
+    animation: fadeIn 0.7s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+    transition: all 0.6s;
+    left: 0;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/*ナビゲーションの縦スクロール*/
+
+#g-nav.panelactive #g-nav-list {
+    /*ナビの数が増えた場合縦スクロール*/
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    /*表示する高さ*/
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/*ナビゲーション*/
+
+#g-nav ul {
+    /*ナビゲーション天地中央揃え*/
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.8s ease;
+}
+
+/*リストのレイアウト設定*/
+
+#g-nav li {
+    list-style: none;
+    text-align: center;
+}
+
+#g-nav li a {
+    color: rgb(27, 26, 26);
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+/*========= ボタンのためのCSS ===============*/
+
+.openbtn {
+    position: fixed;
+    z-index: 9999;
+    /*ボタンを最前面に*/
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    width: 70px;
+    height: 100vh;
+    background: #ffffff!important;
+    border-left: 1px solid rgb(95 95 95);
+}
+
+/*×に変化*/
+
+.openbtn span {
+    display: inline-block;
+    transition: all .4s;
+    /*アニメーションの設定*/
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: rgb(0 0 0);
+    width: 45%;
+}
+
+/*ボタンの３本線の配置*/
+
+.openbtn span:nth-of-type(1) {
+    top: 45vh;
+}
+
+.openbtn span:nth-of-type(2) {
+    top: 46vh;
+}
+
+.openbtn span:nth-of-type(3) {
+    top: 47vh;
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3) {
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
+/*コンテンツ*/
+
+#contents {
+    width: 1360px;
+    padding-top: 70px;
+}
+
+.contents p {
+    width: 200px;
+    font-size: 20px;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    padding: 1rem 3rem;
+    margin-left: 30px;
+    padding-top: 10px;
+    margin-top: -50px;
+}
+
+.contents ul li {
+    margin: 15px;
+}
+
+figure {
+    /* display: block; */
+    /* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 40px; */
+    /* margin-inline-end: 40px; */
+}
+
+#pic {
+    clear: both;
+    margin-right: -15px;
+}
+
+#pic li {
+    width: 285px;
+    float: left;
+    list-style-type: none;
+    margin: 0 150px 0 0;
+    padding-left: inherit;
+}
+
+#slidemenu {
+    width: 80px;
+    position: fixed;
+    background-color: #9c9c73;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    color: #3f59b5;
+}
+
+#pic img {
+    margin: 0px;
+    padding: 0px;
+    width: 285px;
+    height: 214px;
+    overflow: hidden;
+    display: block;
+    vertical-align: bottom;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    /* margin-top: 40rem; */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.py-4 {
+    padding-top: 11.5rem!important;
+    padding-bottom: 1.5rem!important;
+    padding-left: 60px;
+    overflow: hidden;
+}
+
+/*SNS*/
+
+.SNS {
+    top: 10px;
+}
+
+.SNS p {
+    width: 200px;
+    font-size: 20px;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    padding: 1rem 3rem;
+    margin-left: 30px;
+    padding-top: 10px;
+    margin-top: -50px;
+}
+
+/* SNS-ボタン全体- */
+
+.flowbtn11 {
+    font-family: 'Verdana', sans-serif;
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    font-size: 20px;
+    color: #fff!important;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+/* Twitter */
+
+.fl_tw1 {
+    background: #55acee;
+}
+
+/* Instagramアイコン位置 */
+
+.insta_btn11 .fa-instagram {
+    position: relative;
+    z-index: 1;
+}
+
+/* Instagram紫グラデ背景色 */
+
+.insta_btn11 {
+    background: -webkit-linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+    background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+    overflow: hidden;
+}
+
+/* Instagramオレンジグラデ背景色 */
+
+.insta_btn11:before {
+    content: '';
+    position: absolute;
+    top: 17px;
+    left: -75px;
+    width: 100%;
+    height: 100%;
+    background: -webkit-radial-gradient(#ffdb2c 5%, rgba(255, 105, 34, 0.65) 45%, rgba(255, 88, 96, 0) 80%);
+    background: radial-gradient(#ffdb2c 5%, rgba(255, 105, 34, 0.65) 55%, rgba(255, 88, 96, 0) 80%);
+}
+
+/* アイコンボタンホバー時 */
+
+.flowbtn11:hover span {
+    -webkit-transform: rotateX(360deg);
+    -ms-transform: rotateX(360deg);
+    transform: rotateX(360deg);
+    text-decoration: none;
+}
+
+/* ボタン内テキスト調整 */
+
+.flowbtn11 span {
+    font-size: 14px;
+    position: relative;
+    left: 8px;
+    bottom: 2px;
+    transition: .6s;
+    display: inline-block;
+}
+
+/* ulタグの内側余白を０にする */
+
+ul.snsbtniti2 {
+    padding: 0!important;
+    width: 950px;
+}
+
+/* アイコンボタンの位置調整 */
+
+.snsbtniti2 {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* アイコンボタン同士の余白調整 */
+
+.snsbtniti2 li {
+    flex: 0 0 48%;
+    text-align: center!important;
+    list-style: none;
+}
+
+ul.snsbtniti {
+    padding: 0 !important;
+    list-style-type: none!important;
+}
+
+ul li:before {
+    width: 0!important;
+}
+
+/*問い合わフォーム*/
+
+.container p {
+    width: 100px;
+    font-size: 20px;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    padding: 1rem 3rem;
+    margin-left: -135px;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #777777f8;
+    border-color: #777777f8;
+}

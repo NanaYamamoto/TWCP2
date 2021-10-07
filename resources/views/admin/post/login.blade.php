@@ -66,7 +66,7 @@
     </div>
 
     <footer>
-        <h5><a target="_blank" href="{{route('post.home')}}">ホームに戻る</a></h5><!--href="http://lifes.gd"-->
+        <h5><a target="_blank" href="{{ route('post.home') }}">ホームに戻る</a></h5><!--href="http://lifes.gd"-->
     </footer>
 
 </body>

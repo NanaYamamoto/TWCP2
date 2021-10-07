@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Post;
+
+use App\Models\Category;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
-
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-
 
 class PostsController extends Controller
 {
@@ -29,7 +28,9 @@ class PostsController extends Controller
         $service = new InformationService();
 
         $ses_key = $this->session_key . '.serach';
-        $users = User::select('users.*')->where('active', 1);
+        
+        $user = \Auth::user();
+        $categories = Category::select('id','name')->get()->pluck('name','id');
 
         if ($request->has('btnSearch')) {
             $search_val = $request->all();
@@ -61,19 +62,13 @@ class PostsController extends Controller
         $view->with('rows', $rows);
         $view->with('form', $form);
         $view->with('def', $def);
-        $view->with('user', $users);
+        $view->with('user', $user);
+        $view->with('categories', $categories);
 
         return $view;
     }
 
-    public function login(Request $request)
-    {
-        $user = \Auth::user();
-        if ($user) {
-            return redirect()->back();
-        }
-        return view('admin.post.login');
-    }
+    
 
 
     public function profile(Request $request)
@@ -126,7 +121,6 @@ class PostsController extends Controller
         $view->with('user', $users);
 
         return $view;
-        
     }
 
 
@@ -135,6 +129,7 @@ class PostsController extends Controller
         $user = \Auth::user();
 
         $data = $request->except('icon_url');
+        $fileName = null;
         //dd($request->file('icon_url'));
         //$imagefile = $request->file('icon_url');
         //storage/app/public/tempファイルに保存
@@ -159,10 +154,8 @@ class PostsController extends Controller
         $user->icon_url = $data['icon_url'];
         $user->save();
 
-
-
-        return redirect()
-            ->route('post.home');
+        
+            return redirect()->route('post.profile.complete');
     }
 
     public function saveAvatar(UploadedFile $file)
@@ -172,9 +165,25 @@ class PostsController extends Controller
         Image::make($file)->fit(200, 200)->save($tempPath);
 
         $filePath = Storage::disk('public')
-            ->putFile('icon_url', new File($tempPath));
+            ->putFile('members', new File($tempPath));
 
         return basename($filePath);
+    }
+
+    /**
+     * プロフィール：変更完了画面
+     * @param Request $request
+     * @return void
+     */
+    public function profile_complete(Request $request)
+    {
+        $view = view('sample.post_complete');
+
+        $view->with('func_name', 'お知らせ管理');
+        $view->with('mode_name', 'プロフィール変更');
+        $view->with('back', route('post.home'));
+
+        return $view;
     }
 
     /**
@@ -189,29 +198,6 @@ class PostsController extends Controller
         return $meta["uri"];
     }
 
-
-    /**
-     * 詳細画面処理
-     *
-     * @param Request $request
-     * @param int $id
-     * @return void
-     */
-    public function detail(Request $request, int $id)
-    {
-        $form = new Form();
-        $service = new InformationService();
-        $data = $service->get($id);
-
-        if (!$data) {
-            return redirect()->route('post.home');
-        }
-
-        $view = view('admin.post.detail');
-        $view->with('form', $form->getHtml($data->toArray()));
-
-        return $view;
-    }
 
     /**
      * 新規作成　入力画面
@@ -251,8 +237,8 @@ class PostsController extends Controller
         $user = \Auth::id();
 
         $ses_key = "{$this->session_key}.regist";
+        $read_temp_path = null;
 
-        
         $data = $request->except('img');
         //dd($request->file('img'));
         //$imagefile = $request->file('img');
@@ -266,7 +252,7 @@ class PostsController extends Controller
         }
         //dd($fileName);
         $data = array(
-            'category' => $request->category,
+            'category_id' => $request->category_id,
             'content' => $request->content,
             'img' => $read_temp_path ?? '',
             'user_id' => $user,
@@ -294,7 +280,7 @@ class PostsController extends Controller
             return redirect()->route('post.regist')->withErrors($ret);
         }
 
-        
+
 
         //登録処理
         $service->regist($data);
@@ -312,7 +298,7 @@ class PostsController extends Controller
      */
     public function regist_complete(Request $request)
     {
-        $view = view('sample.complete');
+        $view = view('sample.post_complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
@@ -333,6 +319,10 @@ class PostsController extends Controller
         $service = new InformationService();
 
         $ses_key = $this->session_key . '.update';
+        $user = \Auth::user();
+        if (!$user) {
+            return redirect()->route('post.login');
+        }
 
         if ($id) {
             $data = $service->get($id);
@@ -396,7 +386,7 @@ class PostsController extends Controller
      */
     public function update_complete(Request $request)
     {
-        $view = view('sample.complete');
+        $view = view('sample.post_complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');
@@ -405,33 +395,9 @@ class PostsController extends Controller
         return $view;
     }
 
-    /**
-     * 削除：確認画面
-     * @param Request $request
-     * @param int $id
-     * @return void
-     */
-    public function delete_confirm(Request $request, int $id)
-    {
-        $form = new Form();
-        $service = new InformationService();
-        $ses_key = "{$this->session_key}.delete";
-        $data = $service->get($id);
-
-        if (!$data) {
-            return redirect()->route('post.home');
-        }
-
-        session()->put("{$ses_key}.id", $id);
-
-        $view = view('admin.info.delete_confirm');
-        $view->with('form', $form->getHtml($data->toArray()));
-
-        return $view;
-    }
 
     /**
-     * 更新：登録処理
+     * 削除：登録処理
      *
      * @param Request $request
      * @return void
@@ -456,6 +422,22 @@ class PostsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('post.update.complete');
+        return redirect()->route('post.delete.complete');
+    }
+
+    /**
+     * 削除：完了画面
+     * @param Request $request
+     * @return void
+     */
+    public function delete_complete(Request $request)
+    {
+        $view = view('sample.post_complete');
+
+        $view->with('func_name', 'お知らせ管理');
+        $view->with('mode_name', '削除');
+        $view->with('back', route('post.home'));
+
+        return $view;
     }
 }
