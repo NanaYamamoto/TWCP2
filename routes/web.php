@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\Administrator\AdministratorsController;
 use App\Http\Controllers\Admin\Post\PostsController;
-
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
@@ -104,10 +104,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'operate'], function (
     Route::any('admin/{id}', [AdministratorsController::class, 'detail'])->name('operate.user.detail');
     Route::any('admin', [AdministratorsController::class, 'index'])->name('operate.user');
 });
-Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');;
+Route::get('login/admin', [AuthLoginController::class, 'showAdminLoginForm'])->name('admin.login');;
 Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm']);
 
-Route::post('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
+Route::post('login/admin', [AuthLoginController::class, 'adminLogin'])->name('admin.login');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
 
 
@@ -137,8 +137,8 @@ Route::group(['prefix' => 'member'], function () {
 });
 Route::any('', [PostsController::class, 'index'])->name('post.home');
 
-Route::get('post/login', [App\Http\Controllers\Auth\LoginController::class, 'showPostLoginForm'])->name('post.login');
-Route::post('post/login', [App\Http\Controllers\Auth\LoginController::class, 'postlogin'])->name('post.login');
+Route::get('post/login', [AuthLoginController::class, 'showPostLoginForm'])->name('post.login');
+Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');
 Route::post('post/register', [RegisterController::class, 'postregister'])->name('post.register');
 
