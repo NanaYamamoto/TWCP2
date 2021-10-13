@@ -174,7 +174,7 @@
         </div>
     </footer>
 
-
+    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のNews</a></h2>
     <ul id="gallery" class="gallery bgappearTrigger">
 		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
 		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_02_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
@@ -186,31 +186,7 @@
 		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_08_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
 </ul>
 
-    <div id="pickup" class="wrapper">
-        <h2 style="position: absolute;top: 180px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のNews</a></h2>
-        <article>
-            <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-            <p>ああああああ</h2>
-            <div class="readmore"><a href="#">READ MORE</a></div>
-        </article>
-
-        <article>
-            <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-            <p>ああああああ</h2>
-            <div class="readmore"><a href="#">READ MORE</a></div>
-        </article>
-
-        <article>
-            <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-            <p>ああああああ</h2>
-            <div class="readmore"><a href="#">READ MORE</a></div>
-        </article>
-        <article>
-            <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-            <p>ああああああ</h2>
-            <div class="readmore"><a href="#">READ MORE</a></div>
-        </article>
-    </div>
+    
 
     
 
