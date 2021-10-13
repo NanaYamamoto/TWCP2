@@ -40,7 +40,7 @@ Route::get('/', function () {
 
 
 // 山本さん作成のusersページ
-
+// Route::group(['middleware' => ['auth']], function () {
     Route::any('operate/members/regist', [MembersController::class, 'regist'])->name('operate.members.regist');
     Route::post('operate/members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('operate.members.regist.confirm');
     Route::post('operate/members/regist/proc', [MembersController::class, 'regist_proc'])->name('operate.members.regist.proc');
@@ -58,7 +58,7 @@ Route::get('/', function () {
     Route::any('operate/members/{id}', [MembersController::class, 'detail'])->name('operate.members.detail');
 
     Route::any('operate/members', [MembersController::class, 'index'])->name('operate.members');
-
+// });
 
 // AuthRouteMethods.phpのルートを手動で記述
 //新規登録
@@ -137,10 +137,12 @@ Route::group(['prefix' => 'member'], function () {
 });
 Route::any('', [PostsController::class, 'index'])->name('post.home');
 
-Route::get('post/login', [AuthLoginController::class, 'showPostLoginForm'])->name('post.login');
+Route::get('post/login', [AuthLoginController::class, 'showLoginForm'])->name('post.login');
 Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');
 Route::post('post/register', [RegisterController::class, 'postregister'])->name('post.register');
+
+Route::get('home', [PostsController::class, 'home']);
 
 include 'web_sample.php';
 

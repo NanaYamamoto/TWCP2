@@ -68,8 +68,10 @@ class PostsController extends Controller
         return $view;
     }
 
-    
-
+    public function home(Request $request)
+    {
+        return view('top');
+    }
 
     public function profile(Request $request)
     {
