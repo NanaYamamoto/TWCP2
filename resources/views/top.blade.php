@@ -48,7 +48,7 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('css/team.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+    
     <link href="{{ asset('css/top.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -59,7 +59,7 @@
     <header class="header">
         <div class="header_content">
             <div class="header_inner">
-                <div class="header_logo"><a class="gunosy_app_icon" href="https://gunosy.com/">
+                <div class="header_logo"><a class="app_icon" href="">
                         <h1 class="header_title">暮らしのアプリ</h1>
                     </a></div>
             </div>
@@ -133,6 +133,7 @@
     </header>
     <nav id="navi">
         <ul class="wrapper">
+            <li><a href="#">この部分に</a></li>
             <li><a href="#">タグを</a></li>
             <li><a href="#">入れるか</a></li>
             <li><a href="#">迷ってます</a></li>
@@ -174,7 +175,7 @@
         </div>
     </footer>
 
-    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のNews</a></h2>
+    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のTopics</a></h2>
     <ul id="gallery" class="gallery bgappearTrigger">
 		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
 		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_02_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
@@ -193,8 +194,8 @@
     <div id="container" class="wrapper">
         <main>
             <article>
-                <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">Topics</a></h1>
-                <p><a href="#">ああああああ</a></h2>
+                <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">おすすめの投稿</a></h1>
+                <p><a href="#">タイトル</a></h2>
                 <ul class="meta">
                     <li><a href="#">2020/01/01</a></li>
                     <li><a href="#">カテゴリ1</a></li>
@@ -240,7 +241,6 @@
         </main>
 
         <aside id="sidebar">
-
 
             <section class="ranking">
                 <h3 class="side-title">人気ランキング</h3>

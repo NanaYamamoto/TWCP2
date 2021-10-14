@@ -529,13 +529,13 @@ SP
     margin: 27px 0 0 0
 }
 
-.header .header_logo .gunosy_app_icon img {
+.header .header_logo .app_icon img {
     width: 47.27273px;
     height: 31.81818px;
     float: left
 }
 
-.header .header_logo .gunosy_app_icon .header_title {
+.header .header_logo .app_icon .header_title {
     font-size: 15px;
     font-weight: bold;
     color: #444
