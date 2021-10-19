@@ -134,7 +134,7 @@
             <div class="close-btn"><span></span><span></span></div>
             <div class="search-area">
                 <form role="search" method="get" action="">
-                    <input type="text" value="" name="" id="search-text" placeholder="search">
+                    <input type="text" value="" name="keyword" id="search-text" placeholder="search">
                     <input type="submit" id="searchsubmit" value="">
                 </form>
             </div>

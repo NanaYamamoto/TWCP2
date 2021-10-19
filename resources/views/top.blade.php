@@ -48,7 +48,7 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('css/team.css') }}" rel="stylesheet">
-    
+
     <link href="{{ asset('css/top.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -133,21 +133,24 @@
     </header>
     <nav id="navi">
         <ul class="wrapper">
-            <li><a href="#">この部分に</a></li>
-            <li><a href="#">タグを</a></li>
-            <li><a href="#">入れるか</a></li>
-            <li><a href="#">迷ってます</a></li>
-            <li><a href="#">Q&A</a></li>
-            <li><a href="#">aaa</a></li>
+        @if( count($categories) )
+            @foreach( $categories as $category )
+            <li><a href="#">{{ $category }}</a></li>
+            @endforeach
+            @else
+            <span>タグがありません</span>
+            
+            @endif
         </ul>
     </nav>
 
     <div id="search-wrap">
         <div class="close-btn"><span></span><span></span></div>
         <div class="search-area">
-            <form role="search" method="get" action="">
-                <input type="text" value="" name="" id="search-text" placeholder="search">
-                <input type="submit" id="searchsubmit" value="">
+            <form role="search" method="post">
+                @csrf
+                <input type="text" value="" name="keyword" id="search-text" placeholder="search">
+                <input type="submit" id="searchsubmit" name="btnSearch" value="">
             </form>
         </div>
         <!--/search-wrap-->
@@ -163,11 +166,15 @@
 
                         <ul>
                             <li><i class="fas fa-tags mb-2"></i>タグ</li>
-
-                            <li><a href="#"></a></li>
-
-
+                            @if( count($categories) )
+                            @foreach( $categories as $category )
+                            <li><a href="#">{{ $category }}</a></li>
+                            @endforeach
                             <li>etc...</li>
+                            @else
+                            <span>タグがありません</span>
+                            
+                            @endif
                         </ul>
                     </div>
                 </nav>
@@ -177,67 +184,77 @@
 
     <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のTopics</a></h2>
     <ul id="gallery" class="gallery bgappearTrigger">
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_02_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_03_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_04_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_05_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_06_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_07_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-		<li class="bgextend bgLRextendTrigger zoomInRotate"><div class="bgappearTrigger"><a href="img/gal_08_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a><p>ああああああ</p></div></li>
-</ul>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_02_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_03_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_04_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_05_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_06_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_07_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+        <li class="bgextend bgLRextendTrigger zoomInRotate">
+            <div class="bgappearTrigger"><a href="img/gal_08_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+                <p>ああああああ</p>
+            </div>
+        </li>
+    </ul>
 
-    
 
-    
+
+
 
     <div id="container" class="wrapper">
         <main>
+            @if( count($rows) )
+            @foreach( $rows as $row )
             <article>
                 <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">おすすめの投稿</a></h1>
                 <p><a href="#">タイトル</a></h2>
                 <ul class="meta">
-                    <li><a href="#">2020/01/01</a></li>
-                    <li><a href="#">カテゴリ1</a></li>
+                    <li><a href="#">{{ $row->created_at }}</a></li>
+                    <li><a href="#">{{ $row->category_id }}</a></li>
+                    <li><a href="#">{{ $row->user->name }}さんの投稿</a></li>
                 </ul>
                 <a href="#"><img src="/images/画像/インテリア.png" alt="テキストテキストテキスト"></a>
                 <p class="text">
-                    本文テキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    {{ $row->content }}
                 </p>
                 <div class="readmore"><a href="#">READ MORE</a></div>
             </article>
 
-            <article>
-                <p><a href="#">ああああああ</a></h2>
-                <ul class="meta">
-                    <li><a href="#">2020/01/01</a></li>
-                    <li><a href="#">カテゴリ1</a></li>
-                </ul>
-                <a href="#"><img src="/images/画像/インテリア.png" alt="テキストテキストテキスト"></a>
-                <p class="text">
-                    本文テキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                </p>
-                <div class="readmore"><a href="#">READ MORE</a></div>
-            </article>
 
-            <article>
-                <p><a href="#">ああああああ</a></h2>
-                <ul class="meta">
-                    <li><a href="#">2020/01/01</a></li>
-                    <li><a href="#">カテゴリ1</a></li>
-                </ul>
-                <a href="#"><img src="/images/画像/インテリア.png" alt="テキストテキストテキスト"></a>
-                <p class="text">
-                    本文テキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                    テキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                </p>
-                <div class="readmore"><a href="#">READ MORE</a></div>
-            </article>
+            @endforeach
+            {{$rows->links()}}
+            @else
+            <span>記事がありません</span>
+            @endif
         </main>
 
         <aside id="sidebar">
@@ -290,7 +307,7 @@
     </div>
 
     <footer id="footer">
-        
+
 
         <p class="copyright">&copy; TWCP</p>
     </footer>
