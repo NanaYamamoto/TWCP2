@@ -81,7 +81,7 @@ a:hover, a:active {
 }
 
 #user-btn {
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 20px;
     display: flex;
@@ -111,6 +111,7 @@ a:hover, a:active {
     margin: 0 100px 0 0;
     text-align: left;
     letter-spacing: 0.03em;
+    border-radius: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -307,6 +308,7 @@ small {
     text-decoration: none;
     border: 1px solid #6a5555;
     color: #6a5555;
+    font-family: 'Amatic SC', cursive;
     /*アニメーションの指定*/
     transition: all 0.4s ease-out;
 }
@@ -469,10 +471,11 @@ small {
     background-image: url("/images/画像/03-light-carpet.png");
     background-repeat: repeat;
     background-attachment: fixed;
+    max-height: 740px;
 }
 
 #box3 {
-    background: url("/images/img/bg_04.jpg") no-repeat center;
+    background: url("/images/画像/table.jpeg") no-repeat center;
     background-size: cover;
 }
 

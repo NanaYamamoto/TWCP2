@@ -82,9 +82,9 @@
         <section id="box1" class="box" data-section-name="Profile">
             <div class="box-area">
                 <div class="profile-area blurTrigger">
-                    <h2>TWCP <span>このサイトについて</span></h2>
-                    <p>ここは皆さんの生活に役立つ知識を集めたサイトです。<br>知っているようで知らないこと、こうだと思っていたけど実は間違って覚えてしまっていたことなど。
-                        </br>このサイトを上手く活用して少しでも皆さんの生活が彩れば幸いです・・・</p>
+                    <h2>About this site <span>このサイトについて</span></h2>
+                    <p>ここは皆さんの生活に役立つ知識を集めたサイトです。<br>知っているようで知らないこと、知っているととても便利なことなど、普段の生活が快適になる情報がたくさん投稿されています。
+                        </br>このサイトを上手く活用して皆さんの生活が少しでも楽に、そして楽しくなれば幸いです・・・</p>
 
                 </div>
             </div>
@@ -95,15 +95,15 @@
             <div class="box-area">
                 <h2 class="picup eachTextAnime">picup</h2>
                 <ul class="slider_width">
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
-                    <li><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
+                    <li><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""></li>
 
                 </ul>
-                <a href="#gallery-1" class="gradient4 btn-view blurTrigger">View Photos</a>
+                <a href="#gallery-1" class="gradient4 blurTrigger">View All</a>
                 <!--/box-area-->
             </div>
 
@@ -117,11 +117,11 @@
 
             </div>
             <div id="gallery-2" class="hide-area">
-                <p><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""><span class="caption">Woman 2001</span></p>
-                <p><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""><span class="caption">Woman 2002</span></p>
-                <p><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""><span class="caption">Woman 2003</span></p>
-                <p><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""><span class="caption">Woman 2004</span></p>
-                <p><img src="{{ asset('/images/画像/table.jpeg') }}" alt=""><span class="caption">Woman 2005</span></p>
+                <p><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""><span class="caption">Woman 2001</span></p>
+                <p><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""><span class="caption">Woman 2002</span></p>
+                <p><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""><span class="caption">Woman 2003</span></p>
+                <p><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""><span class="caption">Woman 2004</span></p>
+                <p><img src="{{ asset('/images/画像/キッチン.jpeg') }}" alt=""><span class="caption">Woman 2005</span></p>
             </div>
             <!--/box-->
         </section>
