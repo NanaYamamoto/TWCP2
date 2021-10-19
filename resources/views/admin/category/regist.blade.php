@@ -5,7 +5,7 @@
     <h1 class="h2">カテゴリー管理 >> 新規作成</h1>
 </div>
 <div class="row">
-    <form action="{{route('admin.category.regist.confirm')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('admin.category.regist.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
         @csrf
         @include('admin.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">

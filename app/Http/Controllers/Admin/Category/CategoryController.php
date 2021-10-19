@@ -71,12 +71,28 @@ class CategoryController extends Controller{
 
         $ses_key = $this->session_key.'.regist';
 
-        //入力値をセッションに保存
-        $data = $request->all();
-        session()->put("{$ses_key}.input", $data );
+        $data = $request->except('img');
+
+        //storage/app/public/tempファイルに保存
+        if ($request->has('img')) {
+            date_default_timezone_set('Asia/Tokyo');
+            $originalName = $request->file('img')->getClientOriginalName();
+            $fileName =  date("Ymd_His") . '.' . $originalName;
+            $temp_path = $request->file('img')->storeAs('app/images', $fileName);
+            $read_temp_path = Url('') . '/' . str_replace('public/', 'images/', $temp_path);
+        }
+        //dd($read_temp_path);
+        $data = array(
+            'name' => $request->name,
+            'active' => $request->active,
+            'img' => $temp_path ?? ''
+        );
 
         //バリデーション
         $request->validate( $form->getRuleRegist( $data ) );
+
+        //セッションに保存
+        session()->put("{$ses_key}.input", $data);
 
         //確認画面表示
         $view = view('admin.category.regist_confirm');
@@ -104,14 +120,7 @@ class CategoryController extends Controller{
         if( empty( $data ) ){
             return redirect()->route('admin.category.regist');
         }
-
-        //バリデーション
-        $ret = SimpleForm::validation($data, $form->getRuleRegist($data) );
-        if( $ret !== true ) {
-            //入力画面にリダイレクト
-            return redirect()->route('admin.category.regist')->withErrors($ret);
-        }
-
+        
         //登録処理
         $service->regist( $data );
 
@@ -138,7 +147,7 @@ class CategoryController extends Controller{
     }
 
     /**
-     * 更新　入力画面
+     * 更新入力画面
      * @param Request $request
      * @param int $id
      * @return void

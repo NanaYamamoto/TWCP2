@@ -35,6 +35,15 @@ class Category extends Model
         'created_at'
     ];
 
+    public static $rules = [
+        'id' => 'required',
+        'name' => 'required|max: 30',
+        'active' => 'required',
+        'img' => 'image','file','mimes:jpeg,png,jpg,bmb',
+        'updated_at' => 'required|date',
+        'created_at' => 'required|date',
+    ];
+
     /*
     *DBから情報取得
     */

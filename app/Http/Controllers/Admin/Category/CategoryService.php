@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\TakemiLibs\CommonService;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryService extends CommonService {
 
@@ -58,6 +59,11 @@ class CategoryService extends CommonService {
      */
     public function regist( $data = [] ){
 
+  /*      if($data['img']){
+            $file_path = str_replace('temp/members','members/'.$data['name']);
+            Storage::move($data['img'],$file_path);
+        }
+*/
         $data = Category::create( $data );
         return $data;
     }

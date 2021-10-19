@@ -45,16 +45,14 @@ if( isset($form['type']) && $form['type'] == '非公開' ) $type = 1;
 </div>
 
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">写真</label>
-    <div class="col-sm-10" type="file">
-        <input id="image" type="file" name="image" {!! $form['img'] !!} 
-
-@error('img')
+    <label for="img" class="col-sm-2 col-form-label">カテゴリー画像</label>
+    <div class="col-sm-10">
+        {!! $form['img'] !!}
+        @error('img')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-@enderror
+        @enderror
     </div>
 </div>
-
 {{--
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">更新日時</label>
