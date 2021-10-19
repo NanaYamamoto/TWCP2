@@ -100,7 +100,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'operate'], function (
     Route::any('admin/delete/complete', [AdministratorsController::class, 'delete_complete'])->name('operate.user.delete.complete');
     Route::any('admin/delete/{id}', [AdministratorsController::class, 'delete_confirm'])->name('operate.user.delete.confirm');
     
-    Route::any('admin/profile', [AdministratorsController::class, 'profile'])->name('operate.user.profile');
+    Route::any('admin/', [AdministratorsController::class, 'profile'])->name('operate.user.profile');
     Route::any('admin/{id}', [AdministratorsController::class, 'detail'])->name('operate.user.detail');
     Route::any('admin', [AdministratorsController::class, 'index'])->name('operate.user');
 });
@@ -142,7 +142,7 @@ Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');
 Route::post('post/register', [RegisterController::class, 'postregister'])->name('post.register');
 
-Route::get('home', [PostsController::class, 'home']);
+Route::any('top', [PostsController::class, 'top'])->name('top');
 
 include 'web_sample.php';
 
