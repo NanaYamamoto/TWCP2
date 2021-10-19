@@ -1,22 +1,24 @@
-{{--
+
 @php
 $type = 1;
 if( isset($data) ) $type = $data->type;
 if( isset($form['type']) && !is_array( $form['type'] ) ) $type = $form['type'];
-if( isset($form['type']) && $form['type'] == 'リンクのみ' ) $type = 2;
-if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1;
+if( isset($form['type']) && $form['type'] == '公開' ) $type = 2;
+if( isset($form['type']) && $form['type'] == '非公開' ) $type = 1;
 @endphp
---}}
 
+{{--
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">ID</label>
     <div class="col-sm-10">
         {!! $form['id'] !!}
-@error('name')
+@error('id')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
 @enderror
     </div>
 </div>
+--}}
+
 
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">名前</label>
@@ -28,7 +30,6 @@ if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1
     </div>
 </div>
 
-{{--
 <div class="form-group row">
     <label for="publish" class="col-sm-2 col-form-label">公開フラグ</label>
     <div class="col-sm-10">
@@ -42,13 +43,13 @@ if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1
 @enderror
     </div>
 </div>
---}}
 
 <div class="form-group row">
-    <label for="title" class="col-sm-2 col-form-label">IMG</label>
-    <div class="col-sm-10">
-        {!! $form['img'] !!}
-@error('name')
+    <label for="title" class="col-sm-2 col-form-label">写真</label>
+    <div class="col-sm-10" type="file">
+        <input id="image" type="file" name="image" {!! $form['img'] !!} 
+
+@error('img')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
 @enderror
     </div>
@@ -59,23 +60,24 @@ if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1
     <label for="title" class="col-sm-2 col-form-label">更新日時</label>
     <div class="col-sm-10">
         {!! $form['updated_at'] !!}
-@error('name')
+@error('updated_at')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
 @enderror
     </div>
 </div>
+
 
 <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">作成日時</label>
     <div class="col-sm-10">
         {!! $form['created_at'] !!}
-@error('name')
+@error('created_at')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
 @enderror
     </div>
 </div>
 
-{{--
+
 <div class="form-group row">
     <label for="publish_at" class="col-sm-2 col-form-label">記事日付</label>
     <div class="col-sm-10">
@@ -99,6 +101,7 @@ if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1
 @enderror
     </div>
 </div>
+
 <div class="form-group row" id="url" @if( $type != 2 ) style="display:none;"@endif >
     <label for="url" class="col-sm-2 col-form-label">URL</label>
     <div class="col-sm-10">

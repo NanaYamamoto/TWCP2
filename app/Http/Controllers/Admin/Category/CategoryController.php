@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use App\Models\Category;
-use DB;
+
 
 class CategoryController extends Controller{
 
@@ -99,7 +99,7 @@ class CategoryController extends Controller{
         $ses_key = "{$this->session_key}.regist";
 
         $data = session()->get( "{$ses_key}.input", null );
-
+        
         //データがない場合は入寮画面に戻る
         if( empty( $data ) ){
             return redirect()->route('admin.category.regist');

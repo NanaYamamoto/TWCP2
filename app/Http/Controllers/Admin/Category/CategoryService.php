@@ -58,10 +58,6 @@ class CategoryService extends CommonService {
      */
     public function regist( $data = [] ){
 
-        if( $data['type'] == 2 ) {
-            $data['content'] = $data['url'];
-        }
-
         $data = Category::create( $data );
         return $data;
     }

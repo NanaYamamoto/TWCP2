@@ -71,4 +71,3 @@ Route::any ('admin/category/delete/complete', [CategoryController::class, 'delet
 Route::any ('admin/category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('admin.category.delete.confirm')/*->where('id', '[0-9]+')*/ ;
 Route::get('admin/category/{id}', [CategoryController::class, 'details'])->name('admin.category.details');
 Route::any('admin/category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('admin.category.delete.confirm');
-//Route::any ('admin/category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('admin.category.delete.confirm')/*->where('id', '[0-9]+')*/ ;

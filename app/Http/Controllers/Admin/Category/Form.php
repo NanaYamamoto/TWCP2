@@ -13,11 +13,11 @@ class Form implements InterfaceForm{
         $form = [];
         $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
         
-        $form['id'] = FormF::text('id', $data['id']??'', $opt );
-        
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
-        $form['img'] = FormF::file('img', $data['img']??'', $opt );
+        $form['active'] = SimpleForm::radio('active', $data['active']??'', __('define.publish'), [] );
+
+        $form['img'] = FormF::text('img', $data['img']??'', $opt );
 
         return $form;
     }
@@ -36,18 +36,12 @@ class Form implements InterfaceForm{
 
     public function getRuleRegist(array $data = []): array
     {
+    
        $rule = [];
-       $rule['title'] = ['required', 'max:200' ];
-       $rule['type'] = ['required', 'integer' ];
-       $rule['publish'] = ['required', 'integer' ];
-       $rule['publish_at'] = ['required', 'date' ];
-
-       if ( !empty($data['type']) && $data['type'] == 2 ) {
-               $rule['url'] = ['required',  'max:2000' ];
-       } else {
-           $rule['content'] = ['required',   ];
-       }
-
+       $rule['name'] = ['required', 'max:200' ];
+       $rule['active'] = ['required' ];
+       $rule['img'] = ['required' ];
+       
        return $rule; 
     }
 
@@ -57,12 +51,12 @@ class Form implements InterfaceForm{
      * @return void
      */
     public function getHtml( array $data = [] ) {
-        /*
-        $data['type'] = __('define.info.type')[$data['type']] ?? '';
-        $data['publish'] = __('define.publish')[$data['publish']] ?? '';
-        $data['content'] = "<pre>{$data['content']}</pre>";
-        if( !isset($data['url']) ) $data['url'] = '';
-        */
+        
+        $rule = [];
+        $rule['name'] = ['required', 'max:20'];
+        $data['active'] = __('define.category.active')[$data['active']] ?? '';
+        $rule['img'] = ['required', 'max:30'];
+
         return $data;
     }
 }

@@ -46,11 +46,11 @@ class Form implements InterfaceForm{
        $rule['publish'] = ['required', 'integer' ];
        $rule['publish_at'] = ['required', 'date' ];
 
-       if ( !empty($data['type']) && $data['type'] == 2 ) {
-               $rule['url'] = ['required',  'max:2000' ];
+    if ( !empty($data['type']) && $data['type'] == 2 ) {
+                $rule['url'] = ['required',  'max:2000' ];
        } else {
            $rule['content'] = ['required',   ];
-       }
+        }
 
        return $rule; 
     }

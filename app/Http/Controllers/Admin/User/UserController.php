@@ -171,7 +171,7 @@ class UserController extends Controller{
     }
 
     /**
-     * 更新　入力画面
+     * 更新入力画面
      * @param Request $request
      * @param int $id
      * @return void

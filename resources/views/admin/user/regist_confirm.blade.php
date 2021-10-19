@@ -10,7 +10,7 @@
         @include('admin.user.form')
         <div class="form-group form-inline" style="margin-top:10px;">
             <a href="{{route('admin.user.regist')}}" class="btn btn-secondary">入力に戻る</a>
-            <button class="btn btn-primary">確認画面へ</button>
+            <button class="btn btn-primary">登録完了</button>
         </div>
     </form>
 </div>
