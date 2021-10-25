@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\Post;
 use App\Http\TakemiLibs\CommonService;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class InformationService extends CommonService
 {
@@ -18,10 +20,15 @@ class InformationService extends CommonService
     {
         $db = Post::query();
         $users = User::query();
+        $categories = Category::query();
+        
 
+        $postModel = new Post();
 
-        if (!empty($data['category_id'])) $db->where('category_id', ' LIKE', "%{$data['category_id']}%");
+        if (!empty($data['category_id'])) $db->where('category_id', $data['category_id']);
 
+        if (!empty($data['title'])) $db->where('title', $data['title']);
+        
         if (!empty($data['content'])) $db->where('content', $data['content']);
 
         if (!empty($data['active'] = 1)) $db->where('active', $data['active']);
@@ -29,32 +36,23 @@ class InformationService extends CommonService
         // if( !empty($data['type']) ) $db->where( 'type', $data['type'] );
 
         if (!empty($data['name'])) $users->where('name', $data['name']);
+        if (!empty($data['name'])) $db->categories()->select('id', 'name')->where('name', $data['name'])->get()->toArray();
 
 
         if (!empty($data['publish'])) $db->where('publish', $data['publish']);
 
         // もしキーワードが入力されている場合
         if (!empty($data['keyword'])) {
-            
-            $keyword = $data['keyword'];
-            $db->where('content', 'LIKE', "%{$keyword}%") 
-            && $users->where('name', 'LIKE', "%{$keyword}%");
-            
-
-            // $first = $users
-            //     ->where('name', 'LIKE', "%{$keyword}%");
-
-            // $all = $db
-            //     ->where('content', 'LIKE', "%{$keyword}%")
-            //     ->union($first);
-                
-
-            // 検索結果を結合したい
+            $keyword = $postModel->myContent($data['keyword']);
             
             // キーワードが入力されていない場合
-        } 
+        } else{
+            return $db->paginate();
+            exit;
+        }
 
-        return $db->paginate();
+        return $keyword;
+        
         
         // return $all;
 
@@ -97,7 +95,7 @@ class InformationService extends CommonService
     public function update($id, $data = [])
     {
 
-        $user = \Auth::user();
+        $user = Auth::user();
         $recode = Post::where('active', 1)->where('id', $id)->where('user_id', $user['id'])->find($id);
         if (!$recode) return null;
 

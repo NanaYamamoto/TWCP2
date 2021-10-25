@@ -1,81 +1,75 @@
-@php
-$type = 1;
-if( isset($data) ) $type = $data->type;
-if( isset($form['type']) && !is_array( $form['type'] ) ) $type = $form['type'];
-if( isset($form['type']) && $form['type'] == 'リンクのみ' ) $type = 2;
-if( isset($form['type']) && $form['type'] == '通常のお知らせ' ) $type = 1;
-@endphp
-
-
-<div class="form-group row">
-    <div class="col-sm-10">
-    {!! $form['user_id'] !!}
-    </div>
+<div id="contents" class="cp_iptxt">
+    {!! $form['title'] !!}
+    @error('title')
+    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+    @enderror
+    <label for="title" class="">タイトル</label>
+    <span class="focus_line"></span>
+</div>
+<div id="contents" class="cp_iptxt">
+    <label for="category_id" class="padding">カテゴリー</label>
+    {!! $form['category_id'] !!}
+    @error('category_id')
+    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+    @enderror
+    <!--この部分だけ赤線を排除-->
+    <span class="focus_line-z"></span>
 </div>
 
-<div class="form-group row">
-    <label for="category_id" class="col-sm-2 col-form-label">カテゴリー</label>
-    <div class="col-sm-10">
-        {!! $form['category_id'] !!}
-@error('category_id')
-        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-@enderror
-    </div>
+<div id="contents" class="cp_iptxt">
+    <label for="content" class="d-flex">記事内容</label>
+    {!! $form['content'] !!}
+    @error('content')
+    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+    @enderror
+    <span class="focus_line"></span>
 </div>
 
-<div class="form-group row" id="content"> <!-- divclassの中に入れる可能性あり @if( $type != 1 ) style="display:none;" @endif -->
-    <label for="content" class="col-sm-2 col-form-label">内容</label>
-    <div class="col-sm-10">
-        {!! $form['content'] !!}
-@error('content')
-        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-@enderror
-    </div>
-</div>
+<div id="contents" class="cp_iptxt">
+    <label for="publish" class="padding">公開フラグ</label>
 
-<div class="form-group row">
-    <label for="publish" class="col-sm-2 col-form-label">公開フラグ</label>
-    <div class="col-sm-10">
     @if( is_array( $form['publish']) )
-        @foreach( $form['publish'] as $node ) {!! $node !!}@endforeach
+    @foreach( $form['publish'] as $node ) {!! $node !!}@endforeach
     @else
-        {!! $form['publish'] !!}
+    {!! $form['publish'] !!}
     @endif
-@error('publish')
-        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-@enderror
-    </div>
+    @error('publish')
+    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+    @enderror
+
+    <span class="focus_line"></span>
 </div>
 
-<div class="form-group row">
-    <label for="img" class="col-sm-2 col-form-label">画像</label>
-    <div class="col-sm-10">
-        {!! $form['img'] !!}
-        @error('img')
-        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-        @enderror
-    </div>
+<div id="contents" class="cp_iptxt">
+    <label for="img" class="">画像</label>
+    {!! $form['img'] !!}
+    @error('img')
+    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+    @enderror
+
 </div>
+
+
 
 
 @section('scripts')
 @parent
-    <script lang="text/javascript">
-        $( function(){
-            if( $('input[name=type]:checked').val() == 2) {
+<script lang="text/javascript">
+    $(function() {
+        if ($('input[name=type]:checked').val() == 2) {
+            $('div[id=url]').show();
+            $('div[id=content]').hide();
+        }
+        $('input[name=type]').change(function() {
+            let val = $(this).val();
+            if (val == 1) {
+                $('div[id=url]').hide();
+                $('div[id=content]').show();
+            } else {
                 $('div[id=url]').show();
                 $('div[id=content]').hide();
             }
-            $('input[name=type]').change( function(){
-                let val = $(this).val();
-                if( val == 1 ) {
-                    $('div[id=url]').hide();
-                    $('div[id=content]').show();
-                } else {
-                    $('div[id=url]').show();
-                    $('div[id=content]').hide();
-                }
-            } );
-        } );
-    </script>
+        });
+    });
+</script>
 @endsection
