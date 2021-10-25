@@ -19,18 +19,19 @@ use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
+    protected $session_key = 'users';
+
+
+    /**
+     * ログイン画面の表示
+     * @return View
+     */
+    public function showLogin()
+    {
+        return view('login.login_form');
+    }
 
     /**
      * ログイン処理
@@ -66,6 +67,8 @@ class LoginController extends Controller
             } else {
                 //ログイン成功
                 $request->session()->regenerate();
+                // 指定したユーザーでログインし、"remember"にする
+                Auth::login($user);
                 return redirect('operate/members')->with('login_success', 'ログインに成功しました。');
             }
         } else {
@@ -170,11 +173,6 @@ class LoginController extends Controller
     //////////////
     //林のコードはここから下のログイン処理じゃないと開けない//
     //////////////
-
-    public function showLogin()
-    {
-        return view('login.login_form');
-    }
 
     /**
      * 認証を処理する

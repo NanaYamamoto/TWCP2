@@ -19,6 +19,8 @@ class Search implements InterfaceSearch{
         //お知らせタイトル
         $form['category'] = Form::text('category', $data['category'] ?? '', $opt );
 
+        $form['title'] = Form::text('title', $data['title'] ?? '', $opt );
+        
         $form['content'] = Form::text('content', $data['content'] ?? '', $opt );
         
         $form['type'] = SimpleForm::radio('type', $data['type']??'', __('define.info.type'), $opt );

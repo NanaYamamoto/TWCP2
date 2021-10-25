@@ -1,0 +1,352 @@
+@charset "utf-8";
+/*========= 背景グラデーション ===============*/
+
+body {
+    width: 100%;
+    height: 100%;
+    /* よくわからないので100vhからこちらに変更 */
+    background: linear-gradient( 45deg, #7ceeee, #c786dfbb, #87e2d6f1);
+    background-size: 170% 170%;
+    animation: bggradient 20s ease infinite;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@keyframes bggradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.mt-3 {
+    margin-top: 0rem!important;
+}
+
+/*========= ロゴ文字(黒文字) ===============*/
+
+.navbar-brand {
+    font-size: 1.5em;
+    /* フォントサイズ */
+    font-weight: 400;
+    /* フォント太さ */
+    padding-top: .1em;
+    padding-bottom: .1em;
+    margin-bottom: 1em;
+    align-items: baseline;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.top p {
+    width: 220px;
+    font-size: 20px;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    padding: 1rem 3rem;
+    margin-left: 30px;
+    padding-top: 30px;
+    margin-top: 5px;
+}
+
+/*コンテンツ*/
+
+.contents {
+    width: 1360px;
+    padding-top: 70px;
+}
+
+.contents p {
+    color: #8B8B8B;
+}
+
+form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 68em;
+}
+
+label {
+    display: inline-block;
+    font-size: 25px;
+    letter-spacing: 18.5px;
+}
+
+.h1, h1 {
+    font-size: calc(1rem + 1vw);
+}
+
+span.category {
+    background-color: #FFF687;
+    border-radius: 15px;
+    color: #000000;
+    padding: 5px 8px 5px 8px;
+}
+
+time.date {
+    color: #000000;
+    margin-left: 1rem;
+}
+
+.contents ul li {
+    margin: 15px;
+}
+
+/*テキストエリア*/
+
+textarea.ef {
+    text-align: left;
+    width: 80%;
+}
+
+/*入力フォーム装飾*/
+
+.cp_iptxt {
+    position: relative;
+    width: 100%;
+    margin: 100px 10%;
+}
+
+.cp_iptxt input[type='text'] {
+    /* font: 0.5px/54px caption; */
+    box-sizing: border-box;
+    width: 80%;
+    letter-spacing: 1px;
+    /* padding-left: 174em; */
+    color: black;
+}
+
+.cp_iptxt input[type='text']:focus {
+    outline: none;
+}
+
+.ef {
+    padding: 14px 50px 14px 25px;
+    border: 0;
+    border-bottom: 1px solid #1b2538;
+    background-color: transparent;
+}
+
+/*赤線ライン*/
+
+.ef~.focus_line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    transition: 1s;
+    background-color: #da3c41;
+}
+
+.ef:focus~.focus_line, .cp_iptxt.ef~.focus_line {
+    width: 80%;
+    transition: 0.4s;
+}
+
+.ef~label {
+    position: absolute;
+    z-index: -1;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    transition: 1s;
+    letter-spacing: 18.5px;
+    color: black;
+}
+
+/*文字入力時*/
+
+.ef:focus~label, .cp_iptxt.ef~label {
+    font-size: 25px;
+    top: -35px;
+    transition: 0.7s;
+    color: #ffffff;
+}
+
+figure {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+}
+
+#pic {
+    clear: both;
+    margin-right: -15px;
+}
+
+#pic li {
+    width: 285px;
+    float: left;
+    list-style-type: none;
+    margin: 0 150px 0 0;
+    padding-left: inherit;
+}
+
+#slidemenu {
+    width: 80px;
+    position: fixed;
+    background-color: #9c9c73;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    color: #3f59b5;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.h1 {
+    margin-bottom: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.py-4 {
+    padding-top: 11.5rem!important;
+    padding-bottom: 1.5rem!important;
+    padding-left: 60px;
+    overflow: hidden;
+}
+
+/* 画像ボタン */
+
+input#file_upload {
+    padding: 0px 0px 0px 50px;
+}
+
+/*新規作成ボタンデザイン*/
+
+.btn-success {
+    color: #fff;
+    background-color: #777777f8;
+    border-color: #777777f8;
+}
+
+.btn, a.btn, button.btn {
+    /* margin: 0px 0px 50px 1100px; */
+    /* font-size: 1.6rem; */
+    /* font-weight: 700; */
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    /* padding: 1rem 4rem; */
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    /*     color: #212529; */
+    border-radius: 0.5rem;
+}
+
+a.btn-svg {
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 54px;
+    width: 204px;
+    height: 54px;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a.btn-svg svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+a.btn-svg svg rect {
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+    stroke: #000;
+    stroke-width: 2;
+    stroke-dasharray: 200px, 16px;
+    stroke-dashoffset: 70px;
+}
+
+a.btn-svg:hover svg rect {
+    stroke-dashoffset: 284px;
+}
+
+a.btn-svg span {
+    color: #000;
+}
+
+/*黒帯(最下部)*/
+
+footer.text-center.bg-dark.text-white {
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* /////追加//// */
+
+button.btn-svg {
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 54px;
+    width: 204px;
+    height: 54px;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+button.btn-svg svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button.btn-svg svg rect {
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+    stroke: #000;
+    stroke-width: 2;
+    stroke-dasharray: 200px, 16px;
+    stroke-dashoffset: 70px;
+}
+
+button.btn-svg:hover svg rect {
+    stroke-dashoffset: 284px;
+}
+
+button.btn-svg span {
+    color: #000;
+}
+
+.padding {
+    padding: 0 40px 0 0;
+}

@@ -16,11 +16,13 @@ class Form implements InterfaceForm
         $categories = Category::select('id','name')->get()->pluck('name','id');
         
         $form = [];
-        $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
+        $opt = ['class' => 'ef', 'autocomplete' => 'off'];// 元は'class' => 'form-control'
 
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
         $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt);
+
+        $form['title'] = FormF::text('title', $data['title'] ?? '', $opt);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
 
@@ -53,6 +55,7 @@ class Form implements InterfaceForm
     {
         $rule = [];
         $rule['category_id'] = ['required'];
+        $rule['title'] = ['required'];
         $rule['content'] = ['required'];
         // $rule['type'] = ['required'];
         $rule['publish'] = ['required'];

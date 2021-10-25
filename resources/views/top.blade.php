@@ -75,11 +75,11 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.register') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
+                        <a class="nav-link" href="{{ route('showRegist') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link mr-2" href="{{ route('post.login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
+                        <a class="nav-link mr-2" href="{{ route('showLogin') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
                     </li>
                     <li class="nav-item open-btn" style="
                             position: unset;
@@ -150,7 +150,7 @@
             <form role="search" method="post">
                 @csrf
                 <input type="text" value="" name="keyword" id="search-text" placeholder="search">
-                <input type="submit" id="searchsubmit" name="btnSearch" value="">
+                <input type="submit" id="searchsubmit" name="btnSearch" value="検索">
             </form>
         </div>
         <!--/search-wrap-->
@@ -233,10 +233,11 @@
     <div id="container" class="wrapper">
         <main>
             @if( count($rows) )
-            @foreach( $rows as $row )
+            
             <article>
                 <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">おすすめの投稿</a></h1>
-                <p><a href="#">タイトル</a></h2>
+                @foreach( $rows as $row )
+                <p><a href="#">{{ $row->title }}</a></h2>
                 <ul class="meta">
                     <li><a href="#">{{ $row->created_at }}</a></li>
                     <li><a href="#">{{ $row->category_id }}</a></li>
@@ -247,11 +248,12 @@
                     {{ $row->content }}
                 </p>
                 <div class="readmore"><a href="#">READ MORE</a></div>
+                @endforeach
             </article>
 
 
-            @endforeach
-            {{$rows->links()}}
+            
+            
             @else
             <span>記事がありません</span>
             @endif
