@@ -3,7 +3,7 @@
 
 
 @section('contents')
-<div id="profile-edit-form" class="container">
+<div id="profile-edit-form" class="container" style="grid-template-columns:none;">
 
     <div class="row">
         <div class="bg-white"><!-- col-10 -->

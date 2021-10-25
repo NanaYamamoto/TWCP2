@@ -29,6 +29,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- モーダルウィンドウ用 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
+    
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
 
@@ -52,42 +56,15 @@
 
 <body>
     <!--ローディング画面-->
-    
+
     <div id="container">
+        <header id="header">
+            <h1><a href="#">暮らしのアプリ</a></h1>
 
-        <!--タイトル壁紙-->
-        <div class="wallpaper">
-
-            <!--タイトル文字-->
-            <div class="letter">
-                <p>teamM.jp</p>
-            </div>
-
-            <!--スクロール-->
-            <div class="scrolldown1" style="z-index:2"><span>Scroll</span></div>
-
-            <img src="/images/画像/table.jpeg" alt="">
-
-            <!--ページトップ-->
-            <nav class="navbar navbar-expand navbar-dark tempting-azure-gradient" style="z-index: 100;">
-
-                <div class="container d-flex justify-content-center px-4">
-                    <a class="navbar-brand mr-auto" href="/" style="font-size:1.5rem;"><i class="fas fa-sun mr-1"></i>暮らしのまとめ</a>
-
-
-
-                    <!-- <form method="GET" action="{{ route('operate.user') }}" class="search-form form-inline w-25 d-none d-md-flex">
-                        <span></span>
-                        <input class="form-control w-100" name="free_word" type="search" placeholder="投稿を検索" value="{{ $freeWord ?? old('free_word') }}">
-                    </form> -->
-
-
-
-                    <!-- 検索フォームを表示しない -->
-
-
-                    <ul class="navbar-nav ml-auto d-none d-md-flex align-items-center">
-
+            
+            <nav id="f-nav">
+                <div id="f-nav-list">
+                    <ul id="g-navi" class="nav01c">
                         @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.register') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
@@ -95,6 +72,17 @@
 
                         <li class="nav-item">
                             <a class="nav-link mr-2" href="{{ route('post.login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
+                        </li>
+                        <li class="nav-item open-btn">
+                        <i class="fas fa-search" style="
+                        color: #fff;
+                        text-decoration: none;
+                        padding-top: 10px;
+                        display: block;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        font-weight: bold;">
+                        </i>
                         </li>
 
 
@@ -104,34 +92,28 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.regist') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
                         </li>
-
-
-                        <form id="quick-post" method="POST" action="">
-                            @csrf
-
-                        </form>
-
-                        <!-- Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- <img class="user-mini-icon  rounded-circle" src="{{ Auth::user()->icon_url }}"> -->
-                                @isset($authgroup)
-                                    {{ Auth::guard($authgroup)->user()->name }}さん
-                                    @else
-                                    {{ Auth::user()->name }}さん
-                                @endisset
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <button form="mypage-button" class="dropdown-item" type="submit">
-                                    マイページ
-                                </button>
-
-                                <div class="dropdown-divider"></div>
-                                <button form="logout-button" class="dropdown-item" type="submit">
-                                    ログアウト
-                                </button>
-                            </div>
+                        <li class="has-child"><a href="#" class="nav-link">{{ Auth::user()->name }}さん</a>
+                            <ul>
+                                <li><button form="mypage-button" class="dropdown-item" type="submit">
+                                        マイページ
+                                    </button></li>
+                                <li><button form="logout-button" class="dropdown-item" type="submit">
+                                        ログアウト
+                                    </button></li>
+                            </ul>
                         </li>
+                        <li class="nav-item open-btn">
+                        <i class="fas fa-search" style="
+                        color: #aaa;
+                        text-decoration: none;
+                        padding-top: 10px;
+                        display: block;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        font-weight: bold;">
+                        </i>
+                        </li>
+
                         <form id="mypage-button" method="POST" action="{{ route('post.profile') }}">
                             @csrf
                         </form>
@@ -140,86 +122,72 @@
                         </form>
                         <!-- Dropdown -->
                         @endauth
-
+                        
                     </ul>
                 </div>
-
+                
             </nav>
+            
+        </header>
+
+        <div id="search-wrap">
+            <div class="close-btn"><span></span><span></span></div>
+            <div class="search-area">
+                <form role="search" method="get" action="">
+                    <input type="text" value="" name="keyword" id="search-text" placeholder="search">
+                    <input type="submit" id="searchsubmit" value="">
+                </form>
+            </div>
+            <!--/search-wrap-->
         </div>
+
+        <!--タイトル壁紙-->
+        <div class="wallpaper">
+
+            <section class="container">
+                <div class="main_img">
+                    <img src="/images/画像/background.jpeg" alt="">
+                </div>
+                <h3 class="main_copy">普段の暮らしをもっと便利に、<br>もっと楽しく、<br>It is such an application.</h3>
+
+            </section>
+
+            <!--ページトップ-->
+
+        </div>
+
+        
 
         <!--ラインナップ-->
         <div class="container-fluid">
             <div class="row">
-                <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                    <div class="card-header text-center mt-2"><i class="fas fa-tags mr-2"></i>タグ</div>
-                    <div class="card-body py-3 mx-auto">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
-                                    <span data-feather="home"></span>
-                                    ダッシュボード
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file"></span>
-                                    注文
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="shopping-cart"></span>
-                                    商品
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="users"></span>
-                                    お客様
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="bar-chart-2"></span>
-                                    レポート
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="layers"></span>
-                                    インテグレーション
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </nav> -->
-
                 <!-- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> -->
                 <main class="col-md-10 col-lg-10 offset-1 px-md-4">
                     @yield('contents')
                 </main>
             </div>
-            <footer id="globalfooter">
-        <div class="lib-wrap">
-            <div class="box-lid-menu">
-                <div class="openbtn"><span></span><span></span><span></span></div>
-                <nav id="g-nav" class="">
-                    <div id="category-list"><!--ナビの数が増えた場合縦スクロールするためのdiv-->
-                    
-                        <ul>
-                        <li><i class="fas fa-tags mb-2"></i>タグ</li>
-                        @foreach( $categories as $category )
-                            <li><a href="#">{{ $category }}</a></li> 
 
-                        @endforeach
-                            <li>etc...</li>
-                        </ul>
+            <footer id="globalfooter">
+                <div class="lib-wrap">
+                    <div class="box-lid-menu">
+                        <div class="openbtn"><span></span><span></span><span></span></div>
+                        <nav id="g-nav" class="">
+                            <div id="category-list">
+                                <!--ナビの数が増えた場合縦スクロールするためのdiv-->
+
+                                <ul>
+                                    <li><i class="fas fa-tags mb-2"></i>タグ</li>
+                                    @foreach( $categories as $category )
+                                    <li><a href="#">{{ $category }}</a></li>
+
+                                    @endforeach
+                                    <li>etc...</li>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
-                </nav>
-            </div>
-        </div>
-    </footer>
+                </div>
+            </footer>
         </div>
 
 
@@ -234,6 +202,9 @@
     <!--不必要なら削除してください-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
     <!--不必要なら削除してください-->
+
+    <!-- モーダルウィンドウ用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js"></script>
     <!--JSを読み込み-->
     <script src="{{ asset('js/team.js') }}"></script>
 </body>

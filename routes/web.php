@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\Administrator\AdministratorsController;
 use App\Http\Controllers\Admin\Post\PostsController;
-
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
@@ -93,11 +93,9 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-//管理者のログイン、新規登録
-Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');;
-Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm']);
 
-Route::post('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
+//管理者のログイン、新規登録
+Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
 
 
@@ -126,11 +124,13 @@ Route::group(['prefix' => 'member'], function () {
 });
 Route::any('', [PostsController::class, 'index'])->name('post.home');
 
-Route::get('post/login', [App\Http\Controllers\Auth\LoginController::class, 'showPostLoginForm'])->name('post.login');
-Route::post('post/login', [App\Http\Controllers\Auth\LoginController::class, 'postlogin'])->name('post.login');
+Route::get('post/login', [AuthLoginController::class, 'showLoginForm'])->name('post.login');
+Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');
 Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');
 Route::post('post/register', [RegisterController::class, 'postregister'])->name('post.register');
 
+
+Route::any('top', [PostsController::class, 'top'])->name('top');
 
 //一般ユーザーログイン
 Route::get('/login', [LoginController::class, 'showLogin'])->name('showLogin');

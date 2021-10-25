@@ -57,7 +57,7 @@ class PostsController extends Controller
 
         $rows = $service->getList($search_val);
 
-        $view = view('admin.post.list');
+        $view = view('top');
 
         $view->with('rows', $rows);
         $view->with('form', $form);
@@ -68,8 +68,22 @@ class PostsController extends Controller
         return $view;
     }
 
-    
+    public function top(Request $request)
+    {
+        
+        
+        $user = \Auth::user();
+        $categories = Category::select('id','name')->get()->pluck('name','id');
 
+
+        $view = view('toppage');
+
+        
+        $view->with('user', $user);
+        
+
+        return $view;
+    }
 
     public function profile(Request $request)
     {

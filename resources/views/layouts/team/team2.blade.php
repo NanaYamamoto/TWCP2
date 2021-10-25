@@ -29,6 +29,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- モーダルウィンドウ用 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
+
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
 
@@ -50,14 +54,14 @@
 </head>
 
 <body style="height: 100vh;">
-    
+
     <div id="container">
 
         <!--タイトル壁紙-->
         <div class="wallpaper">
 
             <!--タイトル文字-->
-            
+
 
             <!--ページトップ-->
             <nav class="navbar navbar-expand navbar-dark tempting-azure-gradient sticky-top">
@@ -101,9 +105,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a href="route{{ ('post.profile') }}">
-                                <button class="dropdown-item" type="button">
-                                    マイページ
-                                </button>
+                                    <button class="dropdown-item" type="button">
+                                        マイページ
+                                    </button>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <button form="logout-button" class="dropdown-item" type="submit">
@@ -144,6 +148,9 @@
     <!--不必要なら削除してください-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
     <!--不必要なら削除してください-->
+
+    <!-- モーダルウィンドウ用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js"></script>
     <!--JSを読み込み-->
     <script src="{{ asset('js/team.js') }}"></script>
 </body>

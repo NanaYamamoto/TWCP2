@@ -31,7 +31,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <form method="POST" action="{{ route('post.register') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('regist.confirm') }}" enctype="multipart/form-data">
                     @csrf
                     <h1><span>暮らしのアプリ</span> 新規作成</h1>
                     <div class="form-group row">
@@ -67,7 +67,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <input id="icon_url" type="file" name="icon_url" class="@error('icon_url') is-invalid @enderror">
+                    <label for="inputIcon" class="visually-hidden">アイコン写真</label>
+                        <input name="icon" type="file" id="inputIcon" class="@error('icon_url') is-invalid @enderror">
                         @error('icon_url')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
