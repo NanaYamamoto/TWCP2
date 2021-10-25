@@ -2,7 +2,7 @@
 //ログイン機能、新規登録機能自作
 namespace App\Http\Controllers\Login;
 
-use App\Models\User;
+use App\Models\User as ModelsUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
