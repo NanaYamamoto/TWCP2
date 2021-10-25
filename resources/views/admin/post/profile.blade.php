@@ -1,8 +1,8 @@
-@extends('layouts.team.team2')
+@extends('layouts.newpost')
 
 
 
-@section('contents')
+@section('newpost')
 <div id="profile-edit-form" class="container" style="grid-template-columns:none;">
 
     <div class="row">
@@ -28,7 +28,7 @@
 
                 {{-- ニックネーム --}}
                 <div class="form-group mt-3">
-                    <label for="name">ニックネーム</label>
+                    <label for="name" style="letter-spacing: 5.5px;">ニックネーム</label>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -37,12 +37,12 @@
                     @enderror
                 </div>
 
-                <div class="form-group mb-0 mt-3">
-                    <button type="submit" class="btn btn-block btn-primary">
+                <div class="form-group mb-0 mt-4 text-center">
+                    <button type="submit" class="btn btn-block btn-primary" style="padding: 6px 37px;">
                         保存
                     </button>
                 </div>
-                <div class="form-group mb-0 mt-3">
+                <div class="form-group mb-0 mt-3 text-center">
                     <a href="{{route('post.home')}}" class="btn btn-block btn-secondary mt-2">一覧に戻る</a>
                 </div>
             </form>

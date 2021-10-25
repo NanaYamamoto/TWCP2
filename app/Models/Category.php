@@ -45,4 +45,9 @@ class Category extends Model
 
         return $data;
     }
+
+    public function post()
+{
+    return $this->belongsTo('App\Models\Post');
+}
 }

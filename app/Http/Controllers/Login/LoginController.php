@@ -2,7 +2,7 @@
 //ログイン機能、新規登録機能自作
 namespace App\Http\Controllers\Login;
 
-use App\Models\User;
+use App\Models\User as ModelsUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
@@ -19,18 +19,19 @@ use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
+    protected $session_key = 'users';
+
+
+    /**
+     * ログイン画面の表示
+     * @return View
+     */
+    public function showLogin()
+    {
+        return view('login.login_form');
+    }
 
     /**
      * ログイン処理
@@ -172,11 +173,6 @@ class LoginController extends Controller
     //////////////
     //林のコードはここから下のログイン処理じゃないと開けない//
     //////////////
-
-    public function showLogin()
-    {
-        return view('login.login_form');
-    }
 
     /**
      * 認証を処理する

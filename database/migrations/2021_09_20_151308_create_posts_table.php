@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 50)->comment('記事タイトル');
             $table->unsignedBigInteger('category_id')->comment('カテゴリ');
             $table->text('content')->comment('本文');
             $table->string('img')->nullable()->comment('画像');

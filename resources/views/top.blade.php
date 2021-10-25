@@ -67,19 +67,19 @@
                 <ul>
                     @guest
                     <li class="nav-item confirm">
-                        <a href="#inline" class="inline nav-link"><i class="fas fa-pen mr-1"></i>投稿する</a>
+                        <a href="#inline" class="inline"><i class="fas fa-pen mr-1"></i>投稿する</a>
 
                         <div id="inline" style="display:none;">
-                            <p>投稿をするにはログインをする必要があります。</p>
+                            <p>ログインをする必要があります。</p>
                             <p><a class="inline_close"></a></p>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.register') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
+                        <a class="nav-link" href="{{ route('showRegist') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link mr-2" href="{{ route('post.login') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
+                        <a class="nav-link mr-2" href="{{ route('showLogin') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
                     </li>
                     <li class="nav-item open-btn" style="
                             position: unset;
@@ -133,14 +133,21 @@
     </header>
     <nav id="navi">
         <ul class="wrapper">
-        @if( count($categories) )
-            @foreach( $categories as $category )
-            <li><a href="#">{{ $category }}</a></li>
-            @endforeach
-            @else
-            <span>タグがありません</span>
-            
-            @endif
+            @guest
+            <li><a href="#inline" class="inline">プロフィール</a></li>
+            <li><a href="#inline" class="inline">記事作成</a></li>
+            <li><a href="#">記事検索</a></li>
+            <li><a href="#inline" class="inline">アーカイブ</a></li>
+            <li><a href="#inline" class="inline">フォロワー</a></li>
+            @endguest
+            @auth()
+            <li><a href="{{ route('post.profile') }}">プロフィール</a></li>
+            <li><a href="{{ route('post.regist') }}">記事作成</a></li>
+            <li><a href="#">記事検索</a></li>
+            <li><a href="#">アーカイブ</a></li>
+            <li><a href="#">フォロワー</a></li>
+            @endauth
+
         </ul>
     </nav>
 
@@ -150,7 +157,7 @@
             <form role="search" method="post">
                 @csrf
                 <input type="text" value="" name="keyword" id="search-text" placeholder="search">
-                <input type="submit" id="searchsubmit" name="btnSearch" value="">
+                <input type="submit" id="searchsubmit" name="btnSearch" value="検索">
             </form>
         </div>
         <!--/search-wrap-->
@@ -173,7 +180,7 @@
                             <li>etc...</li>
                             @else
                             <span>タグがありません</span>
-                            
+
                             @endif
                         </ul>
                     </div>
@@ -182,7 +189,7 @@
         </div>
     </footer>
 
-    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">最近のTopics</a></h2>
+    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">Topics</a></h2>
     <ul id="gallery" class="gallery bgappearTrigger">
         <li class="bgextend bgLRextendTrigger zoomInRotate">
             <div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
@@ -233,10 +240,11 @@
     <div id="container" class="wrapper">
         <main>
             @if( count($rows) )
-            @foreach( $rows as $row )
+
             <article>
                 <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">おすすめの投稿</a></h1>
-                <p><a href="#">タイトル</a></h2>
+                @foreach( $rows as $row )
+                <p><a href="#">{{ $row->title }}</a></h2>
                 <ul class="meta">
                     <li><a href="#">{{ $row->created_at }}</a></li>
                     <li><a href="#">{{ $row->category_id }}</a></li>
@@ -247,11 +255,12 @@
                     {{ $row->content }}
                 </p>
                 <div class="readmore"><a href="#">READ MORE</a></div>
+                @endforeach
             </article>
 
 
-            @endforeach
-            {{$rows->links()}}
+
+
             @else
             <span>記事がありません</span>
             @endif

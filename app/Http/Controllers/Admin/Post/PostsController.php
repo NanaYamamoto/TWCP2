@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
 use App\Models\User;
-
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +29,7 @@ class PostsController extends Controller
 
         $ses_key = $this->session_key . '.serach';
         
-        $user = \Auth::user();
+        $user = Auth::user();
         $categories = Category::select('id','name')->get()->pluck('name','id');
 
         if ($request->has('btnSearch')) {
@@ -72,7 +72,7 @@ class PostsController extends Controller
     {
         
         
-        $user = \Auth::user();
+        $user = Auth::user();
         $categories = Category::select('id','name')->get()->pluck('name','id');
 
 
@@ -87,7 +87,7 @@ class PostsController extends Controller
 
     public function profile(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         if (!$user) {
             return redirect()->route('post.login');
         }
@@ -140,7 +140,7 @@ class PostsController extends Controller
 
     public function editProfile(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $data = $request->except('icon_url');
         $fileName = null;
@@ -221,7 +221,7 @@ class PostsController extends Controller
     public function regist(Request $request)
     {
         $form = new Form();
-        $user = \Auth::user();
+        $user = Auth::user();
         if (!$user) {
             return redirect()->route('post.login');
         }
@@ -267,6 +267,7 @@ class PostsController extends Controller
         //dd($fileName);
         $data = array(
             'category_id' => $request->category_id,
+            'title' => $request->title,
             'content' => $request->content,
             'img' => $read_temp_path ?? '',
             'user_id' => $user,
@@ -333,7 +334,7 @@ class PostsController extends Controller
         $service = new InformationService();
 
         $ses_key = $this->session_key . '.update';
-        $user = \Auth::user();
+        $user = Auth::user();
         if (!$user) {
             return redirect()->route('post.login');
         }
