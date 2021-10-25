@@ -66,6 +66,8 @@ class LoginController extends Controller
             } else {
                 //ログイン成功
                 $request->session()->regenerate();
+                // 指定したユーザーでログインし、"remember"にする
+                Auth::login($user);
                 return redirect('operate/members')->with('login_success', 'ログインに成功しました。');
             }
         } else {
