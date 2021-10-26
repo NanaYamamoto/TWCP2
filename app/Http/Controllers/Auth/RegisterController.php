@@ -72,12 +72,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $temp_path = $data['icon_url']; //画像を送信せず$temp_pathがなかった時のため
-        
-        if(!empty($data['icon_url'])){
-        date_default_timezone_set('Asia/Tokyo');
-        $originalName = request()->file('icon_url')->getClientOriginalName();
-        $fileName =  date("Ymd_His") . '.' . $originalName;
-        $temp_path = request()->file('icon_url')->storeAs('public/members/' . $data['name'], $fileName);
+
+        if (!empty($data['icon_url'])) {
+            date_default_timezone_set('Asia/Tokyo');
+            $originalName = request()->file('icon_url')->getClientOriginalName();
+            $fileName =  date("Ymd_His") . '.' . $originalName;
+            $temp_path = request()->file('icon_url')->storeAs('public/members/' . $data['name'], $fileName);
         }
 
         return User::create([
@@ -99,7 +99,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'icon_url' => ['nullable', 'file','mimes:jpeg,png,jpg,bmb','max:2048']
+            'icon_url' => ['nullable', 'file', 'mimes:jpeg,png,jpg,bmb', 'max:2048']
         ]);
     }
 
@@ -121,8 +121,8 @@ class RegisterController extends Controller
         }
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect(RouteServiceProvider::ADMINHOME);
+            ? new JsonResponse([], 201)
+            : redirect(RouteServiceProvider::ADMINHOME);
     }
 
     protected function createAdmin(array $data)
@@ -168,13 +168,12 @@ class RegisterController extends Controller
         }
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect(RouteServiceProvider::POSTHOME);
+            ? new JsonResponse([], 201)
+            : redirect(RouteServiceProvider::POSTHOME);
     }
 
     protected function registeredPost(Request $request, $user)
     {
         //
     }
-
 }

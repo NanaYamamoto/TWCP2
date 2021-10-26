@@ -54,20 +54,21 @@ class LoginController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        
+
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
 
-        if (Auth::guard('post')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => [1], 'active' => [1]], $request->get('remember'))) 
-        {
+        if (Auth::guard('post')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => [1], 'active' => [1]], $request->get('remember'))) {
             return redirect()->intended('/post');
         }
 
@@ -77,7 +78,6 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return back()->withInput($request->only('email', 'remember'));
-        
     }
 
     /**
@@ -98,15 +98,16 @@ class LoginController extends Controller
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => [2], 'active' => [1]], $request->get('remember'))) 
-        {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => [2], 'active' => [1]], $request->get('remember'))) {
             return redirect()->intended('/admin');
         }
 
@@ -127,13 +128,13 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        return array_merge( 
+        return array_merge(
             $request->only($this->username(), 'password'), // 標準の条件
-            [ 'type' => 1 ], // 追加条件
-            [ 'active' => 1 ] // 追加条件
+            ['type' => 1], // 追加条件
+            ['active' => 1] // 追加条件
         );
     }
-    
+
     protected function sendFailedLoginResponse(Request $request)
     {
         // ログイン時に入力されたメールアドレスからユーザーを探す
@@ -164,7 +165,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
+
 
     /**
      * Create a new controller instance.

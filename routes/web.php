@@ -141,3 +141,9 @@ Route::get('/regist', [LoginController::class, 'showRegist'])->name('showRegist'
 Route::post('/regist/confirm', [LoginController::class, 'regist_confirm'])->name('regist.confirm');
 Route::post('/regist/precomplete', [LoginController::class, 'regist_pre_complete'])->name('regist.pre.complete');
 Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])->name('regist.complete');
+
+//パスワードリセット
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
