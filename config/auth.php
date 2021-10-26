@@ -20,6 +20,13 @@ return [
         'passwords' => 'users',
     ],
 
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => '60',
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -113,6 +120,7 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
 
+
+    'password_timeout' => 11800,
 ];

@@ -47,10 +47,8 @@
             <input name="password" type="password" id="inputPassword" class="form-control" placeholder="パスワード">
         </div>
 
-        <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
+        <div>
+            <a href="{{ Route('password.request') }}">パスワードをお忘れの方はこちらへ</a>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
         <div class="m-3">
