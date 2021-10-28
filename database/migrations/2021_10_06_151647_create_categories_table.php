@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name', 100)->comment('名前');
             $table->tinyInteger('active')->unsigned()->default(1)->comment('利用可能');
-            $table->binary('img')->nullable()->comment('画像');
+            $table->text('img')->nullable()->comment('画像');
             $table->timestamps();
         });
     }
