@@ -1,27 +1,90 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>（ユーザー？）ログインフォーム</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- ログインフォームのCSS（Bootstrap5から借用） -->
-    <link href="{{ asset('css/sign.css') }}" rel="stylesheet">
-</head>
+@extends('layouts.guest')
 
-<body class="text-center">
-    
-    <main class="form-signin">
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-        <h1 class="h3 mb-5 fw-normal">ログイン</h1>
+@section('css')
+<!-- ログインフォームCSS -->
+<style>
+.login-page {
+    width: 520px;
+    margin: auto;
+  }
+  .form {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      max-width: 520px;
+      padding: 30px 55px;
+      text-align: center;
+      border: 1px solid #00000061;
+      box-shadow: 0 0 10px 0 rgb(7 7 7 / 10%), 0 5px 5px 0 rgb(0 0 0 / 4%);
+  }
+  .form h1{
+      margin-bottom: 25px;
+      font-size: 30px;
+      font-weight: bold;
+  }
+  .form .login-form{
+      width: 100%;
+  }
+  .form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 30px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  .form input:hover,.form input:focus {
+      background: #ecebeb;
+  }
+  .form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #212529;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-bottom: 15px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+    background: #4c4d4c;
+  }
+  
+  .form .forgot-pass{
+      font-size: 13px;
+  }
+  .form .forgot-pass:hover{
+      color: rgba(0, 60, 255, 0.671);
+  }
+  .regist-link a{
+      font-size: 13px;
+      color: #000000a6;
+      text-decoration: none;
+      margin-top: 15px;
+      display: inline-block;
+  }
+  .regist-link a:hover{
+      color: #4d4b4ba6;
+  }
+</style>
+@endsection
 
-        <!--入力フォームバリデーションエラーの表示-->
-        @if ($errors->any())
+@section('content')
+<body>
+    <div class="login-page">
+        <div class="form">
+            <h1>LOGIN</h1>
+
+            <!--入力フォームバリデーションエラーの表示-->
+            @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -29,33 +92,28 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+            @endif
 
-        <!--ログインエラーの表示-->
-        @if (session('login_error'))
+            <!--ログインエラーの表示-->
+            @if (session('login_error'))
             <div class="alert alert-danger">
                 {{ session('login_error')}}
             </div>
-        @endif
-        
-        <div class="mb-3">
-            {{-- <label for="inputEmail" class="visually-hidden">メールアドレス</label> --}}
-            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="メールアドレス" autofocus>
-        </div>
-        <div class="mb-3">
-            {{-- <label for="inputPassword" class="visually-hidden">パスワード</label> --}}
-            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="パスワード">
-        </div>
+            @endif
 
-        <div>
-            <a href="{{ Route('password.request') }}">パスワードをお忘れの方はこちらへ</a>
+            <form method="POST" action="{{ route('login') }}" class="login-form">
+            @csrf
+                <input name="email" type="text" placeholder="メールアドレス" autofocus/>
+                <input name="password" type="password" placeholder="パスワード"/>
+                <button type="submit">login</button>
+                <a href="{{ Route('password.request') }}" class="forgot-pass">パスワードを忘れた場合</a>
+            </form>
+            <div class="regist-link">
+                <a href="{{ route('showRegist')}}">新規登録</a>
+            </div>
+            
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
-        <div class="m-3">
-            <a href="{{ route('showRegist')}}">新規登録する</a>
-        </div>
-    </form>
-    </main>
-
+    </div>
 </body>
-</html>
+
+@endsection
