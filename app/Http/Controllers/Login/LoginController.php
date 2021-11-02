@@ -191,7 +191,7 @@ class LoginController extends Controller
         }
     }
 
-    
+
 
     /**
      * ユーザーを探す条件を指定する
@@ -201,13 +201,13 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        return array_merge( 
+        return array_merge(
             $request->only($this->username(), 'password'), // 標準の条件
-            [ 'type' => 1 ], // 追加条件
-            [ 'active' => 1 ] // 追加条件
+            ['type' => 1], // 追加条件
+            ['active' => 1] // 追加条件
         );
     }
-    
+
     protected function sendFailedLoginResponse(Request $request)
     {
         // ログイン時に入力されたメールアドレスからユーザーを探す
@@ -238,7 +238,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
+
 
     /**
      * Create a new controller instance.

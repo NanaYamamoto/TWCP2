@@ -12,7 +12,8 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('css/newpost.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/team.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/team.css') }}" rel="stylesheet"> --}}
+    
     @yield('css')
     <title>teamM.jp @yield('title')</title>
 

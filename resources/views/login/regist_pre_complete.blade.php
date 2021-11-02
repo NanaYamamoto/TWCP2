@@ -1,38 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>メール送信完了画面</title>
-    <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
+@extends('layouts.guest')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    
-    
-    {{-- <!-- ログインフォームのCSS（Bootstrap5から借用） -->
-    <link href="{{ asset('css/sign.css') }}" rel="stylesheet"> --}}
-</head>
+@section('css')
+<style>
+.box {
+  width: 520px;
+  margin: auto;
+}
+.box2 {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    background:#ccc9c970;
+    max-width: 520px;
+    padding: 30px 55px;
+    text-align: center;
+    border: 1px solid #00000061;
+    box-shadow: 0 0 10px 0 rgb(7 7 7 / 10%), 0 5px 5px 0 rgb(0 0 0 / 4%);
+}
+.box2 h1{
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: gray;
+}
 
-<body style="background-color:#EEEEEE">
-        <div class="text-center">
-            <div class="mt-5 fs-3 fw-bold" style="fonr-color: red;">
-                <p>登録はまだ完了していません</p>
-            </div>
-            <div class="mx-auto border-bottom border-end border-3 rounded" style="width: 50%; height: 250px; background-color:white;">
-                <div class="p-5 text-muted" style="font-size:15px; font-color:#EEEEEE;">
-                    <i class="bi bi-people-fill"></i>
-                    <i class="bi bi-envelope"></i>
-                    <p class="">仮登録メールアドレスにメールを送信しました。</p>
-                    <p class="">メール内容に記載されたURLへアクセスしていただき、</p>
-                    <p class="">登録を完了してください。</p>
+.box2 .logo{
+    margin: 25px 0;
+}
+.box2 .logo svg {
+    color:#07d2749e;
+}
+
+.box2 p{
+    font-size: 12px;
+    color: gray;
+}
+</style>
+@endsection
+
+
+@section('content')
+<body class="box">
+        <div class="box2">   
+            <div>
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="110" height="50" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>登録はまだ完了していません</h1>
+                </div>
+                <div>                 
+                    <p>仮登録メールアドレスにメールを送信しました。<br>
+                    メール内容に記載されたURLへアクセスしていただき、<br>
+                    登録を完了してください。</p>
                 </div>
             </div>
         </div>
 </body>
 </html>
+@endsection
+
+
+

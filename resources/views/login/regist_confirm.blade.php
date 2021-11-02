@@ -1,63 +1,111 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>（ユーザー？）新規登録確認画面</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <!-- ログインフォームのCSS（Bootstrap5から借用） -->
-    <link href="{{ asset('css/sign.css') }}" rel="stylesheet"> --}}
-</head>
+@extends('layouts.guest')
 
-<body class="">
-    
-    <main class="form-signin" >
-    <form method="POST" action="{{ route('regist.pre.complete') }}" enctype="multipart/form-data">
-        @csrf
-        <h1 class="text-center mt-5 mb-4 fw-normal">新規登録</h1>
+@section('css')
+<!-- ログインフォームCSS -->
+<style>
+.login-page {
+  width: 520px;
+  margin: auto;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 520px;
+    padding: 30px 55px;
+    text-align: center;
+    border: 1px solid #00000061;
+    box-shadow: 0 0 10px 0 rgb(7 7 7 / 10%), 0 5px 5px 0 rgb(0 0 0 / 4%);
+}
+.form h1{
+    margin-bottom: 25px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.form .login-form{
+    width: 100%;
+}
 
-        <div class="mx-auto border border-5 rounded" style="width:20%; background-color:#DDDDDD;">
-            <div class="ml-3 mt-3">
-                <div class="mb-3 text-center">
-                    <h5>入力内容</h5>
-                </div>
-        
-                <div class="container">
-                    <h5 class="mt-5 font-weight-bold">名前</h5>
-                    <p class="text-muted lead">{{ $data['name'] }}</p>
-                </div>
+.form .box {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 30px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
 
-                <div class="container">
-                    <h5 class="mt-3 font-weight-bold">メールアドレス</h5>
-                    <p class="text-muted lead">{{ $data['email'] }}</p>
-                </div>
-        
-                <div class="container">
-                    <h5 class="mt-3 font-weight-bold">パスワード</h5>
-                    <p class="text-muted lead">***********</p>
-                </div>
-                
-                <div class="container mb-4">
-                    <h5 class="mt-3 font-weight-bold">プロフィール写真</h5>
+.box .label {
+    font-weight: bold;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #212529;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  margin-bottom: 15px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #4c4d4c;
+}
+
+.form .btn-back {
+    background: #2125298c;
+}
+.form .btn-back:hover {
+    background: #31353a8c;
+}
+</style>
+@endsection
+
+@section('content')
+<body>
+    <div class="login-page">
+        <div class="form">
+            <h1>入力内容</h1>
+
+            <form method="POST" action="{{ route('regist.pre.complete') }}" class="login-form" enctype="multipart/form-data">
+            @csrf
+            <div class="box">
+                <div class="label">名前</div>
+                <div>{{ $data['name'] }}</div>
+            </div>
+            <div class="box">
+                <div class="label">メールアドレス</div>
+                <div>{{ $data['email'] }}</div>
+            </div>
+            <div class="box">
+                <div class="label">パスワード</div>
+                <div>***********</div>
+            </div>
+            <div class="box">
+                <div class="label">プロフィール写真</div>
+                <div>
                     @if ($data['read_temp_path']==="")選択されていません。
-                        @else  <a href="{{ $data['read_temp_path'] }}">アップロード写真</a>
+                    @else  <a href="{{ $data['read_temp_path'] }}">アップロード写真</a>
                     @endif
-                </div> 
-            
-                <div class="ml-3 pb-5 row">
-                    <a class="mr-1 btn  btn-secondary" href="/registForm" role="button">戻る</a>
-                    <button class="btn btn-primary" type="submit">登録</button>
                 </div>
             </div>
+            <button type="submit">登録</button>
+            <button class="btn-back" onclick="location.href='/registForm'">戻る</button>
+            </form>
             
         </div>
-    
-    </form>
-    </main>
-
+    </div>
 </body>
-</html>
+
+@endsection
+

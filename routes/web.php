@@ -39,7 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-// 山本さん作成のusersページ
+//管理者ページ
 Route::group(['middleware' => ['OperateAuth'], 'prefix' => 'operate', 'as' => 'operate.'], function () {
     Route::any('/members/regist', [MembersController::class, 'regist'])->name('members.regist');
     Route::post('/members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('members.regist.confirm');
@@ -79,6 +79,7 @@ Route::group(['middleware' => ['OperateAuth'], 'prefix' => 'operate', 'as' => 'o
 });
 
 
+
 //ログアウト
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -97,8 +98,6 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 //管理者のログイン、新規登録
 Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
-
-
 
 
 // Posts //確認画面なし
