@@ -21,6 +21,7 @@ class OperateAuth
         //ログインしているユーザーの取得
         $user = Auth::user();
 
+        //管理者じゃなかったらログアウトしてリダイレクト
         if ($user->type != 1) {
             Auth::logout();
             return redirect('/login');

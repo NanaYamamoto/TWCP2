@@ -61,8 +61,8 @@
                 <!--/heading-block-->
             </div>
             <ul id="user-btn">
-                <li><a href="{{ route('login') }}">ログイン</a></li>
-                <li><a href="{{ route('register') }}">会員登録</a></li>
+                <li><a href="{{ route('showLogin') }}">ログイン</a></li>
+                <li><a href="{{ route('showRegist') }}">会員登録</a></li>
                 <li><a href="#inline" class="inline">マイページ</a></li>
                 <li><a href="#inline2" class="inline2">投稿する</a></li>
 
@@ -112,7 +112,7 @@
         <section id="box3" class="box" data-section-name="post">
             <div class="box-area">
                 <h2 class="eachTextAnime">記事を投稿するには会員登録が必要です</h2>
-                <a href="{{ route('login') }}" class="btnchangeline blurTrigger"><span>ログイン</span></a>
+                <a href="{{ route('showLogin') }}" class="btnchangeline blurTrigger"><span>ログイン</span></a>
                 <!--/box-area-->
 
             </div>

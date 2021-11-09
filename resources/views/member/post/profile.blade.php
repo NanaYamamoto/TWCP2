@@ -43,7 +43,7 @@
                     </button>
                 </div>
                 <div class="form-group mb-0 mt-3 text-center">
-                    <a href="{{route('post.home')}}" class="btn btn-block btn-secondary mt-2">一覧に戻る</a>
+                    <a href="{{route('member.mypage')}}" class="btn btn-block btn-secondary mt-2">一覧に戻る</a>
                 </div>
             </form>
         </div>

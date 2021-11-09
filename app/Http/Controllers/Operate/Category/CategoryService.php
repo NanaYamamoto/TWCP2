@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Operate\Category;
 
 use App\Http\TakemiLibs\CommonService;
 use App\Models\Category;

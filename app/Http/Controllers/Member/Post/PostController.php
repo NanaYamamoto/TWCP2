@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Member\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
@@ -12,8 +12,9 @@ use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Form;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     protected $session_key = 'post';
 
@@ -25,12 +26,12 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $search = new Search();
-        $service = new InformationService();
+        $service = new PostService();
 
         $ses_key = $this->session_key . '.serach';
-        
+
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
 
         if ($request->has('btnSearch')) {
             $search_val = $request->all();
@@ -70,17 +71,17 @@ class PostsController extends Controller
 
     public function top(Request $request)
     {
-        
-        
+
+
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
 
 
         $view = view('toppage');
 
-        
+
         $view->with('user', $user);
-        
+
 
         return $view;
     }
@@ -98,7 +99,7 @@ class PostsController extends Controller
     public function postprofile(Request $request)
     {
         $search = new Search();
-        $service = new InformationService();
+        $service = new PostService();
 
         $ses_key = $this->session_key . '.serachpost';
         $users = User::select('users.*')->where('active', 1);
@@ -168,8 +169,8 @@ class PostsController extends Controller
         $user->icon_url = $data['icon_url'];
         $user->save();
 
-        
-            return redirect()->route('post.profile.complete');
+
+        return redirect()->route('post.profile.complete');
     }
 
     public function saveAvatar(UploadedFile $file)
@@ -195,7 +196,7 @@ class PostsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', 'プロフィール変更');
-        $view->with('back', route('post.home'));
+        $view->with('back', route('mypage'));
 
         return $view;
     }
@@ -247,7 +248,7 @@ class PostsController extends Controller
     public function regist_proc(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new POstService();
         $user = \Auth::id();
 
         $ses_key = "{$this->session_key}.regist";
@@ -331,7 +332,7 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new PostService();
 
         $ses_key = $this->session_key . '.update';
         $user = Auth::user();
@@ -366,7 +367,7 @@ class PostsController extends Controller
     public function update_proc(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new PostService();
 
         $ses_key = "{$this->session_key}.update";
 
@@ -420,7 +421,7 @@ class PostsController extends Controller
     public function delete_proc(Request $request, int $id)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new PostService();
 
         $ses_key = "{$this->session_key}.delete";
         $data = $service->get($id);
@@ -451,7 +452,7 @@ class PostsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '削除');
-        $view->with('back', route('post.home'));
+        $view->with('back', route('mypage'));
 
         return $view;
     }

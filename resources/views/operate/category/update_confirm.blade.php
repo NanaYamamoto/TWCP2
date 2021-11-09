@@ -5,11 +5,11 @@
     <h1 class="h2">ユーザー管理 >> 編集</h1>
 </div>
 <div class="row">
-    <form action="{{route('admin.user.update.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('category.update.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
-        @include('admin.category')
+        @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('admin.user.update', $data->id)}}" class="btn btn-secondary">入力に戻る</a>
+            <a href="{{route('operate.category.update', $data->id)}}" class="btn btn-secondary">入力に戻る</a>
             <button class="btn btn-primary">確認画面へ</button>
         </div>
     </form>

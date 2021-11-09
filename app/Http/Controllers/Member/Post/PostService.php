@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Member\Post;
 
 use App\Http\TakemiLibs\CommonService;
 use App\Models\User;
@@ -9,7 +9,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class InformationService extends CommonService
+class PostService extends CommonService
 {
     /**
      * 検索処理

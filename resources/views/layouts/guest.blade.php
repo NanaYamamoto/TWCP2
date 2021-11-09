@@ -12,7 +12,6 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('css/newpost.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/team.css') }}" rel="stylesheet"> --}}
     
     @yield('css')
     <title>teamM.jp @yield('title')</title>
@@ -23,7 +22,7 @@
 <body>
     <!--ページトップ(黒帯)-->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3" width:1400px;>
-        <a class="navbar-brand" href="/">teamM.jp</a>
+        <a class="navbar-brand" href="/">暮らしのアプリ</a>
         <div class="collapse navbar-collapse"></div>
     </nav>
 
@@ -31,7 +30,7 @@
 
     <!-- フッター(最下部黒帯) -->
     <footer class="text-center bg-dark text-white">
-        <p class="py-3">teamM.jp</p>
+        <p class="py-3">暮らしのアプリ</p>
     </footer>
 
     </div>

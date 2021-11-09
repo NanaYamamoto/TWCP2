@@ -5,11 +5,11 @@
     <h1 class="h2">カテゴリー管理 >> 削除</h1>
 </div>
 <div class="row">
-    <form action="{{route('admin.category.delete.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('category.delete.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
-        @include('admin.category.form')
+        @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('admin.category')}}" class="btn btn-secondary">キャンセル</a>
+            <a href="{{route('category')}}" class="btn btn-secondary">キャンセル</a>
             <button class="btn btn-primary">削除処理</button>
         </div>
     </form>

@@ -51,9 +51,7 @@ class Form implements InterfaceForm
         $rule['name'] = ['required', 'max:20'];
         $rule['email'] = ['email', 'required', 'max:30', 'unique:users'];
         $rule['password'] = ['required', 'max:30', 'min:8'];
-        $rule['icon_url'] = ['image', 'mimes:jpeg,png,jpg,bmb', 'nullable'];
-
-        //$rule['publish_at'] = ['required', 'date'];
+        $rule['icon_url'] = ['image', 'mimes:jpeg,png,jpg,bmb'];
 
         return $rule;
     }
@@ -71,8 +69,11 @@ class Form implements InterfaceForm
         //画像をURL化
         if ($data['icon_url']) {
             $file_path = Url('') . '/' . str_replace('public/', 'storage/', $data['icon_url']);
+            $data['icon_url'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
+        } else {
+            $data['icon_url'] = "<pre>選択されていません<pre>";
         }
-        $data['icon_url'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
+
         //dd($data);
         return $data;
     }

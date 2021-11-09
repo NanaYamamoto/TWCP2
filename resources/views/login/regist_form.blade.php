@@ -3,24 +3,31 @@
 @section('css')
 <!-- ログインフォームCSS -->
 <style>
+body {
+    background: url("/images/画像/background.jpeg") no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+}
 .login-page {
-  width: 520px;
+  width: 400px;
   margin: auto;
+}
+.login-page h1{
+    margin-bottom: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 .form {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    max-width: 520px;
-    padding: 30px 55px;
+    max-width: 400px;
+    padding: 40px 55px;
     text-align: center;
     border: 1px solid #00000061;
     box-shadow: 0 0 10px 0 rgb(7 7 7 / 10%), 0 5px 5px 0 rgb(0 0 0 / 4%);
-}
-.form h1{
-    margin-bottom: 25px;
-    font-size: 30px;
-    font-weight: bold;
 }
 .form .login-form{
     width: 100%;
@@ -49,7 +56,6 @@
   padding: 15px;
   color: #FFFFFF;
   font-size: 14px;
-  margin-bottom: 15px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
@@ -65,14 +71,15 @@
     color: rgba(0, 60, 255, 0.671);
 }
 .regist-link a{
-    font-size: 13px;
-    color: #000000a6;
+    font-size: 15px;
+    color: white;
     text-decoration: none;
-    margin-top: 15px;
-    display: inline-block;
+    margin-top: 7px;
+    display: block;
+    text-align: center;
 }
 .regist-link a:hover{
-    color: #4d4b4ba6;
+    color: rgb(255, 255, 255, 0.747);
 }
 </style>
 @endsection
@@ -80,8 +87,8 @@
 @section('content')
 <body>
     <div class="login-page">
+        <h1>Register</h1>
         <div class="form">
-            <h1>REGISTER</h1>
 
             <!--入力フォームバリデーションエラーの表示-->
             @if ($errors->any())
@@ -106,13 +113,13 @@
                 <input name="name" type="text" placeholder="名前" autofocus/>
                 <input name="email" type="text" placeholder="メールアドレス"/>
                 <input name="password" type="password" placeholder="パスワード"/>
-                <input name="icon" type="file" placeholder="プロフィール写真"/>
+                {{-- <input name="icon" type="file" placeholder="プロフィール写真"/> --}}
                 <button type="submit">確認画面</button>
             </form>
-            <div class="regist-link">
-                <a href="{{ route('showLogin')}}">ログイン</a>
-            </div>
             
+        </div>
+        <div class="regist-link">
+            <a href="{{ route('showLogin')}}">ログイン</a>
         </div>
     </div>
 </body>
