@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Member\Post;
 
 use App\Http\TakemiLibs\InterfaceSearch;
 use App\Http\TakemiLibs\SimpleForm;
@@ -26,8 +26,6 @@ class Search implements InterfaceSearch{
         $form['type'] = SimpleForm::radio('type', $data['type']??'', __('define.info.type'), $opt );
 
         $form['name'] = Form::text('name', $data['name'] ?? '', $opt );
-
-        $form['publish'] = SimpleForm::radio('publish', $data['publish']??'', __('define.publish'), $opt );
         
         return $form;
     }

@@ -1,8 +1,12 @@
-@extends('layouts.newpost')
+@extends('layouts.member')
 
+<!-- @section('css') -->
 
+@section('title')
+プロフィール編集
+@endsection
 
-@section('newpost')
+@section('content')
 <div id="profile-edit-form" class="container" style="grid-template-columns:none;">
 
     <div class="row">

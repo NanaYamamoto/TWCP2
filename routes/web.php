@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\Admin\Administrator\AdministratorsController;
-use App\Http\Controllers\Admin\Post\PostsController;
+use App\Http\Controllers\Operate\Administrator\AdministratorsController;
+use App\Http\Controllers\Member\Post\PostsController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 

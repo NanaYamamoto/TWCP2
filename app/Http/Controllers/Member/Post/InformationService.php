@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Member\Post;
 
 use App\Http\TakemiLibs\CommonService;
 use App\Models\User;
@@ -37,9 +37,6 @@ class InformationService extends CommonService
 
         if (!empty($data['name'])) $users->where('name', $data['name']);
         if (!empty($data['name'])) $db->categories()->select('id', 'name')->where('name', $data['name'])->get()->toArray();
-
-
-        if (!empty($data['publish'])) $db->where('publish', $data['publish']);
 
         // もしキーワードが入力されている場合
         if (!empty($data['keyword'])) {

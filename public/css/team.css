@@ -284,7 +284,6 @@ body {
 /*コンテンツ*/
 #contents {
     width: 1360px;
-    padding-top: 70px;
 }
 
 .contents p {
@@ -525,7 +524,7 @@ ul li:before {
 /*===================================*/
 /*tabの形状*/
 .tab-area {
-    width: 70%;
+    width: 90%;
 }
 
 .tab {
@@ -543,8 +542,9 @@ ul li:before {
     border-top: transparent 1px solid;
     border-right: #000 1px solid;
     border-left: transparent 1px solid;
-    padding: 8px 30px;
+    padding: 10px 10px;
     background: #333;
+    color: #fff;
 }
 
 @media screen and (max-width: 400px) {
@@ -558,6 +558,7 @@ ul li:before {
     background: #000;
     border-top: #aaa 1px solid;
     border-color: #aaa;
+    color: #0d6efd;
 }
 
 /*エリアの表示非表示と形状*/
@@ -616,7 +617,7 @@ ul li:before {
 }
 
 #news {
-    padding: 0 0 5% 15%;
+    padding: 0 0 5% 0;
 }
 
 #news .area li {
