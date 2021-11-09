@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class OperateAuth
 {
@@ -18,13 +18,21 @@ class OperateAuth
      */
     public function handle(Request $request, Closure $next)
     {
+
+        //ログインチェック
+        if( Auth::check() === false ) {
+            echo "not login";exit;
+            //ログイン出来ていない場合は、ログイン画面に遷移
+            return redirect('/login/admin');
+        }
+
         //ログインしているユーザーの取得
         $user = Auth::user();
 
         //管理者じゃなかったらログアウトしてリダイレクト
         if ($user->type != 1) {
             Auth::logout();
-            return redirect('/login');
+            return redirect('/login/admin');
         }
 
         return $next($request);
