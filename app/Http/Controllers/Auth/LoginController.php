@@ -44,7 +44,7 @@ class LoginController extends Controller
 
     public function showPostLoginForm()
     {
-        return view('admin.post.login');
+        return view('member.post.login');
     }
 
     public function postlogin(Request $request)

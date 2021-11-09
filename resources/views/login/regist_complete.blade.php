@@ -54,7 +54,7 @@
                 </svg>
             </div>
             <h1>登録が完了しました。</h1>
-            <a href="＃">マイページへ</a>
+            <a href="{{ Route('member.mypage') }}">マイページへ</a>
         </div>
     </div>
 </body>

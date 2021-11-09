@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">メンバー管理</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{route('operate.members.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
+        <a href="{{route('members.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
     </div>
 </div>
     <!--ログイン成功メッセージ-->
@@ -43,7 +43,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-info" name="btnSearch">上記の内容で検索</button>
-            <button type="submit" class="btn btn-outline-default" name="btnSearchClear">検索条件をクリア</button>
+            <button type="submit" class="btn btn-info" name="btnSearchClear">検索条件をクリア</button>
         </div>
     </form>
 </div>
@@ -78,9 +78,9 @@
                     </td>
                     <td>{{$row->updated_at}}<br/>{{$row->created_at}}</td>
                     <td>
-                        <a href="{{route('operate.members.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
-                        <a href="{{route('operate.members.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
-                        <a href="{{route('operate.members.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
+                        <a href="{{route('members.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
+                        <a href="{{route('members.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
+                        <a href="{{route('members.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
                     </td>
                 </tr>
 @endforeach

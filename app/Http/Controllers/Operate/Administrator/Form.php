@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Administrator;
+namespace App\Http\Controllers\Operate\Administrator;
 
 use App\Http\TakemiLibs\SimpleForm;
 use App\Http\TakemiLibs\InterfaceForm;
@@ -18,7 +18,7 @@ class Form implements InterfaceForm
         $form['email'] = FormF::email('email', $data['email'] ?? '', $opt);
 
         $form['password'] = FormF::password('password', $opt);
-        // ↑$optと$data['password'] ?? ''の順番を入れ替えたら表示できる。
+
         $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.user.type'), []);
         $form['icon_url'] = FormF::input('file', 'icon_url', $data['icon_url'] ?? '', $opt);
         return $form;

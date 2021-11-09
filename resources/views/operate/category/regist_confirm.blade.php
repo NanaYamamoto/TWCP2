@@ -5,12 +5,12 @@
     <h1 class="h2">お知らせ管理 >> 確認画面</h1>
 </div>
 <div class="row">
-    <form action="{{route('admin.category.regist.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('category.regist.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
-        @include('admin.category.form')
+        @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('admin.category.regist')}}" class="btn btn-secondary">入力に戻る</a>
-            <button class="btn btn-primary">確認画面へ</button>
+            <a href="{{route('category.regist')}}" class="btn btn-secondary">入力に戻る</a>
+            <button class="btn btn-primary">登録</button>
         </div>
     </form>
 </div>

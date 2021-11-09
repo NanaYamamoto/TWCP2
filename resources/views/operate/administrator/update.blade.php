@@ -5,11 +5,11 @@
     <h1 class="h2"><i class="fas fa-user-edit"></i> 編集</h1>
 </div>
 <div class="row">
-    <form action="{{route('operate.user.update.confirm')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('admin.update.confirm')}}" class="form-horizontal form-label-left" method="post">
         @csrf
-        @include('admin.administrator.form')
+        @include('operate.administrator.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('operate.user')}}" class="btn btn-secondary mr-2">キャンセル</a>
+            <a href="{{route('admin')}}" class="btn btn-secondary mr-2">キャンセル</a>
             <button class="btn btn-primary">確認画面へ</button>
         </div>
     </form>

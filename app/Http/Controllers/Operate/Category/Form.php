@@ -1,45 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Operate\Category;
 
 use App\Http\TakemiLibs\SimpleForm;
 use App\Http\TakemiLibs\InterfaceForm;
 use \Form as FormF;
 
-class Form implements InterfaceForm{
+class Form implements InterfaceForm
+{
 
-    public function buildRegist( array $data = [] ) : array
+    public function buildRegist(array $data = []): array
     {
         $form = [];
         $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
-        
+
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
-        $form['active'] = SimpleForm::radio('active', $data['active']??'', __('define.publish'), [] );
+        $form['active'] = SimpleForm::radio('active', $data['active'] ?? '', __('define.publish'), []);
 
         $form['img'] = FormF::input('file', 'img', $data['img'] ?? '', $opt);
 
         return $form;
     }
 
-    public function build( array $data = [] ): array
+    public function build(array $data = []): array
     {
-        return $this->buildRegist( $data );
+        return $this->buildRegist($data);
     }
 
     public function getRule(array $data = []): array
     {
-        return $this->getRuleRegist( $data );
+        return $this->getRuleRegist($data);
     }
 
     public function getRuleRegist(array $data = []): array
     {
-       $rule = [];
-       $rule['name'] = ['required', 'max:20' ];
-       $rule['active'] = ['required' ];
-       $rule['img'] = [ 'image','file','mimes:jpeg,png,jpg,bmb' ];
-       
-       return $rule; 
+        $rule = [];
+        $rule['name'] = ['required', 'max:20'];
+        $rule['active'] = ['required'];
+        $rule['img'] = ['image', 'file', 'mimes:jpeg,png,jpg,bmb'];
+
+        return $rule;
     }
 
     /**
@@ -47,8 +48,9 @@ class Form implements InterfaceForm{
      * @param array $data
      * @return void
      */
-    public function getHtml( array $data = [] ) {
-/*        
+    public function getHtml(array $data = [])
+    {
+        /*        
         $rule = [];
         $rule['name'] = ['required', 'max:20'];
         $rule['active'] = __('define.category.active')[$data['active']] ?? '';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Administrator;
+namespace App\Http\Controllers\Operate\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 /**
  * お知らせ管理コントローラー`
  */
-class AdministratorsController extends Controller
+class AdministratorController extends Controller
 {
     protected $session_key = 'Administrator';
 
@@ -21,7 +21,7 @@ class AdministratorsController extends Controller
     public function index(Request $request)
     {
         $search = new Search();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = $this->session_key . '.serach';
 
@@ -49,7 +49,7 @@ class AdministratorsController extends Controller
         // $rows = $service->select( $search_val );
         $rows = $service->getList($search_val);
 
-        $view = view('admin.administrator.list');
+        $view = view('operate.administrator.list');
 
         $view->with('rows', $rows);
         $view->with('form', $form);
@@ -67,10 +67,10 @@ class AdministratorsController extends Controller
      */
     public function profile(Request $request)
     {
-        
+
         // dd($data);
-        $view = view('admin.administrator.profile');
-        
+        $view = view('operate.administrator.profile');
+
 
         return $view;
     }
@@ -84,14 +84,14 @@ class AdministratorsController extends Controller
     public function detail(Request $request, int $id)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
         $data = $service->get($id);
 
         if (!$data) {
-            return redirect()->route('operate.user');
+            return redirect()->route('operate.admin');
         }
         // dd($data);
-        $view = view('admin.administrator.detail');
+        $view = view('operate.administrator.detail');
         $view->with('form', $data);
 
         return $view;
@@ -110,7 +110,7 @@ class AdministratorsController extends Controller
 
         $input = session()->get("{$ses_key}.input", []);
 
-        $view = view('admin.administrator.regist');
+        $view = view('operate.administrator.regist');
         $view->with('form', $form->buildRegist($input));
 
         return $view;
@@ -150,7 +150,7 @@ class AdministratorsController extends Controller
         //セッションに保存
         session()->put("{$ses_key}.input", $data);
         //確認画面表示
-        $view = view('admin.administrator.regist_confirm');
+        $view = view('operate.administrator.regist_confirm');
         $view->with('form', $form->getHtml($data));
         return $view;
     }
@@ -164,7 +164,7 @@ class AdministratorsController extends Controller
     public function regist_proc(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = "{$this->session_key}.regist";
 
@@ -172,14 +172,14 @@ class AdministratorsController extends Controller
 
         //データがない場合は入力画面に戻る
         if (empty($data)) {
-            return redirect()->route('operate.user.regist');
+            return redirect()->route('operate.admin.regist');
         }
 
         //バリデーション
         // $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         // if ($ret !== true) {
         //     //入力画面にリダイレクト
-        //     return redirect()->route('operate.user.regist')->withErrors($ret);
+        //     return redirect()->route('operate.admin.regist')->withErrors($ret);
         // }
 
         //登録処理
@@ -189,7 +189,7 @@ class AdministratorsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('operate.user.regist.complete');
+        return redirect()->route('operate.admin.regist.complete');
     }
 
     /**
@@ -203,7 +203,7 @@ class AdministratorsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('operate.user'));
+        $view->with('back', route('operate.admin'));
 
         return $view;
     }
@@ -217,7 +217,7 @@ class AdministratorsController extends Controller
     public function update(Request $request, $id)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = $this->session_key . '.update';
 
@@ -230,7 +230,7 @@ class AdministratorsController extends Controller
         if (!$input) {
             $input = $data->toArray();
         }
-        $view = view('admin.administrator.update');
+        $view = view('operate.administrator.update');
         $view->with('form', $form->build($input));
         $view->with('data', $data);
 
@@ -245,7 +245,7 @@ class AdministratorsController extends Controller
     public function update_confirm(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = $this->session_key . '.update';
 
@@ -255,14 +255,14 @@ class AdministratorsController extends Controller
         //
         $data = $service->get(session()->get("{$ses_key}.id"));
         $input['id'] = $data->id;
-        
+
         //バリデーション
         $request->validate($form->getRule($input));
 
-        
+
 
         //確認画面表示
-        $view = view('admin.administrator.update_confirm');
+        $view = view('operate.administrator.update_confirm');
         $view->with('form', $request);
         $view->with('data', $data);
 
@@ -278,7 +278,7 @@ class AdministratorsController extends Controller
     public function update_proc(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = "{$this->session_key}.update";
 
@@ -286,14 +286,14 @@ class AdministratorsController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('operate.user.update');
+            return redirect()->route('operate.admin.update');
         }
 
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
-            return redirect()->route('operate.user.update')->withErrors($ret);
+            return redirect()->route('operate.admin.update')->withErrors($ret);
         }
 
         //登録処理
@@ -303,7 +303,7 @@ class AdministratorsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('operate.user.update.complete');
+        return redirect()->route('operate.admin.update.complete');
     }
 
     /**
@@ -317,7 +317,7 @@ class AdministratorsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('operate.user'));
+        $view->with('back', route('operate.admin'));
 
         return $view;
     }
@@ -331,17 +331,17 @@ class AdministratorsController extends Controller
     public function delete_confirm(Request $request, int $id)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
         $ses_key = "{$this->session_key}.delete";
         $data = $service->get($id);
 
         if (!$data) {
-            return redirect()->route('operate.user');
+            return redirect()->route('operate.admin');
         }
 
         session()->put("{$ses_key}.id", $id);
 
-        $view = view('admin.administrator.delete_confirm');
+        $view = view('operate.administrator.delete_confirm');
         $view->with('form', $data);
 
         return $view;
@@ -356,7 +356,7 @@ class AdministratorsController extends Controller
     public function delete_proc(Request $request)
     {
         $form = new Form();
-        $service = new InformationService();
+        $service = new AdministratorService();
 
         $ses_key = "{$this->session_key}.delete";
 
@@ -364,7 +364,7 @@ class AdministratorsController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($id)) {
-            return redirect()->route('operate.user');
+            return redirect()->route('operate.admin');
         }
 
         //削除処理
@@ -373,6 +373,6 @@ class AdministratorsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('operate.user.update.complete');
+        return redirect()->route('operate.admin.update.complete');
     }
 }
