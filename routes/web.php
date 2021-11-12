@@ -102,7 +102,7 @@ Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->nam
 
 // Posts //確認画面なし
 
-Route::group(['prefix' => 'member'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'member'], function () {
     Route::any('newpost', [PostsController::class, 'regist'])->name('post.regist');
     Route::post('newpost/proc', [PostsController::class, 'regist_proc'])->name('post.regist.proc');
     Route::any('newpost/complete', [PostsController::class, 'regist_complete'])->name('post.regist.complete');
@@ -121,7 +121,7 @@ Route::group(['prefix' => 'member'], function () {
     // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 });
-Route::any('', [PostsController::class, 'index'])->name('post.home');
+Route::any('', [PostsController::class, 'index'])->name('post.home')->middleware('auth');
 
 Route::get('post/login', [AuthLoginController::class, 'showLoginForm'])->name('post.login');
 Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');

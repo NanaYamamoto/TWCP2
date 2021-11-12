@@ -69,7 +69,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 // 指定したユーザーでログインし、"remember"にする
                 Auth::login($user);
-                return redirect('operate/members')->with('login_success', 'ログインに成功しました。');
+                return redirect('/')->with('login_success', 'ログインに成功しました。');
             }
         } else {
             //ユーザーが存在しない
