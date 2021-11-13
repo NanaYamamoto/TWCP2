@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 
 use Illuminate\Support\Facades\Auth;
-
-use App\Http\Controllers\Member\Post\PostController;
+use App\Http\Controllers\Operate\Administrator\AdministratorsController;
+use App\Http\Controllers\Member\Post\PostsController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -31,17 +31,17 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
- Route::get('/', function () {
-     return view('toppage');
- });
+Route::get('/', function () {
+    return view('toppage');
+});
 
 
 //トップページ
 Route::any('top', [PostController::class, 'top'])->name('top');
 
 //管理者ページ
-Route::group([/*'middleware' => 'OperateAuth',*/ 'prefix' => 'operate', 'as' => 'operate.'], function () {
-    Route::any('dashboard', [DashboardController::class, 'index' ] )->name('dashboard');
+Route::group([/*'middleware' => 'OperateAuth',*/'prefix' => 'operate', 'as' => 'operate.'], function () {
+    Route::any('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::any('members/regist', [MembersController::class, 'regist'])->name('members.regist');
     Route::post('members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('members.regist.confirm');
     Route::post('members/regist/proc', [MembersController::class, 'regist_proc'])->name('members.regist.proc');
@@ -123,11 +123,9 @@ Route::post('admin/update/confirm', [AdministratorController::class, 'update_con
 Route::post('admin/update/proc', [AdministratorController::class, 'update_proc'])->name('admin.update.proc');
 Route::any('admin/update/complete', [AdministratorController::class, 'update_complete'])->name('admin.update.complete');
 Route::any('admin/update/{id}', [AdministratorController::class, 'update'])->name('admin.update');
-
 Route::post('admin/delete/proc', [AdministratorController::class, 'delete_proc'])->name('admin.delete.proc');
 Route::any('admin/delete/complete', [AdministratorController::class, 'delete_complete'])->name('admin.delete.complete');
 Route::any('admin/delete/{id}', [AdministratorController::class, 'delete_confirm'])->name('admin.delete.confirm');
-
 Route::any('admin/profile', [AdministratorController::class, 'profile'])->name('admin.profile');
 Route::any('admin/{id}', [AdministratorController::class, 'detail'])->name('admin.detail');
 Route::any('admin', [AdministratorController::class, 'index'])->name('admin');
@@ -136,18 +134,28 @@ Route::any('category/regist', [CategoryController::class, 'regist'])->name('cate
 Route::post('category/regist/confirm', [CategoryController::class, 'regist_confirm'])->name('category.regist.confirm');
 Route::post('category/regist/proc', [CategoryController::class, 'regist_proc'])->name('category.regist.proc');
 Route::any('category/regist/complete', [CategoryController::class, 'regist_complete'])->name('category.regist.complete');
-
 Route::post('category/update/confirm', [CategoryController::class, 'update_confirm'])->name('category.update.confirm');
 Route::post('category/update/proc', [CategoryController::class, 'update_proc'])->name('category.update.proc');
 Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
 Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update')/*->where('id', '[0-9]+')*/;
-
-Route::get('category', [CategoryController::class, 'index'])->name('category');
 Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
 Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
 Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm')/*->where('id', '[0-9]+')*/;
 Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
-Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
+Route::get('category', [CategoryController::class, 'index'])->name('category');
+
+
+Route::group(['middleware' => 'auth', 'prefix' => 'member'], function () {
+    Route::any('newpost', [PostsController::class, 'regist'])->name('post.regist');
+    Route::post('newpost/proc', [PostsController::class, 'regist_proc'])->name('post.regist.proc');
+    Route::any('newpost/complete', [PostsController::class, 'regist_complete'])->name('post.regist.complete');
+    Route::any('post/profile', [PostsController::class, 'profile'])->name('post.profile');
+    Route::post('post/profile/edit', [PostsController::class, 'editProfile'])->name('post.editProfile');
+    Route::any('post/profile/complete', [PostsController::class, 'profile_complete'])->name('post.profile.complete');
+    // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
+    Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+});
+Route::any('', [PostsController::class, 'index'])->name('post.home')->middleware('auth');
 
 //管理者のログイン、新規登録
 Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');

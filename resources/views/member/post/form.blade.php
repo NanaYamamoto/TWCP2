@@ -1,9 +1,9 @@
 <div id="contents" class="cp_iptxt">
+    <label for="title" class="">タイトル</label>
     {!! $form['title'] !!}
     @error('title')
     <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
     @enderror
-    <label for="title" class="">タイトル</label>
     <span class="focus_line"></span>
 </div>
 <div id="contents" class="cp_iptxt">
@@ -25,20 +25,6 @@
     <span class="focus_line"></span>
 </div>
 
-<div id="contents" class="cp_iptxt">
-    <label for="publish" class="padding">公開フラグ</label>
-
-    @if( is_array( $form['publish']) )
-    @foreach( $form['publish'] as $node ) {!! $node !!}@endforeach
-    @else
-    {!! $form['publish'] !!}
-    @endif
-    @error('publish')
-    <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-    @enderror
-
-    <span class="focus_line"></span>
-</div>
 
 <div id="contents" class="cp_iptxt">
     <label for="img" class="">画像</label>

@@ -57,48 +57,32 @@
 
 <body style="background-color: white;">
     <header class="header">
-        <div class="header_content">
-            <div class="header_inner">
-                <div class="header_logo"><a class="app_icon" href="">
-                        <h1 class="header_title">暮らしのアプリ</h1>
-                    </a></div>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3 ml-4 pl-5">
+            <a class="navbar-brand" href="/">teamM.jp</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('post.profile') }}">プロフィール</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('post.regist') }}">記事作成</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#searchpost">記事検索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#archive">アーカイブ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#follower">フォロワー</a>
+                    </li>
+                </ul>
+
             </div>
             <div class="header_list">
                 <ul>
-                    @guest
-                    <li class="nav-item confirm">
-                        <a href="#inline" class="inline"><i class="fas fa-pen mr-1"></i>投稿する</a>
-
-                        <div id="inline" style="display:none;">
-                            <p>ログインをする必要があります。</p>
-                            <p><a class="inline_close"></a></p>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('showRegist') }}"><i class="fas fa-user-plus mr-1"></i>ユーザー登録</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link mr-2" href="{{ route('showLogin') }}"><i class="fas fa-sign-in-alt mr-1"></i>ログイン</a>
-                    </li>
-                    <li class="nav-item open-btn" style="
-                            position: unset;
-                            top: 0px;
-                            right: 0px;
-                            height: auto;
-                            cursor: pointer;
-                            z-index: 999;">
-                        <i class="fas fa-search">
-                        </i>
-                    </li>
-
-                    @endguest
-
-                    @auth()
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.regist') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
-                    </li>
-                    <li class="has-child"><a href="#" class="nav-link">{{ Auth::user()->name }}さん</a>
+                    @auth
+                    <li class="has-child"><a href="#" class="nav-link"><i class="fas fa-user-alt"></i></a>
                         <ul>
                             <li><button form="mypage-button" class="dropdown-item" type="submit">
                                     マイページ
@@ -108,48 +92,33 @@
                                 </button></li>
                         </ul>
                     </li>
+                    @else
+                    @endauth
                     <li class="nav-item open-btn" style="
-                            position: unset;
-                            top: 0px;
-                            right: 0px;
+                            position: static;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
                             height: auto;
                             cursor: pointer;
-                            z-index: 999;">
+                            z-index: 999;
+                            color: #fff;">
                         <i class="fas fa-search">
                         </i>
                     </li>
-
-                    <form id="mypage-button" method="POST" action="{{ route('post.profile') }}">
-                        @csrf
-                    </form>
-                    <form id="logout-button" method="POST" action="{{ route('logout') }}">
-                        @csrf
-                    </form>
-                    <!-- Dropdown -->
-                    @endauth
                 </ul>
             </div>
-        </div>
-    </header>
-    <nav id="navi">
-        <ul class="wrapper">
-            @guest
-            <li><a href="#inline" class="inline">プロフィール</a></li>
-            <li><a href="#inline" class="inline">記事作成</a></li>
-            <li><a href="#">記事検索</a></li>
-            <li><a href="#inline" class="inline">アーカイブ</a></li>
-            <li><a href="#inline" class="inline">フォロワー</a></li>
-            @endguest
-            @auth()
-            <li><a href="{{ route('post.profile') }}">プロフィール</a></li>
-            <li><a href="{{ route('post.regist') }}">記事作成</a></li>
-            <li><a href="#">記事検索</a></li>
-            <li><a href="#">アーカイブ</a></li>
-            <li><a href="#">フォロワー</a></li>
-            @endauth
 
-        </ul>
-    </nav>
+            <form id="mypage-button" method="POST" action="{{ route('post.profile') }}">
+                @csrf
+            </form>
+            <form id="logout-button" method="POST" action="{{ route('logout') }}">
+                @csrf
+            </form>
+        </nav>
+    </header>
+
+
 
     <div id="search-wrap">
         <div class="close-btn"><span></span><span></span></div>
@@ -192,42 +161,42 @@
     <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">Topics</a></h2>
     <ul id="gallery" class="gallery bgappearTrigger">
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_01_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_02_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_03_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_04_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_05_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_06_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_07_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
         <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="img/gal_08_l.jpg" data-lightbox="gallery-group" data-title="2025.11.03 新車が入荷しました！"><img src="/images/画像/インテリア.png" alt=""></a>
+            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
                 <p>ああああああ</p>
             </div>
         </li>
@@ -268,30 +237,39 @@
 
         <aside id="sidebar">
 
-            <section class="ranking">
-                <h3 class="side-title">人気ランキング</h3>
-                <article>
-                    <a href="#">
-                        <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-                        <h4 class="article-title">ああああああテキスト</h4>
-                    </a>
-                </article>
+            <section id="news">
 
-                <article>
-                    <a href="#">
-                        <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-                        <h4 class="article-title">ああああああテキスト</h4>
-                    </a>
-                </article>
+                <div class="tab-area bgextend">
+                    <div class="bgappear">
+                        <ul class="tab">
 
-                <article>
-                    <a href="#">
-                        <img src="/images/画像/インテリア.png" alt="テキストテキストテキスト">
-                        <h4 class="article-title">ああああああテキスト</h4>
-                    </a>
-                </article>
+                            <li><a href="#recommendation">あなたへのおすすめ</a></li>
+                            <li><a href="#cars">人気記事</a></li>
+                        </ul>
+                        <div class="tab-choice-area">
+
+                            <div id="recommendation" class="area is-active">
+                                <ul>
+                                    <li><a href="#"><time datetime="2021-09-23">2021.09.23</time>PHP</a></li>
+                                    <li><a href="#"><time datetime="2021-07-15">2021.07.15</time>Javascript</a></li>
+                                    <li><a href="#"><time datetime="2021-05-12">2021.05.12</time>Laravel</a></li>
+                                </ul>
+                                <!--/area-->
+                            </div>
+                            <div id="cars" class="area">
+                                <ul>
+                                    <li><a href="#"><time datetime="2021-11-11">2021.11.11</time>インポートカーお披露目</a></li>
+                                    <li><a href="#"><time datetime="2021-06-07">2021.06.07</time>ドイツ・フランス車フェア</a></li>
+                                    <li><a href="#"><time datetime="2021-03-01">2021.03.01</time>買い替えをご検討中の方へ</a></li>
+                                </ul>
+                                <!--/area-->
+                            </div>
+                            <!--/tab-choice-area-->
+                        </div>
+                    </div>
+                    <!--/tab-area-->
+                </div>
             </section>
-
             <section class="archive">
                 <h3 class="side-title">人気投稿者一覧</h3>
                 <ul>

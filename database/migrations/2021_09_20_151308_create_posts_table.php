@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
             $table->string('img')->nullable()->comment('画像');
             $table->unsignedBigInteger('user_id')->comment('登録したユーザーID');
             $table->tinyInteger('active')->unsigned()->default(1)->comment('利用可能');
-            $table->tinyInteger('publish')->default(1)->unsigned()->comment('公開フラグ');
             $table->timestamps();
         });
     }

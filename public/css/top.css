@@ -1,4 +1,5 @@
-@charset "UTF-8"; html {
+@charset "UTF-8";
+html {
     font-size: 100%;
 }
 
@@ -24,6 +25,7 @@ li {
 /*
 コンテンツ幅を設定するための共通クラス
 */
+
 .wrapper {
     max-width: 1200px;
     padding: 0 16px;
@@ -39,6 +41,7 @@ li {
 /*
 疑似要素で下線を設定するために、「position: relative;」を設定
 */
+
 .readmore a {
     padding-bottom: 1px;
     color: #333;
@@ -51,6 +54,7 @@ widthとheightで線の長さと高さを設定
 疑似要素で線を表示させるためには、「content: '';」を設定すること
 「transition: all 200ms ease;」でホバー時の速度などを設定
 */
+
 .readmore a::after {
     content: '';
     position: absolute;
@@ -68,6 +72,7 @@ widthとheightで線の長さと高さを設定
 「transform: translateY(3px);」下に3px移動
 →下に3px移動しながら下線を非表示にする
 */
+
 .readmore a:hover::after {
     opacity: 0;
     transform: translateY(3px);
@@ -76,17 +81,21 @@ widthとheightで線の長さと高さを設定
 /*-------------------------------------------
 header
 -------------------------------------------*/
+
 /*
 「position: fixed;」でヘッダーを固定し、「z-index: 10;」で前面に表示
 ※他のコンテンツでpositionをrelative、absolute、fixedのいずれかに
 設定している場合は、z-indexの数値が大きい方が前面に表示される
 */
+
 /*==================================================
 機能編 　5-1-11 クリックしたらナビが上から下に出現
 ===================================*/
+
 @media screen and (max-width: 960px) {
     #f-nav {
-        /*position:fixed;にし、z-indexの数値を大きくして前面へ*/ position:fixed;
+        /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+        position: fixed;
         z-index: 999;
         /*ナビのスタート位置と形状*/
         top: -120%;
@@ -94,16 +103,14 @@ header
         width: 100%;
         height: 100vh;
         /*ナビの高さ*/
-        background: rgba(0,0,0,0.8);
+        background: rgba(0, 0, 0, 0.8);
         /*動き*/
         transition: all 0.6s;
     }
-
     /*アクティブクラスがついたら位置を0に*/
     #f-nav.panelactive {
         top: 0;
     }
-
     /*ナビゲーションの縦スクロール*/
     #f-nav.panelactive #f-nav-list {
         /*ナビの数が増えた場合縦スクロール*/
@@ -115,25 +122,21 @@ header
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
-
     /*ナビゲーション*/
     #f-nav ul {
         /*ナビゲーション天地中央揃え*/
         width: 90%;
         margin: 100px auto 0 auto;
     }
-
     #f-nav ul ul {
         width: 100%;
         margin: 0;
     }
-
     /*リストのレイアウト設定*/
     #f-nav li {
         list-style: none;
         text-align: center;
     }
-
     #f-nav li a {
         color: #aaa;
         text-decoration: none;
@@ -148,6 +151,7 @@ header
 /*==================================================
 　機能編 5-2-7 3本線が奥行きを持って回転して×に
 ===================================*/
+
 .f-nav-openbtn {
     display: none;
 }
@@ -164,12 +168,10 @@ header
         width: 50px;
         height: 50px;
     }
-
     /*ボタン内側*/
     .f-nav-openbtn .openbtn-area {
         transition: all .4s;
     }
-
     .f-nav-openbtn span {
         display: inline-block;
         transition: all .4s;
@@ -181,36 +183,29 @@ header
         background: #fff;
         width: 45%;
     }
-
     .f-nav-openbtn span:nth-of-type(1) {
         top: 15px;
     }
-
     .f-nav-openbtn span:nth-of-type(2) {
         top: 23px;
     }
-
     .f-nav-openbtn span:nth-of-type(3) {
         top: 31px;
     }
-
     /*activeクラスが付与されると
 線と周りのエリアが回転して×になる*/
     .f-nav-openbtn.active .openbtn-area {
         transform: rotateY(-360deg);
     }
-
     .f-nav-openbtn.active span:nth-of-type(1) {
         top: 18px;
         left: 18px;
         transform: translateY(6px) rotate(-135deg);
         width: 30%;
     }
-
     .f-nav-openbtn.active span:nth-of-type(2) {
         opacity: 0;
     }
-
     .f-nav-openbtn.active span:nth-of-type(3) {
         top: 30px;
         left: 18px;
@@ -239,6 +234,7 @@ header
 ※blockを指定すると横幅いっぱいまで広がってしまうため、
 inline-blockを設定している
 */
+
 #header .site-title a {
     display: inline-block;
 }
@@ -265,6 +261,7 @@ inline-blockを設定している
 /*-------------------------------------------
 pickup
 -------------------------------------------*/
+
 #pickup {
     display: flex;
     justify-content: space-between;
@@ -284,6 +281,7 @@ pickup
 /*-------------------------------------------
 container
 -------------------------------------------*/
+
 #container {
     display: flex;
     justify-content: space-between;
@@ -291,7 +289,7 @@ container
 }
 
 main {
-    width: 65%;
+    width: 55%;
 }
 
 main article {
@@ -321,8 +319,9 @@ main .text {
 /*-------------------------------------------
 aside
 -------------------------------------------*/
+
 #sidebar {
-    width: 33%;
+    width: 40%;
     padding: 20px;
 }
 
@@ -383,6 +382,7 @@ aside
 /*-------------------------------------------
 footer
 -------------------------------------------*/
+
 #footer {
     font-size: 0.875rem;
     background-color: #f7f7f7;
@@ -424,6 +424,7 @@ footer
 疑似要素で三角矢印を表示
 border～プロパティで三角を作り、positionで位置調整
 */
+
 #footer ul.about-list .arrow::before {
     content: '';
     width: 0;
@@ -441,7 +442,7 @@ border～プロパティで三角を作り、positionで位置調整
     border-bottom: solid 1px #777;
 }
 
-#footer .menu-list > li {
+#footer .menu-list>li {
     border-top: solid 1px #777;
     padding: 15px;
     text-align: left;
@@ -456,18 +457,18 @@ border～プロパティで三角を作り、positionで位置調整
 /*-------------------------------------------
 SP
 -------------------------------------------*/
+
 @media screen and (max-width: 767px) {
     /*-------------------------------------------
   header
-  -------------------------------------------*/#header .site-title {
+  -------------------------------------------*/
+    #header .site-title {
         padding: 20px 16px;
     }
-
     #navi {
         /* 横スクロールを表示 */
         overflow-x: scroll;
     }
-
     /*-------------------------------------------
   pickup
   -------------------------------------------*/
@@ -475,23 +476,19 @@ SP
         flex-direction: column;
         padding-top: 140px;
     }
-
     #pickup article {
         width: 100%;
         margin-bottom: 30px;
     }
-
     /*-------------------------------------------
   container
   -------------------------------------------*/
     #container {
         flex-direction: column;
     }
-
     main {
         width: 100%;
     }
-
     /*-------------------------------------------
   aside
   -------------------------------------------*/
@@ -499,25 +496,40 @@ SP
         width: 100%;
         padding: 0;
     }
-
     /*-------------------------------------------
   footer
   -------------------------------------------*/
     #footer .content {
         flex-direction: column;
     }
-
     #footer .item {
         width: 100%;
         margin-bottom: 30px;
     }
+
+    /*-------------------------------------------
+  gallery
+  -------------------------------------------*/
+    #gallery{
+        columns: 0;
+    }
+
+    /*-------------------------------------------
+  lib-wrap
+  -------------------------------------------*/
+  .lib-wrap{
+      opacity: 0;
+  }
+  #search-wrap{
+    width: 0%;
+  }
 }
 
 .header {
     height: 75px;
     width: 100%;
     background: #fff;
-    padding: 0 16px;
+    
 }
 
 .header .header_inner {
@@ -564,6 +576,7 @@ SP
 }
 
 /*下の階層を持っているulの指定*/
+
 .header_list li.has-child ul {
     /*絶対配置で位置を指定*/
     position: absolute;
@@ -571,8 +584,8 @@ SP
     right: 50px;
     z-index: 4;
     /*形状を指定*/
-    background: rgba(255,255,255,0.5);
-    width: 140px;
+    background: rgba(255, 255, 255, 0.5);
+    width: 115px;
     /*はじめは非表示*/
     visibility: hidden;
     opacity: 0;
@@ -581,15 +594,17 @@ SP
 }
 
 /*hoverしたら表示*/
-.header_list li.has-child:hover > ul, .header_list li.has-child ul li:hover > ul, .header_list li.has-child:active > ul, .header_list li.has-child ul li:active > ul {
+
+.header_list li.has-child:hover>ul, .header_list li.has-child ul li:hover>ul, .header_list li.has-child:active>ul, .header_list li.has-child ul li:active>ul {
     visibility: visible;
     opacity: 1;
 }
 
 /*ナビゲーションaタグの形状*/
+
 .header_list li.has-child ul li a {
     color: #fff;
-    border-bottom: solid 1px rgba(255,255,255,0.4);
+    border-bottom: solid 1px rgba(255, 255, 255, 0.4);
 }
 
 .header_list li.has-child ul li:last-child a {
@@ -597,12 +612,13 @@ SP
 }
 
 .header_list li.has-child ul li a:hover, .header_list li.has-child ul li a:active {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 #g-nav {
     right: 100%;
 }
+
 .gallery {
     columns: 4;
     padding: 150px 15px 0 70px;

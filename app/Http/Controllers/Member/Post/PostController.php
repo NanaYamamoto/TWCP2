@@ -53,7 +53,6 @@ class PostController extends Controller
         $form = $search->build($search_val);
         // $service->user_id = \Auth::id();
 
-        $def['publish'] = __('define.publish');
         $def['active'] = __('define.info.type');
 
         $rows = $service->getList($search_val);
@@ -71,17 +70,10 @@ class PostController extends Controller
 
     public function top(Request $request)
     {
-
-
         $user = Auth::user();
-        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
-
-
+        $categories = Category::select('id','name')->get()->pluck('name','id');
         $view = view('toppage');
-
-
         $view->with('user', $user);
-
 
         return $view;
     }
@@ -92,7 +84,7 @@ class PostController extends Controller
         if (!$user) {
             return redirect()->route('post.login');
         }
-        $view = view('admin.post.profile');
+        $view = view('member.post.profile');
         $view->with('user', $user);
         return $view;
     }
@@ -123,12 +115,11 @@ class PostController extends Controller
         $form = $search->build($search_val);
         // $service->user_id = \Auth::id();
 
-        $def['publish'] = __('define.publish');
         $def['active'] = __('define.info.type');
 
         $rows = $service->getList($search_val);
 
-        $view = view('admin.post.postprofile');
+        $view = view('member.post.postprofile');
 
         $view->with('rows', $rows);
         $view->with('form', $form);
@@ -231,7 +222,7 @@ class PostController extends Controller
 
         $input = session()->get("{$ses_key}.input", []);
 
-        $view = view('admin.post.regist');
+        $view = view('member.post.regist');
         $view->with('form', $form->buildRegist($input));
 
         return $view;
@@ -273,7 +264,6 @@ class PostController extends Controller
             'img' => $read_temp_path ?? '',
             'user_id' => $user,
             'active' => $request->active,
-            'publish' => $request->publish,
         );
         //var_dump($data);
         //バリデーション
@@ -349,7 +339,7 @@ class PostController extends Controller
         if (!$input) {
             $input = $data->toArray();
         }
-        $view = view('admin.post.update');
+        $view = view('member.post.update');
         $view->with('form', $form->build($input));
         $view->with('data', $data);
 
