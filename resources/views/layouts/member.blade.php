@@ -26,10 +26,10 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('post.profile') }}">プロフィール</a>
+                    <a class="nav-link" href="{{ route('member.post.profile') }}">プロフィール</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('post.regist') }}">記事作成</a>
+                    <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#searchpost">記事検索</a>

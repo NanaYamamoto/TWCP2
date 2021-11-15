@@ -7,7 +7,7 @@
 
 <div class="row">
     <!-- <form action="{{route('post.regist')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"> -->
-        @include('admin.post.form')
+        @include('member.post.form')
         <div class="form-group form-inline" style="margin-top:10px;">
             <a href="{{route('post.home')}}" class="btn btn-secondary">一覧に戻る</a>
         </div>

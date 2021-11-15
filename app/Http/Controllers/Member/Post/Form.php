@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Member\Post;
 
 use App\Http\TakemiLibs\SimpleForm;
 use App\Http\TakemiLibs\InterfaceForm;
@@ -16,19 +16,15 @@ class Form implements InterfaceForm
         $categories = Category::select('id','name')->get()->pluck('name','id');
         
         $form = [];
-        $opt = ['class' => 'ef', 'autocomplete' => 'off'];// 元は'class' => 'form-control'
+        $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
 
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
-        $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt);
+        $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt, ['style' => 'display:block; width: 20rem; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; border: 1px solid #ced4da; border-radius: 0.25rem;']);
 
         $form['title'] = FormF::text('title', $data['title'] ?? '', $opt);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
-
-        // $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.info.type'), []);
-
-        $form['publish'] = SimpleForm::radio('publish', $data['publish']??'', __('define.publish'), [] );
         
         $form['user_id'] = FormF::hidden('user_id', $user ?? '', $opt);
         $form['img'] = FormF::file('img', $opt, $data['img'] ?? '');
@@ -57,10 +53,7 @@ class Form implements InterfaceForm
         $rule['category_id'] = ['required'];
         $rule['title'] = ['required'];
         $rule['content'] = ['required'];
-        // $rule['type'] = ['required'];
-        $rule['publish'] = ['required'];
-        
-        
+
         $rule['img'] = ['nullable', 'img', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
 
         
