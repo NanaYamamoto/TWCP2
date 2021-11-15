@@ -70,7 +70,7 @@ class LoginController extends Controller
                 // 指定したユーザーでログインし、"remember"にする
                 Auth::login($user);
                 
-                return redirect('mypage')->with('login_success', 'ログインに成功しました。');
+                return redirect()->route('member.mypage')->with('login_success', 'ログインに成功しました。');
 
             }
         } else {

@@ -62,10 +62,10 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.profile') }}">プロフィール</a>
+                        <a class="nav-link" href="{{ route('member.post.profile') }}">プロフィール</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.regist') }}">記事作成</a>
+                        <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#searchpost">記事検索</a>
@@ -109,7 +109,7 @@
                 </ul>
             </div>
 
-            <form id="mypage-button" method="POST" action="{{ route('post.profile') }}">
+            <form id="mypage-button" method="POST" action="{{ route('member.post.profile') }}">
                 @csrf
             </form>
             <form id="logout-button" method="POST" action="{{ route('logout') }}">

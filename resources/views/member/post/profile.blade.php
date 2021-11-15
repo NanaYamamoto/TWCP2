@@ -14,7 +14,7 @@
 
             <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
 
-            <form method="POST" action="{{ route('post.editProfile') }}" class="p-5" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('member.post.editProfile') }}" class="p-5" enctype="multipart/form-data">
                 @csrf
 
 
