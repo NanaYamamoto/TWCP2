@@ -12,7 +12,7 @@ use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Form;
+
 
 class PostsController extends Controller
 {
@@ -308,7 +308,7 @@ class PostsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('member.post.home'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }
@@ -396,7 +396,7 @@ class PostsController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('post.home'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }
@@ -419,7 +419,7 @@ class PostsController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('member.post.home');
+            return redirect()->route('member.mypage');
         }
 
         //削除処理
