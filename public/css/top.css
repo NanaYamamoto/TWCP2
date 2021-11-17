@@ -580,7 +580,7 @@ SP
 .header_list li.has-child ul {
     /*絶対配置で位置を指定*/
     position: absolute;
-    top: 75px;
+    top: 45px !important;
     right: 50px;
     z-index: 4;
     /*形状を指定*/
