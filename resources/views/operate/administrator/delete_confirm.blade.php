@@ -5,11 +5,11 @@
     <h1 class="h2"><i class="fas fa-user-minus"></i> 削除</h1>
 </div>
 <div class="row">
-    <form action="{{route('admin.delete.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('operate.admin.delete.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
         @include('operate.administrator.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('admin')}}" class="btn btn-secondary mr-2">キャンセル</a>
+            <a href="{{route('operate.admin')}}" class="btn btn-secondary mr-2">キャンセル</a>
             <button class="btn btn-primary">削除処理</button>
         </div>
     </form>

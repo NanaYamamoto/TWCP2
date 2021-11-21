@@ -61,6 +61,7 @@ class AdministratorService extends CommonService
     {
 
         $data['type'] = 2; //追加
+        $data['active'] = 1;
         $data['password'] = Hash::make($data['password']); //追加
         $data = User::create($data);
         return $data;
