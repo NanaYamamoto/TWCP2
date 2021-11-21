@@ -12,9 +12,9 @@ use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Form;
 
-class PostController extends Controller
+
+class PostsController extends Controller
 {
     protected $session_key = 'post';
 
@@ -53,7 +53,6 @@ class PostController extends Controller
         $form = $search->build($search_val);
         // $service->user_id = \Auth::id();
 
-        $def['publish'] = __('define.publish');
         $def['active'] = __('define.info.type');
 
         $rows = $service->getList($search_val);
@@ -71,17 +70,10 @@ class PostController extends Controller
 
     public function top(Request $request)
     {
-
-
         $user = Auth::user();
-        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
-
-
+        $categories = Category::select('id','name')->get()->pluck('name','id');
         $view = view('toppage');
-
-
         $view->with('user', $user);
-
 
         return $view;
     }
@@ -92,7 +84,7 @@ class PostController extends Controller
         if (!$user) {
             return redirect()->route('post.login');
         }
-        $view = view('admin.post.profile');
+        $view = view('member.post.profile');
         $view->with('user', $user);
         return $view;
     }
@@ -123,12 +115,11 @@ class PostController extends Controller
         $form = $search->build($search_val);
         // $service->user_id = \Auth::id();
 
-        $def['publish'] = __('define.publish');
         $def['active'] = __('define.info.type');
 
         $rows = $service->getList($search_val);
 
-        $view = view('admin.post.postprofile');
+        $view = view('member.post.postprofile');
 
         $view->with('rows', $rows);
         $view->with('form', $form);
@@ -170,7 +161,7 @@ class PostController extends Controller
         $user->save();
 
 
-        return redirect()->route('post.profile.complete');
+        return redirect()->route('member.post.profile.complete');
     }
 
     public function saveAvatar(UploadedFile $file)
@@ -196,7 +187,7 @@ class PostController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', 'プロフィール変更');
-        $view->with('back', route('mypage'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }
@@ -231,7 +222,7 @@ class PostController extends Controller
 
         $input = session()->get("{$ses_key}.input", []);
 
-        $view = view('admin.post.regist');
+        $view = view('member.post.regist');
         $view->with('form', $form->buildRegist($input));
 
         return $view;
@@ -273,7 +264,6 @@ class PostController extends Controller
             'img' => $read_temp_path ?? '',
             'user_id' => $user,
             'active' => $request->active,
-            'publish' => $request->publish,
         );
         //var_dump($data);
         //バリデーション
@@ -293,7 +283,7 @@ class PostController extends Controller
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
-            return redirect()->route('post.regist')->withErrors($ret);
+            return redirect()->route('member.post.regist')->withErrors($ret);
         }
 
 
@@ -304,7 +294,7 @@ class PostController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('post.regist.complete');
+        return redirect()->route('member.post.regist.complete');
     }
 
     /**
@@ -318,7 +308,7 @@ class PostController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('post.home'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }
@@ -349,7 +339,7 @@ class PostController extends Controller
         if (!$input) {
             $input = $data->toArray();
         }
-        $view = view('admin.post.update');
+        $view = view('member.post.update');
         $view->with('form', $form->build($input));
         $view->with('data', $data);
 
@@ -406,7 +396,7 @@ class PostController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('post.home'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }
@@ -429,7 +419,7 @@ class PostController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('post.home');
+            return redirect()->route('member.mypage');
         }
 
         //削除処理
@@ -452,7 +442,7 @@ class PostController extends Controller
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '削除');
-        $view->with('back', route('mypage'));
+        $view->with('back', route('member.mypage'));
 
         return $view;
     }

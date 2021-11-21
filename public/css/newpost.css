@@ -56,9 +56,9 @@ body {
 
 /*コンテンツ*/
 
-.contents {
-    width: 1360px;
-    padding-top: 70px;
+#contents {
+    width: 100%;
+    padding-top: 0;
 }
 
 .contents p {
@@ -73,8 +73,8 @@ form {
 
 label {
     display: inline-block;
-    font-size: 25px;
-    letter-spacing: 18.5px;
+    font-size: 20px;
+    letter-spacing: 10px;
 }
 
 .h1, h1 {
@@ -109,13 +109,13 @@ textarea.ef {
 .cp_iptxt {
     position: relative;
     width: 100%;
-    margin: 100px 10%;
+    margin: 100px 0;
 }
 
 .cp_iptxt input[type='text'] {
     /* font: 0.5px/54px caption; */
     box-sizing: border-box;
-    width: 80%;
+    
     letter-spacing: 1px;
     /* padding-left: 174em; */
     color: black;
