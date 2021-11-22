@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 
 use Illuminate\Support\Facades\Auth;
-
-use App\Http\Controllers\Member\Post\PostController;
+use App\Http\Controllers\Operate\Administrator\AdministratorsController;
+use App\Http\Controllers\Member\Post\PostsController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 
 //トップページ
-Route::any('top', [PostController::class, 'top'])->name('top');
+Route::any('top', [PostsController::class, 'top'])->name('top');
 
 //管理者ページ
 Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'operate.'], function () {
@@ -113,24 +113,24 @@ Route::get('regist/verify/{token}', [LoginController::class, 'regist_complete'])
 
 // ログイン後マイページ（記事投稿）
 Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
-    Route::any('mypage', [PostController::class, 'index'])->name('mypage');
-    Route::any('post/newpost', [PostController::class, 'regist'])->name('post.regist');
-    Route::post('post/newpost/proc', [PostController::class, 'regist_proc'])->name('post.regist.proc');
-    Route::any('post/newpost/complete', [PostController::class, 'regist_complete'])->name('post.regist.complete');
+    Route::any('mypage', [PostsController::class, 'index'])->name('mypage');
+    Route::any('post/newpost', [PostsController::class, 'regist'])->name('post.regist');
+    Route::post('post/newpost/proc', [PostsController::class, 'regist_proc'])->name('post.regist.proc');
+    Route::any('post/newpost/complete', [PostsController::class, 'regist_complete'])->name('post.regist.complete');
 
-    Route::post('post/update/proc', [PostController::class, 'update_proc'])->name('post.update.proc');
-    Route::any('post/update/complete', [PostController::class, 'update_complete'])->name('post.update.complete');
-    Route::any('post/update/{id}', [PostController::class, 'update'])->name('post.update');
+    Route::post('post/update/proc', [PostsController::class, 'update_proc'])->name('post.update.proc');
+    Route::any('post/update/complete', [PostsController::class, 'update_complete'])->name('post.update.complete');
+    Route::any('post/update/{id}', [PostsController::class, 'update'])->name('post.update');
 
-    Route::any('post/delete/proc/{id}', [PostController::class, 'delete_proc'])->name('post.delete.proc');
-    Route::any('post/delete/complete', [PostController::class, 'delete_complete'])->name('post.delete.complete');
-    // Route::any('post/delete/{id}', [PostController::class, 'delete_confirm'])->name('post.delete.confirm');
+    Route::any('post/delete/proc/{id}', [PostsController::class, 'delete_proc'])->name('post.delete.proc');
+    Route::any('post/delete/complete', [PostsController::class, 'delete_complete'])->name('post.delete.complete');
+    // Route::any('post/delete/{id}', [PostsController::class, 'delete_confirm'])->name('post.delete.confirm');
 
-    Route::any('post/profile', [PostController::class, 'profile'])->name('post.profile');
-    Route::post('post/profile/edit', [PostController::class, 'editProfile'])->name('post.editProfile');
-    Route::any('post/profile/complete', [PostController::class, 'profile_complete'])->name('post.profile.complete');
-    // Route::post('post/postprofile', [PostController::class, 'postprofile'])->name('post.postprofile');
-    Route::any('post/{id}', [PostController::class, 'detail'])->name('post.detail');
+    Route::any('post/profile', [PostsController::class, 'profile'])->name('post.profile');
+    Route::post('post/profile/edit', [PostsController::class, 'editProfile'])->name('post.editProfile');
+    Route::any('post/profile/complete', [PostsController::class, 'profile_complete'])->name('post.profile.complete');
+    // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
+    Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 });
 
 

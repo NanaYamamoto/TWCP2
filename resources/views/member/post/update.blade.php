@@ -7,7 +7,7 @@
 <div class="row">
     <form action="{{route('post.update.proc')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
         @csrf
-        @include('admin.post.form')
+        @include('member.post.form')
         <div class="form-group form-inline" style="margin-top:10px;">
             <a href="{{route('post.home')}}" class="btn btn-secondary">キャンセル</a>
             <button class="btn btn-primary">確認画面へ</button>
