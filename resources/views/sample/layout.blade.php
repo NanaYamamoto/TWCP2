@@ -73,8 +73,6 @@
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          <!-- 本当はここにAuthのuser()のnameを入れる -->
-          {{Auth::user()->name}}
         </a>
         <!-- 上のaのクラスdropdown-toggleを消すと三角のアイコンも消えます -->
         <!-- ↓ここはログインユーザーがログアウトするときに使う -->
