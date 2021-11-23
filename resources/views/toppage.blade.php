@@ -30,7 +30,7 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
     <!--自作のCSS-->
-    <link href="{{ asset('css/toppage.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toppage.css',true) }}" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
