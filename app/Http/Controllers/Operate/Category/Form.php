@@ -18,7 +18,8 @@ class Form implements InterfaceForm
 
         $form['active'] = SimpleForm::radio('active', $data['active'] ?? '', __('define.publish'), []);
 
-        $form['img'] = FormF::input('file', 'img', $data['img'] ?? '', $opt);
+        $form['img'] = FormF::file('img', $opt);
+        //$form['img'] = FormF::input('file', 'img', $data['img'] ?? '', $opt);
 
         return $form;
     }
@@ -50,16 +51,17 @@ class Form implements InterfaceForm
      */
     public function getHtml(array $data = [])
     {
-        /*        
-        $rule = [];
-        $rule['name'] = ['required', 'max:20'];
-        $rule['active'] = __('define.category.active')[$data['active']] ?? '';
+        $data['name'] = "<pre>{$data['name']}<pre>";
+        $data['active'] = "<pre>{$data['active']}<pre>";
+        
         //画像をURL化
-        if ($data['category_url']) {
+        if ($data['img']) {
             $file_path = Url('') . '/' . str_replace('public/', 'storage/', $data['img']);
+            $data['img'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
+        } else {
+            $data['img'] = "<pre>選択されていません<pre>";
         }
-        $data['category_url'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
-*/
+
         $data['img'] = url($data['img']);
 
         return $data;

@@ -86,12 +86,12 @@ Route::group([/*'middleware' => 'OperateAuth',*/ 'prefix' => 'operate', 'as' => 
     Route::post('category/update/confirm', [CategoryController::class, 'update_confirm'])->name('category.update.confirm');
     Route::post('category/update/proc', [CategoryController::class, 'update_proc'])->name('category.update.proc');
     Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
-    Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update')/*->where('id', '[0-9]+')*/;
+    Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
     Route::get('category', [CategoryController::class, 'index'])->name('category');
     Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
     Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
-    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm')/*->where('id', '[0-9]+')*/;
+    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
     Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
 });
@@ -142,7 +142,7 @@ Route::post('category/update/proc', [CategoryController::class, 'update_proc'])-
 Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
 Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update')/*->where('id', '[0-9]+')*/;
 
-Route::get('category', [CategoryController::class, 'index'])->name('category');
+Route::any('category', [CategoryController::class, 'index'])->name('category');
 Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
 Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
 Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm')/*->where('id', '[0-9]+')*/;

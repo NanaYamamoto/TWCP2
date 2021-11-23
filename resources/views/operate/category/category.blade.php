@@ -34,7 +34,7 @@
                 <td>{{ date('Y.m.d',strtotime($category->updated_at)) }}</td>
                 <td class="text-nowrap">
                     <p><a href="{{ route('category.details', [$category->id] ) }}" class="btn btn-primary btn-sm">詳細</a></p>
-                    <p><a href="" class="btn btn-info btn-sm">編集</a></p>
+                    <p><a href="{{ route('category.update.confirm', [$category->id] ) }}" class="btn btn-info btn-sm">編集</a></p>
                     <p><a href="{{ route('category.delete.confirm', [$category->id] ) }}" class="btn btn-danger btn-sm">削除</a></p>
                 </td>
             </tr>
