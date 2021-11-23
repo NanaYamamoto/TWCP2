@@ -61,7 +61,6 @@ class AdministratorService extends CommonService
     public function regist($data = [])
     {
 
-        $data['type_id'] = 2; //追加
         $data['password'] = Hash::make($data['password']); //追加
         $data = Administrator::create($data);
         return $data;

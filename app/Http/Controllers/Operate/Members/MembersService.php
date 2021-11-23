@@ -46,7 +46,6 @@ class MembersService extends CommonService
      */
     public function regist($data = [])
     {
-        //dd($data);
         //画像を移動
         if ($data['icon_url']) {
 
@@ -59,7 +58,7 @@ class MembersService extends CommonService
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'icon_url' => $file_path,
+            'icon_url' => $file_path ?? '',
             'active' => '1'
         ]);
 

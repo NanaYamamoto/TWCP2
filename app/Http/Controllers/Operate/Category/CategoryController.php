@@ -174,7 +174,7 @@ class CategoryController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('category.regist');
+            return redirect()->route('operate.category.regist');
         }
 
         //登録処理
@@ -183,7 +183,7 @@ class CategoryController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('category.regist.complete');
+        return redirect()->route('operate.category.regist.complete');
     }
 
     /**
@@ -197,7 +197,7 @@ class CategoryController extends Controller
 
         $view->with('func_name', 'カテゴリー管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('category'));
+        $view->with('back', route('operate.category'));
 
         return $view;
     }
@@ -283,14 +283,14 @@ class CategoryController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('category.update');
+            return redirect()->route('operate.category.update');
         }
 
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
-            return redirect()->route('category.update')->withErrors($ret);
+            return redirect()->route('operate.category.update')->withErrors($ret);
         }
 
         //登録処理
@@ -300,7 +300,7 @@ class CategoryController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('category.update.complete');
+        return redirect()->route('operate.category.update.complete');
     }
 
     /**
@@ -314,7 +314,7 @@ class CategoryController extends Controller
 
         $view->with('func_name', 'カテゴリー管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('category'));
+        $view->with('back', route('operate.category'));
 
         return $view;
     }
@@ -333,7 +333,7 @@ class CategoryController extends Controller
         $data = $service->get($id);
 
         if (!$data) {
-            return redirect()->route('category');
+            return redirect()->route('operate.category');
         }
 
         session()->put("{$ses_key}.id", $id);
@@ -361,7 +361,7 @@ class CategoryController extends Controller
 
         //データがない場合は入力画面に戻る
         if (empty($id)) {
-            return redirect()->route('category');
+            return redirect()->route('operate.category');
         }
 
         //削除処理
@@ -370,6 +370,6 @@ class CategoryController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('category.update.complete');
+        return redirect()->route('operate.category.update.complete');
     }
 }

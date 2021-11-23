@@ -5,7 +5,7 @@
     <h1 class="h2">ユーザー管理 >> 編集</h1>
 </div>
 <div class="row">
-    <form action="{{route('category.update.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('operate.category.update.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
         @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">

@@ -99,8 +99,17 @@ body {
 <body>
     <div class="login-page">
         <h1>Login</h1>
-        <div class="form">
 
+        <!--パスワード変更完了メッセージの表示-->
+        <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </div>
+
+        <div class="form">
             <!--入力フォームバリデーションエラーの表示-->
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -124,12 +133,7 @@ body {
                 <input name="email" type="text" placeholder="メールアドレス" autofocus/>
                 <input name="password" type="password" placeholder="パスワード"/>
                 <button type="submit">login</button>
-                {{-- <a href="{{ Route('password.request') }}" class="forgot-pass">パスワードを忘れた場合</a> --}}
             </form>
-            {{-- <div class="regist-link">
-                <a href="{{ route('showRegist')}}">新規登録</a>
-            </div> --}}
-            
         </div>
         <div class="pass-link">
             <a href="{{ Route('password.request') }}" class="forgot-pass">パスワードをお忘れですか？</a>

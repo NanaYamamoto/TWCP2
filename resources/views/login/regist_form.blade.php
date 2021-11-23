@@ -4,7 +4,7 @@
 <!-- ログインフォームCSS -->
 <style>
 body {
-    background: url("/images/画像/background.jpeg") no-repeat center;
+    background: url("/images/画像/インテリア.png") no-repeat center;
     background-size: cover;
     background-attachment: fixed;
 }

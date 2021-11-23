@@ -5,11 +5,11 @@
     <h1 class="h2">カテゴリー管理 >> 新規作成</h1>
 </div>
 <div class="row">
-    <form action="{{route('category.regist.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+    <form action="{{route('operate.category.regist.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
         @csrf
         @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('category')}}" class="btn btn-secondary">キャンセル</a>
+            <a href="{{route('operate.category')}}" class="btn btn-secondary">キャンセル</a>
             <button class="btn btn-primary">確認画面へ</button>
         </div>
     </form>
