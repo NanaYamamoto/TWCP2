@@ -152,7 +152,7 @@
     <!--印象編　6-1　スクロールすると1画面移動-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
     <!--自作のJS-->
-    <script src="{{ asset('js/toppage.js') }}"></script>
+    <script src="{{ asset('js/toppage.js', true) }}"></script>
 </body>
 
 </html>
