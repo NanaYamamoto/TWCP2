@@ -3,8 +3,6 @@
 /storage/logs
 # /storage/app
 # /storage/framework
-storage/app/*.php
-storage/framework/*/*.php
 /vendor
 .env
 .env.backup
