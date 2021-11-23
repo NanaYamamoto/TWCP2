@@ -20,7 +20,7 @@ class Search implements InterfaceSearch
         //お知らせタイトル
         $form['name'] = Form::text('name', $data['name'] ?? '', $opt);
         $form['email'] = Form::text('email', $data['email'] ?? '', $opt);
-        $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.user.type'), $opt);
+        $form['active'] = SimpleForm::radio('active', $data['active'] ?? '', __('define.active'), []);
 
         return $form;
     }

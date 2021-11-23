@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operate\Administrator;
 use App\Http\TakemiLibs\CommonService;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdministratorService extends CommonService
 {
@@ -20,14 +21,13 @@ class AdministratorService extends CommonService
 
         if (!empty($data['name'])) $db->where('name', 'LIKE', "%{$data['name']}%");
 
-        if (!empty($data['email'])) $db->where('email', $data['email']);
+        if (!empty($data['email'])) $db->where('email', 'LIKE', "%{$data['email']}%");
 
         if (!empty($data['type'] = 2)) $db->where('type', $data['type']);
 
-        if (!empty($data['active'] = 1)) $db->where('active', $data['active']);
+        if (!empty($data['active'])) $db->where('active', 'LIKE', "%{$data['active']}%");
 
-        if (!empty($data['icon_url'])) $db->where('icon_url', $data['icon_url']);
-        return $db->paginate();
+        return $db->paginate(10);
     }
 
     // public function select($data = []){
@@ -45,10 +45,6 @@ class AdministratorService extends CommonService
     {
         $data = User::find($id);
 
-        if ($data->active == 1) {
-            $data->url = $data->content;
-            $data->content = '';
-        }
         return $data;
     }
 
@@ -59,10 +55,24 @@ class AdministratorService extends CommonService
      */
     public function regist($data = [])
     {
+        $file_path = null;
+        //dd($data);
+        //画像を移動
+        if ($data['icon_url']) {
+            $file_path = str_replace('temp/administrators', 'administrators/' . $data['name'], $data['icon_url']);
+            Storage::move($data['icon_url'], $file_path);
+        }
+        //dd($file_path);
 
-        $data['type'] = 2; //追加
-        $data['password'] = Hash::make($data['password']); //追加
-        $data = User::create($data);
+        $data = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'icon_url' => $file_path,
+            'active' => 1,
+            'type' => 2,
+        ]);
+
         return $data;
     }
 

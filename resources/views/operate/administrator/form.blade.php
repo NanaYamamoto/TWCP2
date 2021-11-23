@@ -1,10 +1,3 @@
-@php
-$type = 1;
-if( isset($data) ) $type = $data->type;
-if( isset($form['type']) && !is_array( $form['type'] ) ) $type = $form['type'];
-if( isset($form['type']) && $form['type'] == '管理者' ) $type = 2;
-if( isset($form['type']) && $form['type'] == '一般会員' ) $type = 1;
-@endphp
 
 <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">氏名</label>
@@ -51,7 +44,9 @@ if( isset($form['type']) && $form['type'] == '一般会員' ) $type = 1;
     </div>
 </div>
 
-
+{{-- <div class="form-group row">
+        {!! $icon['icon_url'] !!}
+</div> --}}
 
 
 
