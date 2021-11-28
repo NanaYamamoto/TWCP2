@@ -1,18 +1,17 @@
-@extends('sample.layout')
-
-@section('contents')
+<?php $__env->startSection('contents'); ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">カテゴリー管理</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{route('operate.category.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
+        <a href="<?php echo e(route('operate.category.regist')); ?>" class="btn btn-sm btn-outline-primary">新規作成</a>
     </div>
 </div>
     <!--ログイン成功メッセージ-->
-    @if (session('login_success'))
+    <?php if(session('login_success')): ?>
             <div class="alert alert-success">
-                {{ session('login_success')}}
+                <?php echo e(session('login_success')); ?>
+
             </div>
-    @endif
+    <?php endif; ?>
 
 <div class="card">
     <div class="card-header">
@@ -20,17 +19,18 @@
     </div>
     <form class="form-horizontal" method="post">
         <div class="card-body">
-            @csrf
+            <?php echo csrf_field(); ?>
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">カテゴリー名</label>
                 <div class="col-sm-10">
-                    {!! $form['name'] !!}
+                    <?php echo $form['name']; ?>
+
                 </div>
             </div>
             <div class="form-group row">
                 <label for="active" class="col-sm-2 col-form-label">公開フラグ</label>
                 <div class="col-sm-10">
-                    @foreach ($form['active'] as $node) {!! $node !!} @endforeach
+                    <?php $__currentLoopData = $form['active']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo $node; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
             
@@ -47,7 +47,7 @@
         <h6 class="card-title">カテゴリー一覧</h6>
     </div>
     <div class="dard-body">
-@if( count($rows) )
+<?php if( count($rows) ): ?>
         <table class="table table-bordered table-hover dataTable dtr-inline" role="grid">
             <thead>
                 <tr role="row">
@@ -57,31 +57,33 @@
                     <th>最終更新日時<br/>作成日時</th>
                     <th>操作</th>
                 </tr>
-@foreach( $rows as $row )
+<?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td>{{$row->id}}</td>
-                    <td>{{$row->name}}</td>
+                    <td><?php echo e($row->id); ?></td>
+                    <td><?php echo e($row->name); ?></td>
                     <td>
-                        @if ($row->active === 1)
+                        <?php if($row->active === 1): ?>
                           1.利用可能
-                        @else
+                        <?php else: ?>
                           2.利用不可
-                        @endif
+                        <?php endif; ?>
                     </td>
-                    <td>{{$row->updated_at}}<br/>{{$row->created_at}}</td>
+                    <td><?php echo e($row->updated_at); ?><br/><?php echo e($row->created_at); ?></td>
                     <td>
-                        <a href="{{route('operate.category.details', $row->id)}}" class="btn btn-outline-primary">詳細</a>
-                        <a href="{{route('operate.category.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
-                        <a href="{{route('operate.category.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
+                        <a href="<?php echo e(route('operate.category.details', $row->id)); ?>" class="btn btn-outline-primary">詳細</a>
+                        <a href="<?php echo e(route('operate.category.update', $row->id)); ?>" class="btn btn-outline-primary">編集</a>
+                        <a href="<?php echo e(route('operate.category.delete.confirm', $row->id)); ?>" class="btn btn-outline-primary">削除</a>
                     </td>
                 </tr>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </thead>
         </table>
-        {{$rows->links('pagination::bootstrap-4')}}
-@else
+        <?php echo e($rows->links('pagination::bootstrap-4')); ?>
+
+<?php else: ?>
         <span>データがありません</span>
-@endif
+<?php endif; ?>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('sample.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/Nozomi/Documents/GitHub/TWCP2/resources/views/operate/category/list.blade.php ENDPATH**/ ?>
