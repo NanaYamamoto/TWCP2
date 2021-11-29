@@ -6,38 +6,91 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use App\Models\Category;
-
-
+/**
+ * カテゴリー管理コントローラー`
+ */
 class CategoryController extends Controller
 {
 
     protected $session_key = 'category';
 
-    protected $Categoryservice;
+    /**protected $Categoryservice;
 
     public function __construct(CategoryService $category_service)
     {
         $this->categoryService = $category_service;
     }
+    */
 
     /**
-     * 一覧
+     * 検索一覧画面
+     * @param Request $request
+     * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = new Search();
+        $service = new CategoryService();
 
+        $ses_key = $this->session_key . '.search';
+
+        if ($request->has('btnSearch')) {
+            $search_val = $request->all();
+            //dd($search_val);
+            //検索値をセッションに保存
+            session()->put($ses_key . '.input', $search_val);
+        }
+
+        if ($request->has('btnSearchClear')) {
+            session()->forget("{$ses_key}");
+        }
+
+        $search_val = session()->get("{$ses_key}.input", []); //セッションに値がない場合は初期化
+        //var_dump($search_val);
+
+        //検索フォームを作る
+        $form = $search->build($search_val);
+        //dd($form);
+
+        //検索結果をDBから取得
+        $rows = $service->getList($search_val);
+
+        $view = view('operate.category.list');
+
+        $view->with('rows', $rows); //検索結果
+        $view->with('form', $form); //フォーム
+
+        return $view;
+
+        /*
         $categorie = $this->categoryService->getdata();
 
         return view('operate.category.category', ['categorie' => $categorie]);
+        */
+
     }
+
     /**
-     * 詳細
+     * 詳細画面処理
+     *
      * @param Request $request
+     * @param int $id
+     * @return void
      */
-    public function details($id)
+    public function details(Request $request, int $id)
     {
+
+        $service = new CategoryService();
+        $data = $service->get($id);
+        if (!$data) {
+            return redirect()->route('category');
+        }
+
         $details = Category::find($id);
         $form = new Form();
+
+        //dd($data);
+
         $view = view('operate.category.details');
         $view->with('form', $form->getHtml($details->toArray()));
         $view->with('details', $details);
@@ -150,7 +203,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * 更新入力画面
+     * 編集画面
      * @param Request $request
      * @param int $id
      * @return void
@@ -163,11 +216,13 @@ class CategoryController extends Controller
         $ses_key = $this->session_key . '.update';
 
         if ($id) {
+            //dd($id);
             $data = $service->get($id);
             session()->put("{$ses_key}.id", $id);
         }
 
         $input = session()->get("{$ses_key}.input", []);
+        //dd($input);
         if (!$input) {
             $input = $data->toArray();
         }
@@ -179,7 +234,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * 更新：確認画面処理
+     * 編集：確認画面処理
      * @param Request $request
      * @return void
      */
@@ -194,11 +249,14 @@ class CategoryController extends Controller
         $input = $request->all();
         session()->put("{$ses_key}.input", $input);
 
-        //バリデーション
-        $request->validate($form->getRuleRegist($input));
-
         //
         $data = $service->get(session()->get("{$ses_key}.id"));
+        $input['id'] = $data->id;
+
+        //dd($input);
+
+        //バリデーション
+        $request->validate($form->getRule($input));
 
         //確認画面表示
         $view = view('operate.category.update_confirm');

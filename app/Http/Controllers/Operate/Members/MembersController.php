@@ -201,6 +201,7 @@ class MembersController extends Controller
         $ses_key = $this->session_key . '.update';
 
         if ($id) {
+            dd($id);
             $data = $service->get($id);
             session()->put("{$ses_key}.id", $id);
         }
