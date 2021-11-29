@@ -14,7 +14,7 @@
     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
 
     <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+    <script src="/js/app.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!--=============Google Font ===============-->
     <link href="https://fonts.googleapis.com/css?family=Baskervville%7CLa+Belle+Aurore&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
     <!--自作のCSS-->
-    <link href="<?php echo e(asset('css/toppage.css')); ?>" rel="stylesheet">
+    <link href="/css/toppage.css" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -152,7 +152,7 @@
     <!--印象編　6-1　スクロールすると1画面移動-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
     <!--自作のJS-->
-    <script src="<?php echo e(asset('js/toppage.js')); ?>"></script>
+    <script src="/js/toppage.js"></script>
 </body>
 
 </html><?php /**PATH /Applications/MAMP/htdocs/TWCP2/resources/views/toppage.blade.php ENDPATH**/ ?>
