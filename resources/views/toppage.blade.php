@@ -143,9 +143,10 @@
             <div class="tag">
                 <p class="tag_design search">検索</p>
             </div>
-            <form id="form4" action="自分のサイトURL" method="get">
-                <input id="sbox4"  id="s" name="s" type="text" placeholder="フリーワードを入力" />
-                <button id="sbtn4" type="submit"><i class="fas fa-search"></i></button>
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+            <form method="get" action="#" class="search_container">
+                <input type="text" size="25" placeholder="キーワード検索"><input type="submit" value="&#xf002">
             </form>
             <ul class="slider">
                 <li><img src="images/画像/living.png" alt=""></li>

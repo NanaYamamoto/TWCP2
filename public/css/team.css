@@ -371,42 +371,31 @@ padding:10px;
 }
 
 /*========= 検索フォーム ===============*/
-#form4 {
-    position: relative;
-    max-width: 356px;
-    margin-top: 20px;
-    margin-bottom: 16px;
+
+
+.search_container {
+    box-sizing: border-box;
+    margin: 50px 0px 0px 430px;
 }
-    #sbox4 {
-        height: 52px;
-        padding: 0 196px;
-        position: absolute;
-        left: 430px;
-        top: 50px;
-        border-radius: 33px;
-        outline: 0;
-        background: #eee;
-    }
-    #sbtn4 {
-        height: 52px;
-        width: 53px;
-        position: absolute;
-        left: 948px;
-        top: 50px;
-        background: #7fbfff;
-        color: #fff;
-        border: none;
-        border-radius: 0 25px 25px 0;
-    }
-    #sbtn4 .fa-search{
-    font-size:20px;	
-    position:absolute;
-    top:30%;
-    left:30%;	
-    }
-    #sbtn4:hover{
-    color:#888;
-    }
+  .search_container input[type="text"]{
+    background: #ccddf5;
+    border: none;
+    height: 70px;
+    width: 30rem;
+  }
+  .search_container input[type="text"]:focus {
+    outline: 0;
+  }
+  .search_container input[type="submit"]{
+    cursor: pointer;
+    font-family: FontAwesome;
+    border: none;
+    background: #3879D9;
+    color: #fff;
+    outline : none;
+    width: 7em;
+    height: 70px;
+  }
 
 /*========= ロゴ文字(黒文字) ===============*/
 .navbar-brand{
@@ -584,6 +573,7 @@ section.more.btn {
   margin: 0 auto;
 }
 a.btn_02 {
+vertical-align: middle;
   display: flex;
   justify-content: center;
   align-items: center;
