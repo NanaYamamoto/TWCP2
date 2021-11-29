@@ -5,6 +5,7 @@ use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
 use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Member\Archive\ArchiveController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -133,6 +134,8 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 });
 
+//アーカイブページ
+Route::any('member/archive', [ArchiveController::class, 'index'])->name('member.archive');
 
 
 //パスワードリセット
@@ -150,7 +153,7 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
-//いらない
+// いらない
 // Route::get('post/login', [AuthLoginController::class, 'showLoginForm'])->name('post.login');
 // Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');
 // Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');

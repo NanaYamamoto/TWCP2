@@ -79,7 +79,92 @@
                 </ul>
 
             </div>
-            <div class="header_list">
+
+    <!--タイムライン(ループ処理使う)-->
+    <section id="box3" class="box" data-section-name="最新の投稿をチェックしてみましょう">
+        <section id="contents">
+        <div class="top">
+            <p>最新の投稿</p>
+        </div>
+        <div id="contents" class="contents">
+                <div id="main">
+                    <ul id="pic">
+                        <li class="item">
+                            <h1>インテリア収納</h1>
+                            <img src="images/画像/living.png" alt="インテリア">
+                            
+                                <span class="category" href="#">インテリア</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="インテリア">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                        <li class="item">
+                            <h1>キッチン収納</h1>
+                            <img src="images/画像/キッチン.jpeg" alt="キッチン">
+                            
+                                <span class="category" href="#">キッチン</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="キッチン">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                        <li class="item">
+                            <h1>効率のいい筋トレ方法</h1>
+                            <img src="images/画像/筋トレ.jpg" alt="筋トレ">
+                            
+                                <span class="category" href="#">筋トレ</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="筋トレ">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                        <li class="item">
+                            <h1>犬のしつけ方</h1>
+                            <img src="images/画像/犬.jpg" alt="インテリア">
+                            
+                                <span class="category" href="#">ペット</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="ペット">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                        <li class="item">
+                            <h1>おすすめゲーム</h1>
+                            <img src="images/画像/ゲーム.jpg" alt="ゲーム">
+                            
+                                <span class="category" href="#">ゲーム</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="ゲーム">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                        <li class="item">
+                            <h1>便利なスマホアプリ5選</h1>
+                            <img src="images/画像/スマホ.jpg" alt="スマホ">
+                            
+                                <span class="category" href="#">スマホ</span>
+                                <figure>
+                                    <a target="_blank" href="#" title="スマホ">
+                                        
+                                    </a>
+                                </figure>
+                        </li>
+                    </ul>
+                </div>
+
+                <section>
+                    <a href="#" class="btn_02">もっとみる</a>
+                </section>
+        </div>
+        </section>
+    </section>
+            {{-- <div class="header_list">
                 <ul>
                     @auth
                     <li class="has-child"><a href="#" class="nav-link"><i class="fas fa-user-alt"></i></a>
@@ -291,7 +376,7 @@
                 </ul>
             </section>
         </aside>
-    </div>
+    </div> --}}
 
     <footer id="footer">
 
@@ -316,3 +401,4 @@
 </body>
 
 </html>
+

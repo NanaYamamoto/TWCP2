@@ -1,56 +1,84 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+
+    <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
+
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
 
-    <!-- CSS only -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <!-- Styles -->
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- モーダルウィンドウ用 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="css/team.css">
 
-    <title>teamM.jp</title>
+    <link href="<?php echo e(asset('css/team.css')); ?>" rel="stylesheet">
 
-    <meta name="description" content="ユーザー専用間ページ" />
+    <link href="<?php echo e(asset('css/top.css')); ?>" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
 </head>
-<div class="wrap">
-<body>
 
-    <!--タイトル壁紙-->
-    <section id="box1" class="box" data-section-name="title">
-        <div class="wallpaper">
-            <!--タイトル文字-->
-            <div class="title">
-                <p>teamM.jp</p>
+<body style="background-color: white;">
+    <header class="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3 ml-4 pl-5">
+            <a class="navbar-brand" href="/">teamM.jp</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo e(route('member.post.profile')); ?>">プロフィール</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo e(route('member.post.regist')); ?>">記事作成</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#searchpost">記事検索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo e(route('member.archive')); ?>">アーカイブ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#follower">フォロワー</a>
+                    </li>
+                </ul>
+
             </div>
-        
-            <!--スクロール-->
-            <div class="scrolldown1" style="z-index:2"><span>Scroll</span></div>
-        
-    <!--/box--></section>
-
-    
-
-    <section id="box2" class="box" data-section-name="Area2">
-        <div class="box-area">
-            <div class="profile-area blurTrigger">
-            <h2>About this site <span>このサイトについて</span></h2>
-                    <p>ここは皆さんの生活に役立つ知識を集めたサイトです。<br>知っているようで知らないこと、知っているととても便利なことなど、普段の生活が快適になる情報がたくさん投稿されています。
-                        </br>このサイトを上手く活用して皆さんの生活が少しでも楽に、そして楽しくなれば幸いです・・・</p>
-            </div>
-        </div>
-    <!--/box--></section>
 
     <!--タイムライン(ループ処理使う)-->
     <section id="box3" class="box" data-section-name="最新の投稿をチェックしてみましょう">
@@ -136,48 +164,30 @@
         </div>
         </section>
     </section>
+            
 
-    <!--検索フォーム-->
-    <section id="box4" class="box" data-section-name="ワードで検索してみましょう">
-        <div>
-            <canvas id="waveCanvas"></canvas>
-            <div class="search">
-                <p>検索</p>
-            </div>
-            <form id="form4" action="自分のサイトURL" method="get">
-                <input id="sbox4"  id="s" name="s" type="text" placeholder="フリーワードを入力" />
-                <button id="sbtn4" type="submit"><i class="fas fa-search"></i></button>
-            </form>
-            <ul class="slider">
-                <li><img src="images/画像/living.png" alt=""></li>
-                <li><img src="images/画像/ゲーム.jpg" alt=""></li>
-                <li><img src="images/画像/スマホ.jpg" alt=""></li>
-                <li><img src="images/画像/宇宙.jpg" alt=""></li>
-                <li><img src="images/画像/犬2.jpg" alt=""></li>
-                <!--/slider--></ul>
-        </div>
-    </section>
+    <footer id="footer">
 
 
-    <!-- フッター(最下部黒帯) -->
-    <footer class="text-center bg-dark text-white" id="footer">
-        <p class="py-3">teamM.jp</p>
+        <p class="copyright">&copy; TWCP</p>
     </footer>
-
-    </div>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
     <!--IE11用-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <!--不必要なら削除してください-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
+    <!--不必要なら削除してください-->
+
+    <!-- モーダルウィンドウ用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js"></script>
     <!--JSを読み込み-->
-    <script src="{{ asset('js/team.js') }}"></script>
-    
-<!-- /.wrap --></div>
+    <script src="<?php echo e(asset('js/team.js')); ?>"></script>
+
 </body>
 
 </html>
+
+<?php /**PATH /Applications/MAMP/htdocs/TWCP2/resources/views/member/archive/archive.blade.php ENDPATH**/ ?>
