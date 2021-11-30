@@ -1,5 +1,8 @@
-<<<<<<< HEAD
+
 a:3:{s:6:"_token";s:40:"oa6PLaeMRgD3Sjv9dIdWZpgb4H0XCmQQpAa9w4H3";s:9:"_previous";a:1:{s:3:"url";s:36:"http://127.0.0.1:8000/member/archive";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}}
-=======
+
 a:4:{s:6:"_token";s:40:"uyXlqgKsA7OTrv5U6VMzWc2wLZWgWuk59LlqCgh7";s:9:"_previous";a:1:{s:3:"url";s:35:"http://127.0.0.1:8000/member/mypage";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:51:"login_user_59ba36addc2b2f9401580f014c7f58ea4e30989d";i:49;}
->>>>>>> d02ff4a421edd577d093ef54df1284157fea653c
+d02ff4a421edd577d093ef54df1284157fea653c
+
+a:3:{s:6:"_token";s:40:"oa6PLaeMRgD3Sjv9dIdWZpgb4H0XCmQQpAa9w4H3";s:9:"_previous";a:1:{s:3:"url";s:35:"http://127.0.0.1:8000/member/mypage";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}}
+

@@ -42,7 +42,7 @@
 
     
 
-    <section id="box2" class="box" data-section-name="Area2">
+    <section id="box2" class="box" data-section-name="about">
         <div class="box-area">
             <div class="profile-area blurTrigger">
             <h2>About this site <span>このサイトについて</span></h2>
@@ -53,10 +53,10 @@
     <!--/box--></section>
 
     <!--タイムライン(ループ処理使う)-->
-    <section id="box3" class="box" data-section-name="最新の投稿をチェックしてみましょう">
+    <section id="box3" class="box" data-section-name="check new post">
         <section id="contents">
-        <div class="top">
-            <p>最新の投稿</p>
+        <div class="tag">
+            <p class="tag_design_new_post">最新の投稿</p>
         </div>
         <div id="contents" class="contents">
                 <div id="main">
@@ -138,11 +138,10 @@
     </section>
 
     <!--検索フォーム-->
-    <section id="box4" class="box" data-section-name="ワードで検索してみましょう">
+    <section id="box4" class="box" data-section-name="search category">
         <div>
-            <canvas id="waveCanvas"></canvas>
-            <div class="search">
-                <p>検索</p>
+            <div class="tag">
+                <p class="tag_design search">検索</p>
             </div>
             <form id="form4" action="自分のサイトURL" method="get">
                 <input id="sbox4"  id="s" name="s" type="text" placeholder="フリーワードを入力" />
@@ -158,11 +157,59 @@
         </div>
     </section>
 
-
     <!-- フッター(最下部黒帯) -->
-    <footer class="text-center bg-dark text-white" id="footer">
-        <p class="py-3">teamM.jp</p>
-    </footer>
+    <footer id="footer">
+        <section class="primary">
+          <div class="flex">
+            <div class="left">
+              <p class="logo"><a href="#">team M</a></p>
+              <p class="address">
+                〒000-0000 JAPAN<br>
+                TEL : 000-000-000 / FAX : 000-000-0000
+              </p>
+              <ul class="sns-navi">
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+              </ul>
+            </div>
+            <div class="right">
+              <div class="navi-section">
+                <p class="parent"><a href="#">SITE</a></p>
+                <ul class="navi">
+                  <li><a href="#">about</a></li>
+                  <li><a href="#">new post</a></li>
+                  <li><a href="#">search</a></li>
+                  <li><a href="#">???</a></li>
+                </ul>
+              </div>
+              <div class="navi-section">
+                <p class="parent"><a href="#">企業情報</a></p>
+                <ul class="navi">
+                  <li><a href="#">会社案内</a></li>
+                  <li><a href="#">information</a></li>
+                  <li><a href="#">IR</a></li>
+                  <li><a href="#">CSR</a></li>
+                  <li><a href="#">採用情報</a></li>
+                </ul>
+              </div>
+              <div class="navi-section">
+                <p class="parent"><a href="#">キャンペーン情報</a></p>
+                <p class="parent"><a href="#">CMギャラリー</a></p>
+                <p class="parent"><a href="#">お問い合わせ</a></p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="secondary">
+          <ul class="sitenavi">
+            <li><a href="#">サイトマップ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+          <p class="copyright">Copyright TEAM M,Inc. All rights reserved.</p>
+        </section>
+      </footer>
 
     </div>
 

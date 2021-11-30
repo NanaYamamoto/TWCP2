@@ -71,7 +71,9 @@
                         <a class="nav-link" href="#searchpost">記事検索</a>
                     </li>
                     <li class="nav-item">
+
                         <a class="nav-link" href="<?php echo e(route('member.archive')); ?>">アーカイブ</a>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#follower">フォロワー</a>
