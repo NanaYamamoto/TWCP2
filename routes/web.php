@@ -4,6 +4,7 @@ use App\Http\Controllers\Operate\DashboardController;
 use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
+use App\Http\Controllers\Member\Archive\ArchiveController;
 use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -131,6 +132,9 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
     Route::any('post/profile/complete', [PostsController::class, 'profile_complete'])->name('post.profile.complete');
     // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+
+    //アーカイブページ
+    Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
 });
 
 
