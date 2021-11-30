@@ -201,6 +201,7 @@ class MembersController extends Controller
         $ses_key = $this->session_key . '.update';
 
         if ($id) {
+            dd($id);
             $data = $service->get($id);
             session()->put("{$ses_key}.id", $id);
         }
@@ -233,12 +234,25 @@ class MembersController extends Controller
 
         $ses_key = $this->session_key . '.update';
 
-        //入力値をセッションに保存
-        $input = $request->all();
-        session()->put("{$ses_key}.input", $input);
+        //画像パスの作成、public/tempに保存
+        if ($request->has('icon_url')) {
+            $icon_image = $request->file('icon_url');
+            $temp_path = $form->store($icon_image);
+        }
+
+        $input = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'icon_url' => $temp_path ?? '',
+        );
 
         //バリデーション
         $request->validate($form->getRule($input));
+
+        //入力値をセッションに保存
+        $input = $request->all();
+        session()->put("{$ses_key}.input", $input);
 
         //
         $data = $service->get(session()->get("{$ses_key}.id"));

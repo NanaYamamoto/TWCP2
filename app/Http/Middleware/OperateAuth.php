@@ -31,7 +31,7 @@ class OperateAuth
         $user = Auth::user();
 
         //管理者じゃなかったらログアウトしてリダイレクト
-        if ($user->type != 1) {
+        if ($user->type != 2) {
             Auth::logout();
             return redirect('dashboard');
         }

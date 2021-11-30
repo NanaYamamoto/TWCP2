@@ -6,6 +6,7 @@ use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
 use App\Http\Controllers\Member\Archive\ArchiveController;
 use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Member\Archive\ArchiveController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -87,12 +88,12 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
     Route::post('category/update/confirm', [CategoryController::class, 'update_confirm'])->name('category.update.confirm');
     Route::post('category/update/proc', [CategoryController::class, 'update_proc'])->name('category.update.proc');
     Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
-    Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update')/*->where('id', '[0-9]+')*/;
+    Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
     Route::get('category', [CategoryController::class, 'index'])->name('category');
     Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
     Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
-    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm')/*->where('id', '[0-9]+')*/;
+    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
     Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
 });
@@ -137,6 +138,8 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
     Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
 });
 
+//アーカイブページ
+Route::any('member/archive', [ArchiveController::class, 'index'])->name('member.archive');
 
 
 //パスワードリセット
@@ -154,7 +157,7 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
-//いらない
+// いらない
 // Route::get('post/login', [AuthLoginController::class, 'showLoginForm'])->name('post.login');
 // Route::post('post/login', [AuthLoginController::class, 'postlogin'])->name('post.login');
 // Route::get('post/register', [RegisterController::class, 'showPostRegisterForm'])->name('post.register');

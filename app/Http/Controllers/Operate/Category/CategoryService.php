@@ -27,11 +27,11 @@ class CategoryService extends CommonService {
     public function getList( $data = [], $offset = 30 ){
         $db = Category::query();
 
-        if( !empty($data['title']) ) $db->where( 'title', 'LIKE', "%{$data['title']}%");
+        if( !empty($data['name']) ) $db->where( 'name', 'LIKE', "%{$data['name']}%");
 
-        if( !empty($data['type']) ) $db->where( 'type', $data['type'] );
+        if( !empty($data['active']) ) $db->where( 'active', $data['active'] );
 
-        if( !empty($data['publish']) ) $db->where( 'publish', $data['publish'] );
+        //if( !empty($data['publish']) ) $db->where( 'publish', $data['publish'] );
 
         return $db->paginate();
     } 
@@ -45,7 +45,7 @@ class CategoryService extends CommonService {
     {
         $data = Category::find( $id );
 
-        if( $data->type == 2 ){
+        if( $data->active == 2 ){
             $data->url = $data->content;
             $data->content = '';
         }
@@ -70,17 +70,17 @@ class CategoryService extends CommonService {
 
     /**
      * 更新処理 
-     * @param [type] $id
+     * @param [active] $id
      * @param array $data 更新情報を配列で取得
      * @return object
      */
     public function update( $id, $data = [] ) {
 
-        if( $data['type'] == 2 ) {
+        if( $data['active'] == 2 ) {
             $data['content'] = $data['url'];
         }
 
-        $recode = Category::find( $id );
+        $recode = Category::find($id);
         if( !$recode ) return null;
 
         $recode->fill( $data );
@@ -91,7 +91,7 @@ class CategoryService extends CommonService {
 
     /**
      * 削除処理
-     * @param [type] $id
+     * @param [active] $id
      * @return void
      */
     public function delete( $id ) {
