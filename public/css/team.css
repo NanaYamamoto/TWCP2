@@ -584,21 +584,20 @@ section.more.btn {
   margin: 0 auto;
 }
 a.btn_02 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #228bc8;
-  box-sizing: border-box;
-  width: 100%;
-  height: 50px;
-  padding: 0 6% 0 12%;
-  color: #228bc8;
-  font-size: 16px;
-  text-align: left;
-  text-decoration: none;
-  position: relative;
-  transition-duration: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #228bc8;
+    box-sizing: border-box;
+    width: 90%;
+    height: 57px;
+    color: #228bc8;
+    font-size: 16px;
+    text-align: left;
+    text-decoration: none;
+    position: relative;
+    transition-duration: 0.2s;
 }
 a.btn_02:hover {
   background: #228bc8;
@@ -632,6 +631,32 @@ a.btn_02:hover:before {
     margin-top: 10px;
     }
 
+.search_container {
+    box-sizing: border-box;
+    margin-left: 310px;
+}
+.search_container input[type="text"] {
+    background: #ccddf5;
+    border: none;
+    height: 80px;
+    width: 30rem;
+    margin: 110px 0px 0px 100px;
+}
+  .search_container input[type="text"]:focus {
+    outline: 0;
+  }
+  .search_container input[type="submit"] {
+    cursor: pointer;
+    font-family: FontAwesome;
+    border: none;
+    background: #3879D9;
+    color: #fff;
+    outline: none;
+    width: 7em;
+    height: 80px;
+}
+
+
 /*==================================================
 スライドショー
 ===================================*/
@@ -645,7 +670,7 @@ a.btn_02:hover:before {
 }
 
 ul.slider.slick-initialized.slick-slider {
-    padding-top: 200px;
+    padding-top: 120px;
 }
 
 /*黒帯(最下部)*/
