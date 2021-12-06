@@ -1,17 +1,36 @@
-@extends('layouts.team.team2')
+@extends('layouts.member')
 
-@section('contents')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">投稿編集</h1>
-</div>
-<div class="row">
-    <form action="{{route('post.update.proc')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+<!-- @section('css') -->
+
+@section('title')
+新規記事作成
+@endsection
+
+@section('content')
+<!--記事作成-->
+
+    <div class="top">
+        <p>記事登録</p>
+    </div>
+
+
+    <form action="{{route('member.post.update.proc')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
         @csrf
         @include('member.post.form')
-        <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('post.home')}}" class="btn btn-secondary">キャンセル</a>
-            <button class="btn btn-primary">確認画面へ</button>
+        <div class="" style="margin:10px; display: flex;justify-content: center;align-items: center;">
+            <a href="{{route('member.mypage')}}" class="btn btn-svg" style="margin:0px">
+                <svg>
+                    <rect x="2" y="2" rx="0" fill="none" width=200 height="50"></rect>
+                </svg>
+                <span>一覧に戻る</span>
+            </a>
+            <button type="submit" class="btn btn-svg" >
+                <svg>
+                    <rect x="2" y="2" rx="0" fill="none" width=200 height="50"></rect>
+                </svg>
+                <span>編集完了</span>
+            </button>
         </div>
     </form>
-</div>
-@endsection
+
+    @endsection
