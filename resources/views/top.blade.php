@@ -71,7 +71,7 @@
                         <a class="nav-link" href="{{ route('member.post.search') }}">記事検索</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#archive">アーカイブ</a>
+                        <a class="nav-link" href="{{ route('member.archive') }}">アーカイブ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#follower">フォロワー</a>

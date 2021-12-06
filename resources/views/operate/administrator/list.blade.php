@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"><i class="fas fa-user-lock"></i> ユーザー管理</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{route('admin.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
+        <a href="{{route('operate.admin.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
     </div>
 </div>
 
@@ -80,9 +80,9 @@
                     </td>
                     <td>{{$row->updated_at}}<br />{{$row->created_at}}</td>
                     <td>
-                        <a href="{{route('admin.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
-                        <a href="{{route('admin.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
-                        <a href="{{route('admin.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
+                        <a href="{{route('operate.admin.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
+                        <a href="{{route('operate.admin.update', $row->id)}}" class="btn btn-outline-primary">編集</a>
+                        <a href="{{route('operate.admin.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
                     </td>
                 </tr>
                 @endforeach

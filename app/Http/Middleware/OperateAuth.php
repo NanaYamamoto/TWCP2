@@ -20,19 +20,20 @@ class OperateAuth
     {
 
         //ログインチェック
-        if( Auth::check() === false ) {
-            echo "not login";exit;
+        if (Auth::check() === false) {
+            echo "not login";
+            exit;
             //ログイン出来ていない場合は、ログイン画面に遷移
-            return redirect('/login/admin');
+            return redirect('dashboard');
         }
 
         //ログインしているユーザーの取得
         $user = Auth::user();
 
         //管理者じゃなかったらログアウトしてリダイレクト
-        if ($user->type != 1) {
+        if ($user->type != 2) {
             Auth::logout();
-            return redirect('/login/admin');
+            return redirect('dashboard');
         }
 
         return $next($request);

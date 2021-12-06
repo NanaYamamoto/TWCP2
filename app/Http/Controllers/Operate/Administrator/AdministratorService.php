@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Operate\Administrator;
 
 use App\Http\TakemiLibs\CommonService;
-use App\Models\User;
+use App\Models\Administrator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,14 +16,15 @@ class AdministratorService extends CommonService
      */
     public function getList($data = [], $offset = 30)
     {
-        $db = User::query();
-        // $db->admins()->where('type', 2)->get();
+        $db = Administrator::query();
+        // $db->admins()->where('type_id', 2)->get();
+        //1.参照Modelsをadministratorに変更(新規/登録/削除) 2.typeをtype_idに変更
 
         if (!empty($data['name'])) $db->where('name', 'LIKE', "%{$data['name']}%");
 
         if (!empty($data['email'])) $db->where('email', 'LIKE', "%{$data['email']}%");
 
-        if (!empty($data['type'] = 2)) $db->where('type', $data['type']);
+        if (!empty($data['type_id'] = 2)) $db->where('type_id', $data['type_id']);
 
         if (!empty($data['active'])) $db->where('active', 'LIKE', "%{$data['active']}%");
 
@@ -31,8 +32,8 @@ class AdministratorService extends CommonService
     }
 
     // public function select($data = []){
-    //     $data['type'] = \App\Models\Administrator::whereHas('users', function($q){
-    //     $q->where('type', 2);
+    //     $data['type_id'] = \App\Models\Administrator::whereHas('Administrators', function($q){
+    //     $q->where('type_id', 2);
     //     })->get();
     // }
 
@@ -43,7 +44,7 @@ class AdministratorService extends CommonService
      */
     public function get(int $id)
     {
-        $data = User::find($id);
+        $data = Administrator::find($id);
 
         return $data;
     }
@@ -73,6 +74,9 @@ class AdministratorService extends CommonService
             'type' => 2,
         ]);
 
+        $data['password'] = Hash::make($data['password']); //追加
+        $data = Administrator::create($data);
+
         return $data;
     }
 
@@ -86,7 +90,7 @@ class AdministratorService extends CommonService
     {
 
 
-        $recode = User::find($id);
+        $recode = Administrator::find($id);
         if (!$recode) return null;
 
         $recode->fill($data);
@@ -102,7 +106,7 @@ class AdministratorService extends CommonService
      */
     public function delete($id)
     {
-        // return User::where('id', $id)->delete();
-        return User::where('id', $id)->update(['active' => 2]);
+        // return Administrator::where('id', $id)->delete();
+        return Administrator::where('id', $id)->update(['active' => 2]);
     }
 }

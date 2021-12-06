@@ -5,11 +5,11 @@
     <h1 class="h2">メンバー管理 >> 削除</h1>
 </div>
 <div class="row">
-    <form action="{{route('members.delete.proc')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('operate.members.delete.proc')}}" class="form-horizontal form-label-left" method="post">
         @csrf
         @include('operate.members.form')
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('members')}}" class="btn btn-secondary m-2">キャンセル</a>
+            <a href="{{route('operate.members')}}" class="btn btn-secondary m-2">キャンセル</a>
             <button class="btn btn-primary">削除</button>
         </div>
     </form>

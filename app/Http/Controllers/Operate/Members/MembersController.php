@@ -70,7 +70,7 @@ class MembersController extends Controller
         //dd($data);
 
         if (!$data) {
-            return redirect()->route('members');
+            return redirect()->route('operate.members');
         }
 
         $view = view('operate.members.detail');
@@ -156,16 +156,11 @@ class MembersController extends Controller
 
         //データがない場合は入力画面に戻る
         if (empty($data)) {
-            return redirect()->route('members.regist');
+            return redirect()->route('operate.members.regist');
         }
 
         //バリデーション
         $form->getRuleRegist($data);
-        // $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
-        // if ($ret !== true) {
-        //     //入力画面にリダイレクト
-        //     return redirect()->route('members.regist')->withErrors($ret);
-        // }
 
         //登録処理
         $service->regist($data);
@@ -173,7 +168,7 @@ class MembersController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('members.regist.complete');
+        return redirect()->route('operate.members.regist.complete');
     }
 
     /**
@@ -187,7 +182,7 @@ class MembersController extends Controller
 
         $view->with('func_name', 'メンバー管理');
         $view->with('mode_name', '新規登録');
-        $view->with('back', route('members'));
+        $view->with('back', route('operate.members'));
 
         return $view;
     }
@@ -206,6 +201,7 @@ class MembersController extends Controller
         $ses_key = $this->session_key . '.update';
 
         if ($id) {
+            dd($id);
             $data = $service->get($id);
             session()->put("{$ses_key}.id", $id);
         }
@@ -219,7 +215,6 @@ class MembersController extends Controller
         $view = view('operate.members.update');
         $view->with('form', $form->build($input));
         //アイコン写真
-        //$view->with('icon', $form->getHtml($input));
         $view->with('icon', $form->getHtml($data->toArray()));
 
         //dd($input);
@@ -239,13 +234,29 @@ class MembersController extends Controller
 
         $ses_key = $this->session_key . '.update';
 
-        //入力値をセッションに保存
-        $input = $request->all();
-        session()->put("{$ses_key}.input", $input);
+        //画像パスの作成、public/tempに保存
+        if ($request->has('icon_url')) {
+            $icon_image = $request->file('icon_url');
+            $temp_path = $form->store($icon_image);
+        }
+
+        $input = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'icon_url' => $temp_path ?? '',
+        );
 
         //バリデーション
         $request->validate($form->getRule($input));
 
+        //入力値をセッションに保存
+        $input = $request->all();
+        session()->put("{$ses_key}.input", $input);
+
+
+        //バリデーション
+        $request->validate($form->getRule($input));
         //
         $data = $service->get(session()->get("{$ses_key}.id"));
 
@@ -274,14 +285,14 @@ class MembersController extends Controller
 
         //データがない場合は入寮画面に戻る
         if (empty($data)) {
-            return redirect()->route('members.update');
+            return redirect()->route('operate.members.update');
         }
 
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRule($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
-            return redirect()->route('members.update')->withErrors($ret);
+            return redirect()->route('operate.members.update')->withErrors($ret);
         }
 
         //登録処理
@@ -291,7 +302,7 @@ class MembersController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('members.update.complete');
+        return redirect()->route('operate.members.update.complete');
     }
 
     /**
@@ -305,7 +316,7 @@ class MembersController extends Controller
 
         $view->with('func_name', 'メンバー管理');
         $view->with('mode_name', '更新');
-        $view->with('back', route('members'));
+        $view->with('back', route('operate.members'));
 
         return $view;
     }
@@ -325,7 +336,7 @@ class MembersController extends Controller
         //該当データを取得
         $data = $service->get($id);
         if (!$data) {
-            return redirect()->route('members');
+            return redirect()->route('operate.members');
         }
 
         session()->put("{$ses_key}.id", $id); //(users.delete.id)
@@ -356,7 +367,7 @@ class MembersController extends Controller
 
         //データがない場合は入力画面に戻る
         if (empty($id)) {
-            return redirect()->route('members');
+            return redirect()->route('operate.members');
         }
 
         //削除処理：論理削除
@@ -365,6 +376,6 @@ class MembersController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('members.update.complete');
+        return redirect()->route('operate.members.update.complete');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\TakemiLibs\InterfaceForm;
 use Composer\DependencyResolver\Request;
 use \Form as FormF;
 
+
 use function PHPSTORM_META\type;
 
 class Form implements InterfaceForm
@@ -41,11 +42,11 @@ class Form implements InterfaceForm
 
     public function getRule(array $data = []): array
     {
+
         $rule = $this->getRuleRegist($data);
 
-        
-        $rule['email'] = ['email', 'required', 'max:30'];
-
+        $rule['email'] = ['required', "unique:users,email,{$data['id']},id", 'max:30'];
+        $rule['password'] = ['nullable', 'min:8', 'max:20'];
         return $rule;
     }
 
@@ -53,7 +54,7 @@ class Form implements InterfaceForm
     {
         //var_dump($data);
         $rule = [];
-        $rule['name'] = ['required', 'max:20'];
+        $rule['name'] = ['required', 'max:50'];
         $rule['email'] = ['email', 'required', 'max:30', 'unique:users'];
         $rule['password'] = ['required', 'max:30', 'min:8'];
         $rule['icon_url'] = ['image', 'mimes:jpeg,png,jpg,bmb'];
