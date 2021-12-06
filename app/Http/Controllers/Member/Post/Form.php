@@ -18,11 +18,13 @@ class Form implements InterfaceForm
         $form = [];
         $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
 
+        $form['id'] = FormF::hidden('id', $data['id'] ?? '', $opt);
+        
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
         $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt, ['style' => 'display:block; width: 20rem; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; border: 1px solid #ced4da; border-radius: 0.25rem;']);
 
-        $form['title'] = FormF::text('title', $data['title'] ?? '', $opt);
+        $form['title'] = FormF::text('title', $data['title'] ?? '', $opt, ['style' => 'width: 80%;']);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
         
@@ -54,7 +56,7 @@ class Form implements InterfaceForm
         $rule['title'] = ['required'];
         $rule['content'] = ['required'];
 
-        $rule['img'] = ['nullable', 'img', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
+        $rule['img'] = ['nullable'];
 
         
         return $rule;
@@ -69,9 +71,14 @@ class Form implements InterfaceForm
     {
         
         $data['user_id'] = FormF::hidden('user_id');
-        $data['publish'] = __('define.publish')[$data['publish']] ?? '';
-        $data['content'] = "<pre>{$data['content']}</pre>";
-        if( !isset($data['url']) ) $data['url'] = '';
+        
+        //画像をURL化
+        if ($data['img']) {
+            $file_path = Url('') . '/' . str_replace('public/', 'storage/', $data['img']);
+            $data['img'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
+        } else {
+            $data['img'] = "<pre>選択されていません<pre>";
+        }
         
         return $data;
     }

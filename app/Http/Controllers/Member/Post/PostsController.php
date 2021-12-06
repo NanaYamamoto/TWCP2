@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
@@ -19,7 +20,7 @@ class PostsController extends Controller
     protected $session_key = 'post';
 
     /**
-     * 検索一覧画面
+     * マイページ画面
      * @param Request $request
      * @return void
      */
@@ -28,7 +29,67 @@ class PostsController extends Controller
         $search = new Search();
         $service = new PostService();
 
-        $ses_key = $this->session_key . '.serach';
+        $ses_key = $this->session_key . '.mypage';
+
+        $user = Auth::user();
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
+
+        if ($request->has('btnSearch')) {
+            $search_val = $request->all();
+            //検索値のバリデーション
+            $ret = SimpleForm::validation($search_val, $search->getRule());
+            if ($ret !== true) {
+                //バリデーションエラーあり
+                foreach ($ret->errors() as $i => $v) unset($search_val[$i]);
+            }
+            //検索値をセッションに保存
+            session()->put($ses_key . '.input', $search_val);
+            // dd($search_val['name']);
+        }
+        if ($request->has('btnSearchClear')) {
+            session()->forget("{$ses_key}");
+        }
+
+        $search_val = session()->get("{$ses_key}.input", []);
+        $form = $search->build($search_val);
+        // $service->user_id = \Auth::id();
+
+        $def['active'] = __('define.info.type');
+
+        $rows = $service->myPostGet($search_val);
+
+        $view = view('top');
+
+        $view->with('rows', $rows);
+        $view->with('form', $form);
+        $view->with('def', $def);
+        $view->with('user', $user);
+        $view->with('categories', $categories);
+
+        return $view;
+    }
+
+    public function top(Request $request)
+    {
+        $user = Auth::user();
+        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $view = view('toppage');
+        $view->with('user', $user);
+
+        return $view;
+    }
+
+    /**
+     * 検索一覧画面
+     * @param Request $request
+     * @return void
+     */
+    public function search(Request $request)
+    {
+        $search = new Search();
+        $service = new PostService();
+
+        $ses_key = $this->session_key . '.search';
 
         $user = Auth::user();
         $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
@@ -57,7 +118,7 @@ class PostsController extends Controller
 
         $rows = $service->getList($search_val);
 
-        $view = view('top');
+        $view = view('member.post.search');
 
         $view->with('rows', $rows);
         $view->with('form', $form);
@@ -68,11 +129,21 @@ class PostsController extends Controller
         return $view;
     }
 
-    public function top(Request $request)
+    public function detail(Request $request, int $id)
     {
+        $form = new Form();
+        $service = new PostService();
+        $data = $service->get($id);
+        //dd($data);
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
-        $view = view('toppage');
+
+        if (!$data) {
+            return redirect()->route('member.mypage');
+        }
+
+        $view = view('member.post.detail');
+        $view->with('form', $form->getHtml($data->toArray()));
+        //dd($form->getHtml($data->toArray()));
         $view->with('user', $user);
 
         return $view;
@@ -80,57 +151,34 @@ class PostsController extends Controller
 
     public function profile(Request $request)
     {
-        $user = Auth::user();
-        if (!$user) {
-            return redirect()->route('post.login');
-        }
-        $view = view('member.post.profile');
-        $view->with('user', $user);
-        return $view;
-    }
-    public function postprofile(Request $request)
-    {
         $search = new Search();
         $service = new PostService();
 
-        $ses_key = $this->session_key . '.serachpost';
-        $users = User::select('users.*')->where('active', 1);
-
-        if ($request->has('btnSearch')) {
-            $search_val = $request->all();
-            //検索値のバリデーション
-            $ret = SimpleForm::validation($search_val, $search->getRule());
-            if ($ret !== true) {
-                //バリデーションエラーあり
-                foreach ($ret->errors() as $i => $v) unset($search_val[$i]);
-            }
-            //検索値をセッションに保存
-            session()->put($ses_key . '.input', $search_val);
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login');
         }
-        if ($request->has('btnSearchClear')) {
-            session()->forget("{$ses_key}");
+        $db = Post::all()->count();
+        
+        $view = view('member.post.profile');
+        $view->with('user', $user);
+        $view->with('db', $db);
+        return $view;
+    }
+
+    public function profile_edit(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login');
         }
-
-        $search_val = session()->get("{$ses_key}.input", []);
-        $form = $search->build($search_val);
-        // $service->user_id = \Auth::id();
-
-        $def['active'] = __('define.info.type');
-
-        $rows = $service->getList($search_val);
-
-        $view = view('member.post.postprofile');
-
-        $view->with('rows', $rows);
-        $view->with('form', $form);
-        $view->with('def', $def);
-        $view->with('user', $users);
-
+        $view = view('member.post.profile_edit');
+        $view->with('user', $user);
         return $view;
     }
 
 
-    public function editProfile(Request $request)
+    public function profile_proc(Request $request)
     {
         $user = Auth::user();
 
@@ -215,7 +263,7 @@ class PostsController extends Controller
         $form = new Form();
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('post.login');
+            return redirect()->route('login');
         }
 
         $ses_key = $this->session_key . '.regist';
@@ -274,17 +322,18 @@ class PostsController extends Controller
         session()->put("{$ses_key}.input", $data);
         //確認画面表示
 
-        //データがない場合は入寮画面に戻る
+        //データがない場合は入力画面に戻る
         if (empty($data)) {
             return redirect()->back();
         }
 
-        // //バリデーション
-        $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
-        if ($ret !== true) {
-            //入力画面にリダイレクト
-            return redirect()->route('member.post.regist')->withErrors($ret);
-        }
+        // バリデーション
+        // $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
+        // if ($ret !== true) {
+        //     //入力画面にリダイレクト
+        //     return redirect()->route('member.post.regist')->withErrors($ret);
+        // }
+        $form->getRuleRegist($data);
 
 
 
@@ -327,7 +376,7 @@ class PostsController extends Controller
         $ses_key = $this->session_key . '.update';
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('post.login');
+            return redirect()->route('login');
         }
 
         if ($id) {
@@ -363,16 +412,32 @@ class PostsController extends Controller
 
         $data = $request->all();
 
-        //データがない場合は入寮画面に戻る
+        //データがない場合は入力画面に戻る
         if (empty($data)) {
             return redirect()->route('post.update');
         }
 
+        $read_temp_path = null;
+
+        $data['img'] = $request->except('img');
+        //dd($request->file('img'));
+        //$imagefile = $request->file('img');
+        //storage/app/public/tempファイルに保存
+        if ($request->has('img')) {
+            date_default_timezone_set('Asia/Tokyo');
+            $originalName = $request->file('img')->getClientOriginalName();
+            $fileName =  date("Ymd_His") . '.' . $originalName;
+            $temp_path = $request->file('img')->storeAs('public/temp', $fileName);
+            $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
+        }
+
+        $data['img'] = $read_temp_path ?? '';
+        
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
-            return redirect()->route('post.update')->withErrors($ret);
+            return redirect()->back()->withErrors($ret);
         }
 
         //登録処理
@@ -382,7 +447,7 @@ class PostsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('post.update.complete');
+        return redirect()->route('member.post.update.complete');
     }
 
     /**
@@ -417,7 +482,7 @@ class PostsController extends Controller
         $data = $service->get($id);
         // dd($data);
 
-        //データがない場合は入寮画面に戻る
+        //データがない場合は入力画面に戻る
         if (empty($data)) {
             return redirect()->route('member.mypage');
         }
@@ -428,7 +493,7 @@ class PostsController extends Controller
         //セッション削除
         session()->forget("{$ses_key}");
 
-        return redirect()->route('post.delete.complete');
+        return redirect()->route('member.post.delete.complete');
     }
 
     /**
