@@ -58,7 +58,7 @@
 <body style="background-color: white;">
     <header class="header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3 ml-4 pl-5">
-            <a class="navbar-brand" href="/">teamM.jp</a>
+            <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -68,7 +68,7 @@
                         <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#searchpost">記事検索</a>
+                        <a class="nav-link" href="{{ route('member.post.search') }}">記事検索</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('member.archive') }}">アーカイブ</a>
@@ -85,7 +85,7 @@
                     <li class="has-child"><a href="#" class="nav-link"><i class="fas fa-user-alt"></i></a>
                         <ul>
                             <li><button form="mypage-button" class="dropdown-item" type="submit">
-                                    マイページ
+                                    プロフィール
                                 </button></li>
                             <li><button form="logout-button" class="dropdown-item" type="submit">
                                     ログアウト
@@ -109,7 +109,7 @@
                 </ul>
             </div>
 
-            <form id="mypage-button" method="POST" action="{{ route('member.post.profile') }}">
+            <form id="mypage-button" method="POST" action="{{ route('member.post.profile_edit') }}">
                 @csrf
             </form>
             <form id="logout-button" method="POST" action="{{ route('logout') }}">
@@ -139,7 +139,6 @@
                 <nav id="g-nav" class="">
                     <div id="category-list">
                         <!--ナビの数が増えた場合縦スクロールするためのdiv-->
-
                         <ul>
                             <li><i class="fas fa-tags mb-2"></i>タグ</li>
                             @if( count($categories) )
@@ -149,148 +148,60 @@
                             <li>etc...</li>
                             @else
                             <span>タグがありません</span>
-
                             @endif
                         </ul>
+
                     </div>
+
                 </nav>
             </div>
         </div>
     </footer>
 
-    <h2 style="position: absolute;top: 180px;left: 100px;font-size: 1.5rem;font-weight: bold;"><a href="#">Topics</a></h2>
-    <ul id="gallery" class="gallery bgappearTrigger">
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-        <li class="bgextend bgLRextendTrigger zoomInRotate">
-            <div class="bgappearTrigger"><a href="" data-lightbox="gallery-group"><img src="/images/画像/インテリア.png" alt=""></a>
-                <p>ああああああ</p>
-            </div>
-        </li>
-    </ul>
-
-
-
-
 
     <div id="container" class="wrapper">
         <main>
             @if( count($rows) )
-
             <article>
-                <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;"><a href="#">おすすめの投稿</a></h1>
+                <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;">投稿</h1>
                 @foreach( $rows as $row )
-                <p><a href="#">{{ $row->title }}</a></h2>
+                <p>{{ $row->title }}</h2>
                 <ul class="meta">
-                    <li><a href="#">{{ $row->created_at }}</a></li>
-                    <li><a href="#">{{ $row->category_id }}</a></li>
-                    <li><a href="#">{{ $row->user->name }}さんの投稿</a></li>
+                    <li>{{ $row->created_at }}</li>
+                    <li>{{ $row->category_id }}</li>
                 </ul>
-                <a href="#"><img src="/images/画像/インテリア.png" alt="テキストテキストテキスト"></a>
+                <ul class="meta" style="display: flex; align-items: center;">
+                    <li>
+                        @if (!empty($user->icon_url))
+                        <img src="/storage/members/{{$user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                        @else
+                        <img src="/images/blank_profile.png" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                        @endif
+                    </li>
+                    <li><a href="{{route('member.post.detail', $row->id)}}">{{ $row->user->name }}さんの投稿</a></li>
+
+                </ul>
+
+                <a href="{{route('member.post.detail', $row->id)}}" data-lightbox="gallery-group">
+                    @if (!empty($row->img))
+                    <img src="{{$row->img}}" style="object-fit: cover; width: 1000px; height: 1000px;">
+                    @else
+                    <img src="/images/blank_profile.png" style="object-fit: cover; width: 1000px; height: 1000px;">
+                    @endif
+                </a>
+
                 <p class="text">
                     {{ $row->content }}
                 </p>
-                <div class="readmore"><a href="#">READ MORE</a></div>
+                <div class="readmore"><a href="{{route('member.post.detail', $row->id)}}">READ MORE</a></div>
                 @endforeach
             </article>
-
-
-
-
             @else
             <span>記事がありません</span>
             @endif
         </main>
 
-        <aside id="sidebar">
 
-            <section id="news">
-
-                <div class="tab-area bgextend">
-                    <div class="bgappear">
-                        <ul class="tab">
-
-                            <li><a href="#recommendation">あなたへのおすすめ</a></li>
-                            <li><a href="#cars">人気記事</a></li>
-                        </ul>
-                        <div class="tab-choice-area">
-
-                            <div id="recommendation" class="area is-active">
-                                <ul>
-                                    <li><a href="#"><time datetime="2021-09-23">2021.09.23</time>PHP</a></li>
-                                    <li><a href="#"><time datetime="2021-07-15">2021.07.15</time>Javascript</a></li>
-                                    <li><a href="#"><time datetime="2021-05-12">2021.05.12</time>Laravel</a></li>
-                                </ul>
-                                <!--/area-->
-                            </div>
-                            <div id="cars" class="area">
-                                <ul>
-                                    <li><a href="#"><time datetime="2021-11-11">2021.11.11</time>インポートカーお披露目</a></li>
-                                    <li><a href="#"><time datetime="2021-06-07">2021.06.07</time>ドイツ・フランス車フェア</a></li>
-                                    <li><a href="#"><time datetime="2021-03-01">2021.03.01</time>買い替えをご検討中の方へ</a></li>
-                                </ul>
-                                <!--/area-->
-                            </div>
-                            <!--/tab-choice-area-->
-                        </div>
-                    </div>
-                    <!--/tab-area-->
-                </div>
-            </section>
-            <section class="archive">
-                <h3 class="side-title">人気投稿者一覧</h3>
-                <ul>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                    <li><a href="#">林航平</a>(XX)</li>
-                </ul>
-            </section>
-        </aside>
     </div>
 
     <footer id="footer">

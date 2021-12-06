@@ -478,10 +478,9 @@ p.tag_design.search {
   
 
 /*コンテンツ*/
-#contents {
+/* #contents {
     width: 1360px;
-    padding: 3px 0px 0px 60px;
-}
+} */
 
 .contents p {
     color: #8B8B8B;

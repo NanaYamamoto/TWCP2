@@ -126,12 +126,13 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     Route::any('post/delete/proc/{id}', [PostsController::class, 'delete_proc'])->name('post.delete.proc');
     Route::any('post/delete/complete', [PostsController::class, 'delete_complete'])->name('post.delete.complete');
-    // Route::any('post/delete/{id}', [PostsController::class, 'delete_confirm'])->name('post.delete.confirm');
 
     Route::any('post/profile', [PostsController::class, 'profile'])->name('post.profile');
-    Route::post('post/profile/edit', [PostsController::class, 'editProfile'])->name('post.editProfile');
+    Route::any('post/profile/edit', [PostsController::class, 'profile_edit'])->name('post.profile_edit');
+    Route::post('post/profile/proc', [PostsController::class, 'profile_proc'])->name('post.profile_proc');
     Route::any('post/profile/complete', [PostsController::class, 'profile_complete'])->name('post.profile.complete');
-    // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
+
+    Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 
     //アーカイブページ

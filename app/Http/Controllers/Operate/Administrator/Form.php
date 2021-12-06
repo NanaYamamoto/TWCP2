@@ -20,7 +20,7 @@ class Form implements InterfaceForm
         $form['password'] = FormF::password('password', $opt);
 
         $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.user.type'), []);
-        $form['icon_url'] = FormF::input('file', 'icon_url', $data['icon_url'] ?? '', $opt);
+        $form['icon_url'] = FormF::file('icon_url', $opt);
         return $form;
     }
 
@@ -45,12 +45,7 @@ class Form implements InterfaceForm
         $rule['email'] = ['required', 'unique:users,email', 'max:30']; //uniqueで同じものがあれば「既に使用されています」と表示する場合、unique:テーブル名
         $rule['password'] = ['required', 'min:8', 'max:20']; //8文字以上、20文字未満
         //$rule['type'] = ['required', 'integer' ]; //ここはいらない場合、コメントアウト
-        if (!empty($data['icon_url'])) {
-            $rule['icon_url'] = ['nullable', 'file', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
-        } else {
-            $data['icon_url'] = '';
-        }
-        $rule['icon_url'] = ['nullable', 'file', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
+        $rule['icon_url'] = ['file', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
         // $rule['icon_url'] = ['nullable','image','mimes:jpeg,png,jpg,bmb','max:2048'];
 
         return $rule;
@@ -63,11 +58,32 @@ class Form implements InterfaceForm
      */
     public function getHtml(array $data = [])
     {
-
-        $data['icon_url'] = url($data['icon_url']);
-
-
+        $data['name'] = "<pre>{$data['name']}<pre>";
+        $data['email'] = "<pre>{$data['email']}<pre>";
+        $data['password'] = "**********";
+        //画像をURL化
+        if ($data['icon_url']) {
+            $file_path = Url('') . '/' . str_replace('public/', 'storage/', $data['icon_url']);
+            $data['icon_url'] = "<pre><a href= '{$file_path}'><img src='{$file_path}' width='100'></a><pre>";
+        } else {
+            $data['icon_url'] = "<pre>選択されていません<pre>";
+        }
 
         return $data;
+    }
+
+    /**
+     * 画像パスの生成
+     * 
+     */
+    public function store($icon_image)
+    {
+        date_default_timezone_set('Asia/Tokyo');
+
+        $originalName = $icon_image->getClientOriginalName();
+        $fileName =  date("Ymd_His") . '.' . $originalName;
+        $temp_path = $icon_image->storeAs('public/temp/administrators', $fileName);
+
+        return $temp_path;
     }
 }
