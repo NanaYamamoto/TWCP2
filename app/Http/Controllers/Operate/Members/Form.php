@@ -41,7 +41,12 @@ class Form implements InterfaceForm
 
     public function getRule(array $data = []): array
     {
-        return $this->getRuleRegist($data);
+        $rule = $this->getRuleRegist($data);
+
+        
+        $rule['email'] = ['email', 'required', 'max:30'];
+
+        return $rule;
     }
 
     public function getRuleRegist(array $data = []): array
