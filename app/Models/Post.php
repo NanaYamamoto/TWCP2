@@ -43,6 +43,7 @@ class Post extends Model
                 ->orwhere('posts.title', 'LIKE', "%{$data}%")
                 ->orwhere('posts.content', 'LIKE', "%{$data}%")
                 ->where('posts.active', 1) // activeカラムは最後に記述しないとうまくいかないのでここに入力
+                ->orderby('posts.id','DESC')
                 ->get();
 
             return $hits;
