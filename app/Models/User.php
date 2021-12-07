@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function likes()
     {
-        return $this->hasMany('App\Models\Likes');
+        return $this->hasMany('App\Models\Like');
     }
 
     public function myContent($user_id)

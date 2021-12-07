@@ -29,12 +29,12 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->hasMany('App\Models\Likes');
+        return $this->hasMany('App\Models\Like');
     }
 
     public function likedBy($user)
     {
-        return Likes::where('user_id', $user->id)->where('post_id', $this->id);
+        return Like::where('user_id', $user->id)->where('post_id', $this->id);
     }
 
     public function myContent($data)
