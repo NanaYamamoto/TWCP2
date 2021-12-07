@@ -6,7 +6,6 @@ use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
 use App\Http\Controllers\Member\Archive\ArchiveController;
 use App\Http\Controllers\Login\LoginController;
-use App\Http\Controllers\Member\Archive\ArchiveController;
 use Illuminate\Support\Facades\Route;
 
 
