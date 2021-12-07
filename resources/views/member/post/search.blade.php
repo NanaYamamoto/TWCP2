@@ -45,8 +45,11 @@
                 {{ $row->created_at }}<br>
                 {{ $row->user->name }}さんの投稿
             </p>
-            <a class="love hide-text" data-remote="true" rel="nofollow" data-method="POST" href=""><i class="far fa-heart" style="display: inline-block; padding-left: 10px;"></i></a>
-
+            @if ($row->likedBy(Auth::user())->count() > 0)
+            <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/member/like/{{ $row->likedBy(Auth::user())->firstOrFail()->id }}"><i class="far fa-heart" style="color: red; display: inline-block; padding-left: 10px;"></i></a>
+            @else
+            <a class="love hide-text" data-remote="true" rel="nofollow" data-method="POST" href="/member/post/{{ $row->id }}/likes"><i class="far fa-heart" style="display: inline-block; padding-left: 10px;"></i></a>
+            @endif
         </div>
     </li>
     @endforeach
