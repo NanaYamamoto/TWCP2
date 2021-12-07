@@ -5,6 +5,7 @@ use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
 use App\Http\Controllers\Member\Archive\ArchiveController;
+use App\Http\Controllers\Member\Archive\LikesController;
 use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -134,6 +135,9 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
     Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 
+    // いいね機能
+    Route::get('post/{post_id}/likes', [LikesController::class, 'store'])->name('store');
+    Route::get('like/{like_id}', [LikesController::class, 'delete'])->name('delete');
     //アーカイブページ
     Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
 });

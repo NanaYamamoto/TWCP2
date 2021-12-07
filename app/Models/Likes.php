@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LikesModel extends Model
+class Likes extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,16 @@ class LikesModel extends Model
         'post_id',
         'user_id',
     ];
-    protected $primaryKey = ['post_id', 'user_id'];
+    
     public $incrementing = false;
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo('App\Models\Post');
+    }
 }
