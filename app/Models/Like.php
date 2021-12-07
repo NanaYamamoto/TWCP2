@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Likes extends Model
+class Like extends Model
+
 {
     use HasFactory;
 
-    // 参照させたいSQLのテーブル名を指定してあげる
     protected $table = 'likes';
 
     protected $fillable = [
@@ -28,4 +28,5 @@ class Likes extends Model
     {
         return $this->belongsTo('App\Models\Post');
     }
+
 }
