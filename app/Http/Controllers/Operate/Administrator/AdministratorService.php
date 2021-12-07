@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Operate\Administrator;
 
 use App\Http\TakemiLibs\CommonService;
 use App\Models\Administrator;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,15 +17,13 @@ class AdministratorService extends CommonService
      */
     public function getList($data = [], $offset = 30)
     {
-        $db = Administrator::query();
-        // $db->admins()->where('type_id', 2)->get();
-        //1.参照Modelsをadministratorに変更(新規/登録/削除) 2.typeをtype_idに変更
+        $db = User::query();
 
         if (!empty($data['name'])) $db->where('name', 'LIKE', "%{$data['name']}%");
 
         if (!empty($data['email'])) $db->where('email', 'LIKE', "%{$data['email']}%");
 
-        if (!empty($data['type_id'] = 2)) $db->where('type_id', $data['type_id']);
+        if (!empty($data['type'] = 2)) $db->where('type', $data['type']);
 
         if (!empty($data['active'])) $db->where('active', 'LIKE', "%{$data['active']}%");
 

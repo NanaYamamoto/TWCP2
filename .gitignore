@@ -1,8 +1,8 @@
 /node_modules
 /public/hot
 /storage/logs
-# /storage/app
-# /storage/framework
+/storage/app
+/storage/framework
 /vendor
 .env
 .env.backup

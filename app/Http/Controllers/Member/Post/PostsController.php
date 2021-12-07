@@ -19,6 +19,11 @@ class PostsController extends Controller
 {
     protected $session_key = 'post';
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * マイページ画面
      * @param Request $request
