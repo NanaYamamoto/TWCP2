@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Member\Archive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Likes;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -19,7 +19,7 @@ class LikesController extends Controller
 
     public function store(Request $request)
     {
-        $like = new Likes();
+        $like = new Like();
         $like->user_id = Auth::user()->id;
         $like->post_id = $request->post_id;
         $like->save();
@@ -29,7 +29,7 @@ class LikesController extends Controller
 
     public function delete(Request $request)
     {
-        $like = Likes::where('id', $request->like_id)->first();
+        $like = Like::where('id', $request->like_id)->first();
         // 受け取ったHTTPリクエストからIDを判別し、指定のレコードを一つ取得
         $like->delete();
         return redirect()->route('member.post.search');
