@@ -145,10 +145,11 @@ class PostsController extends Controller
         if (!$data) {
             return redirect()->route('member.mypage');
         }
-
+        $rows = $service->getList($data);
         $view = view('member.post.detail');
         $view->with('form', $form->getHtml($data->toArray()));
         //dd($form->getHtml($data->toArray()));
+        $view->with('rows', $rows);
         $view->with('user', $user);
 
         return $view;
