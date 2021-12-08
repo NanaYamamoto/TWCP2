@@ -20,9 +20,9 @@
 <div class="search-area">
     <form role="search" method="post" style="position: relative;">
         @csrf
-        <input type="text" value="" name="keyword" id="search-text" placeholder="search" style="width: 80%; margin: auto; border-radius: 20px; border: 1px solid; padding-left: 10px;">
+        {!! $form['keyword'] !!}
         <input type="submit" id="searchsubmit" name="btnSearch" value="検索" style="position: absolute; top: 0px; right: 12rem; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border: 1px solid;">
-        <input type="submit" id="searchsubmit" name="btnSearch" value="❌" style="position: absolute; top: 0px; right: 15rem; background: none; border: none;">
+        <input type="submit" id="searchsubmit" name="btnSearchClear" value="✖️" style="font-size: 23px; position: absolute; top: -3px; right: 15rem; background: none; border: none;">
 
     </form>
 </div>
@@ -46,7 +46,7 @@
                 {{ $row->user->name }}さんの投稿
             </p>
             @if ($row->likedBy(Auth::user())->count() > 0)
-            <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/member/like/{{ $row->likedBy(Auth::user())->firstOrFail()->id }}"><i class="far fa-heart" style="color: red; display: inline-block; padding-left: 10px;"></i></a>
+            <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/member/like/{{ $row->likedBy(Auth::user())->firstOrFail()->id }}"><i class="fas fa-heart" style="color: red; display: inline-block; padding-left: 10px;"></i></a>
             @else
             <a class="love hide-text" data-remote="true" rel="nofollow" data-method="POST" href="/member/post/{{ $row->id }}/likes"><i class="far fa-heart" style="display: inline-block; padding-left: 10px;"></i></a>
             @endif
