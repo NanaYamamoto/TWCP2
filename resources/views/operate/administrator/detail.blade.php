@@ -12,7 +12,7 @@
 
     @include('operate.administrator.form')
     <div class="form-group form-inline" style="margin-top:10px;">
-        <a href="{{route('admin')}}" class="btn btn-secondary">一覧に戻る</a>
+        <a href="{{route('operate.admin')}}" class="btn btn-secondary">一覧に戻る</a>
     </div>
 
     </form>
