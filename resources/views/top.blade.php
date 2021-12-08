@@ -168,7 +168,7 @@
                 <p>{{ $row->title }}</h2>
                 <ul class="meta">
                     <li>{{ $row->created_at }}</li>
-                    <li>{{ $row->category_id }}</li>
+                    <li>{{ $row->category->name }}</li>
                 </ul>
                 <ul class="meta" style="display: flex; align-items: center;">
                     <li>

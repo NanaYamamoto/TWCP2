@@ -22,10 +22,11 @@ class Post extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->hasMany('App\Models\Category');
+        return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
+
 
     public function likes()
     {
@@ -53,7 +54,7 @@ class Post extends Model
                 ->orwhere('posts.title', 'LIKE', "%{$data}%")
                 ->orwhere('posts.content', 'LIKE', "%{$data}%")
                 ->where('posts.active', 1) // activeカラムは最後に記述しないとうまくいかないのでここに入力
-                ->orderby('posts.id','DESC')
+                ->orderby('posts.id', 'DESC')
                 ->get();
 
             return $hits;
