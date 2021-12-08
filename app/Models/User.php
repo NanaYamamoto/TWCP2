@@ -69,11 +69,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
 
-    public function likes()
-    {
-        return $this->hasMany('App\Models\Like');
-    }
-
     public function myContent($user_id)
     {
         $user = \Request::query('users');
