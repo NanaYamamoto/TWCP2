@@ -19,7 +19,8 @@ class Form implements InterfaceForm
 
         $form['password'] = FormF::password('password', $opt);
 
-        $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.user.type'), []);
+        $form['active'] = SimpleForm::radio('active', $data['active'] ?? '', __('define.active'), []);
+        
         $form['icon_url'] = FormF::file('icon_url', $opt);
         return $form;
     }

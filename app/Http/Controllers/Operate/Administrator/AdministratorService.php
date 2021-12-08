@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Operate\Administrator;
 
 use App\Http\TakemiLibs\CommonService;
-use App\Models\Administrator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +42,7 @@ class AdministratorService extends CommonService
      */
     public function get(int $id)
     {
-        $data = Administrator::find($id);
+        $data = User::find($id);
 
         return $data;
     }
@@ -74,7 +73,7 @@ class AdministratorService extends CommonService
         ]);
 
         $data['password'] = Hash::make($data['password']); //追加
-        $data = Administrator::create($data);
+        $data = User::create($data);
 
         return $data;
     }
@@ -89,7 +88,7 @@ class AdministratorService extends CommonService
     {
 
 
-        $recode = Administrator::find($id);
+        $recode = User::find($id);
         if (!$recode) return null;
 
         $recode->fill($data);
@@ -105,7 +104,6 @@ class AdministratorService extends CommonService
      */
     public function delete($id)
     {
-        // return Administrator::where('id', $id)->delete();
-        return Administrator::where('id', $id)->update(['active' => 2]);
+        return User::where('id', $id)->update(['active' => 2]);
     }
 }
