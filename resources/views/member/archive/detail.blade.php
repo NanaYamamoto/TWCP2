@@ -17,15 +17,21 @@
                 <div id="main">
                     <ul id="pic">
 
-                        @if (count($likes))
-                            @foreach ($likes as $like)
-                                @if (!is_null($like))
+                        @if (count($datas))
+                            @foreach ($datas as $data)
+                                @if (!is_null($data))
                                     <li class="item">
-                                    <h1>{{ $like->category_id }}</h1>
-                                    <a href="{{ Route('member.archive.detail', $like->category_id) }}">detail</a>  
+                                    <h1>{{ $data->title }} </h1>
+                                    <h1>{{ $data->content }} </h1>
+                                      
                                     <img src="img/画像/インテリア.png" alt="インテリア">
     
                                         <span class="category" href="#">1件</span>
+                                        <figure>
+                                            <a target="_blank" href="#" title="インテリア">
+            
+                                            </a>
+                                        </figure>
                                     </li>      
                                 @endif                               
                             @endforeach        

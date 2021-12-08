@@ -1,67 +1,47 @@
 <!-- <?php $__env->startSection('css'); ?> -->
 
 <?php $__env->startSection('title'); ?>
-プロフィール編集
+マイページ
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 <div id="profile-edit-form" class="container" style="grid-template-columns:none;">
 
     <div class="row">
-        <div class="bg-white"><!-- col-10 -->
+        <div class="bg-white">
+            <!-- col-10 -->
 
-            <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
-
-            <form method="POST" action="<?php echo e(route('member.post.editProfile')); ?>" class="p-5" enctype="multipart/form-data">
-                <?php echo csrf_field(); ?>
+            <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">マイページ</div>
 
 
-                
-                <span class="icon_url-form image-picker">
-                    <input type="file" name="icon_url" class="d-none" accept="image/png,image/jpeg,image/gif" id="icon_url" />
-                    <label for="icon_url" class="d-inline-block">
-                        <?php if(!empty($user->icon_url)): ?>
-                        <img src="/storage/members/<?php echo e($user->icon_url); ?>" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                        <?php else: ?>
-                        <img src="/images/blank_profile.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                        <?php endif; ?>
-                    </label>
-                </span>
-
-                
-                <div class="form-group mt-3">
-                    <label for="name" style="letter-spacing: 5.5px;">ニックネーム</label>
-                    <input id="name" type="text" class="form-control <?php $__errorArgs = ['name'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="name" value="<?php echo e(old('name', $user->name)); ?>" required autocomplete="name" autofocus>
-                    <?php $__errorArgs = ['name'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <span class="invalid-feedback" role="alert">
-                        <strong><?php echo e($message); ?></strong>
-                    </span>
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+            
+            <span class="icon_url-form image-picker">
+                <div class="form-group mt-5 text-center">
+                <img src="/storage/members/<?php echo e($user->icon_url); ?>" class="rounded-circle" style="object-fit: cover; width: 120px; height: 120px;">
                 </div>
+            </span>
 
-                <div class="form-group mb-0 mt-4 text-center">
-                    <button type="submit" class="btn btn-block btn-primary" style="padding: 6px 37px;">
-                        保存
+            
+            <div class="form-group mt-4">
+                <div class="text-center" style="font-size: 1.5rem; font-weight: bold;"><?php echo e($user->name); ?></div>
+            </div>
+
+            
+            <div class="form-group mt-4">
+                <div class="text-center"><?php echo e($db); ?>件投稿しています</div>
+            </div>
+
+            <div class="form-group mb-0 mt-4 text-center">
+                <a href="<?php echo e(route('member.post.profile_edit')); ?>">
+                    <button class="btn btn-block btn-primary">
+                        プロフィールを編集する
                     </button>
-                </div>
-                <div class="form-group mb-0 mt-3 text-center">
-                    <a href="<?php echo e(route('member.mypage')); ?>" class="btn btn-block btn-secondary mt-2">一覧に戻る</a>
-                </div>
-            </form>
+                </a>
+            </div>
+            <div class="form-group mb-0 mt-3 text-center">
+                <a href="<?php echo e(route('member.mypage')); ?>" class="btn btn-block btn-secondary mt-2" style="padding: 5px 45px;">投稿一覧に戻る</a>
+            </div>
+
         </div>
     </div>
 </div>

@@ -1,10 +1,8 @@
-@extends('layouts.member')
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(asset('css/toppage.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('css')
-<link href="{{ asset('css/toppage.css') }}" rel="stylesheet">
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="top" style="margin-top: 40px;">
         <p>記事検索</p>
@@ -17,19 +15,25 @@
                 <div id="main">
                     <ul id="pic">
 
-                        @if (count($likes))
-                            @foreach ($likes as $like)
-                                @if (!is_null($like))
+                        <?php if(count($datas)): ?>
+                            <?php $__currentLoopData = $datas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(!is_null($data)): ?>
                                     <li class="item">
-                                    <h1>{{ $like->category_id }}</h1>
-                                    <a href="{{ Route('member.archive.detail', $like->category_id) }}">detail</a>  
+                                    <h1><?php echo e($data->title); ?> </h1>
+                                    <h1><?php echo e($data->content); ?> </h1>
+                                      
                                     <img src="img/画像/インテリア.png" alt="インテリア">
     
                                         <span class="category" href="#">1件</span>
+                                        <figure>
+                                            <a target="_blank" href="#" title="インテリア">
+            
+                                            </a>
+                                        </figure>
                                     </li>      
-                                @endif                               
-                            @endforeach        
-                        @endif
+                                <?php endif; ?>                               
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>        
+                        <?php endif; ?>
                         
                     </ul>
                 </div>
@@ -39,7 +43,7 @@
 
     
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
     <!-- JavaScript Bundle with Popper -->
@@ -54,10 +58,12 @@
     <!-- モーダルウィンドウ用 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js"></script>
     <!--JSを読み込み-->
-    <script src="{{ asset('js/team.js') }}"></script>
+    <script src="<?php echo e(asset('js/team.js')); ?>"></script>
 
 </body>
 
 </html>
 
 
+
+<?php echo $__env->make('layouts.member', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/TWCP2/resources/views/member/archive/detail.blade.php ENDPATH**/ ?>

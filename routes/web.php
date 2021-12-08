@@ -136,6 +136,7 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     //アーカイブページ
     Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
+    Route::any('archive/{id}', [ArchiveController::class, 'detail'])->name('archive.detail');
 });
 
 //アーカイブページ

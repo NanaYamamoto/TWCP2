@@ -1,5 +1,5 @@
 <div id="contents" class="cp_iptxt">
-    <label for="title" class="">タイトル</label>
+    <label for="title" class="d-flex">タイトル</label>
     <?php echo $form['title']; ?>
 
     <?php $__errorArgs = ['title'];
@@ -15,7 +15,7 @@ unset($__errorArgs, $__bag); ?>
     <span class="focus_line"></span>
 </div>
 <div id="contents" class="cp_iptxt">
-    <label for="category_id" class="padding">カテゴリー</label>
+    <label for="category_id" class="d-flex">カテゴリー</label>
     <?php echo $form['category_id']; ?>
 
     <?php $__errorArgs = ['category_id'];
@@ -51,7 +51,7 @@ unset($__errorArgs, $__bag); ?>
 
 
 <div id="contents" class="cp_iptxt">
-    <label for="img" class="">画像</label>
+    <label for="img" class="d-flex">画像</label>
     <?php echo $form['img']; ?>
 
     <?php $__errorArgs = ['img'];
