@@ -23,6 +23,8 @@ class PostService extends CommonService
         $categories = Category::query();
         $postModel = new Post();
 
+        $db->where('user_id', '<>' ,\Auth::id());
+
         if (!empty($data['category_id'])) $db->where('category_id', $data['category_id']);
 
         if (!empty($data['title'])) $db->where('title', $data['title']);
