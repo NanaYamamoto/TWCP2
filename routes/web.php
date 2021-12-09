@@ -140,6 +140,8 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
     Route::get('like/{like_id}', [LikesController::class, 'delete'])->name('delete');
     //アーカイブページ
     Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
+    Route::any('archive/category/{id}', [ArchiveController::class, 'category'])->name('archive.category');
+    Route::any('archive/article/{id}', [ArchiveController::class, 'article'])->name('archive.article');
 });
 
 //アーカイブページ

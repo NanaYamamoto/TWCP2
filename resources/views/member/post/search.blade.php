@@ -43,7 +43,7 @@
             </a>
             <p style="display: inline-block;">{{ $row->title }}<br>
                 {{ $row->created_at }}<br>
-                {{ $row->user->name }}さんの投稿
+                {{-- {{ $row->user->name }}さんの投稿 --}}
             </p>
             @if ($row->likedBy(Auth::user())->count() > 0)
             <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/member/like/{{ $row->likedBy(Auth::user())->firstOrFail()->id }}"><i class="fas fa-heart" style="color: red; display: inline-block; padding-left: 10px;"></i></a>
@@ -67,7 +67,7 @@
             <ul class="meta">
                 <li><a href="#">{{ $row->created_at }}</a></li>
                 <li><a href="#">{{ $row->category_id }}</a></li>
-                <li><a href="#">{{ $row->user->name }}さんの投稿</a></li>
+                {{-- <li><a href="#">{{ $row->user->name }}さんの投稿</a></li> --}}
             </ul>
             <a href="#"><img src="/images/画像/インテリア.png" alt="テキストテキストテキスト"></a>
             <p class="text">
