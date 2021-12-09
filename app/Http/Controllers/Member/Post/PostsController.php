@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
@@ -164,11 +165,13 @@ class PostsController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-        $db = Post::all()->count();
+        $db = Post::all()->where('user_id',\Auth::id())->count();
+        $arcive = Like::query()->where('user_id',\Auth::id())->count();
         
         $view = view('member.post.profile');
         $view->with('user', $user);
         $view->with('db', $db);
+        $view->with('arcive', $arcive);
         return $view;
     }
 
