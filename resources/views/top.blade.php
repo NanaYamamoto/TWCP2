@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('member.post.profile') }}">プロフィール</a>
+                        <a class="nav-link" href="{{ route('member.post.profile') }}">マイページ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
@@ -161,9 +161,11 @@
 
     <div id="container" class="wrapper">
         <main>
-            @if( count($rows) )
             <article>
-                <h1 class="article-title" style="font-size: 1.5rem; padding-bottom: 30px;">投稿</h1>
+                <div class="top">
+                    <p>投稿</p>
+                </div>
+                @if( count($rows) )
                 @foreach( $rows as $row )
                 <p>{{ $row->title }}</h2>
                 <ul class="meta">
@@ -181,18 +183,20 @@
                     <li><a href="{{route('member.post.detail', $row->id)}}">{{ $row->user->name }}さんの投稿</a></li>
 
                 </ul>
+                <div style="display: block; text-align: center;">
+                    <a href="{{route('member.post.detail', $row->id)}}" data-lightbox="gallery-group">
+                        @if (!empty($row->img))
+                        <img src="{{$row->img}}" style="object-fit: cover; width: 600px; height: 600px;">
+                        @else
+                        <img src="/images/blank_profile.png" style="object-fit: cover; width: 600px; height: 600px;">
+                        @endif
+                    </a>
+                    <p class="text">
+                        {{ $row->content }}
+                    </p>
+                </div>
 
-                <a href="{{route('member.post.detail', $row->id)}}" data-lightbox="gallery-group">
-                    @if (!empty($row->img))
-                    <img src="{{$row->img}}" style="object-fit: cover; width: 1000px; height: 1000px;">
-                    @else
-                    <img src="/images/blank_profile.png" style="object-fit: cover; width: 1000px; height: 1000px;">
-                    @endif
-                </a>
 
-                <p class="text">
-                    {{ $row->content }}
-                </p>
                 <div class="readmore"><a href="{{route('member.post.detail', $row->id)}}">READ MORE</a></div>
                 @endforeach
             </article>

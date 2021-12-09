@@ -53,6 +53,8 @@
         </div>
     </li>
     @endforeach
+    @else
+    <span>ヒットする記事がありません</span>
     @endif
 </ul>
 
