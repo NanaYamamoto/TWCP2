@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->bigInteger('post_id')->comment('記事ID');
             $table->bigInteger('user_id')->comment('いいねしたユーザID');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
