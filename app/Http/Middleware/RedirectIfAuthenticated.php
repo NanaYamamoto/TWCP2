@@ -22,9 +22,6 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if ($guard == "post" && Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::POSTHOME);
-            }
             if ($guard == "admin" && Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::ADMINHOME);
             }
