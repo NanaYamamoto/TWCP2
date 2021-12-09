@@ -13,7 +13,7 @@
 @section('content')
 <!--記事作成-->
 
-<div class="top" style="margin-bottom: 40px;">
+<div class="top" style="margin: 0 0 40px;">
     <p>記事検索</p>
 </div>
 
