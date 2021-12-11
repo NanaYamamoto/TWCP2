@@ -90,7 +90,7 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
     Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
     Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
-    Route::get('category', [CategoryController::class, 'index'])->name('category');
+    Route::any('category', [CategoryController::class, 'index'])->name('category');
     Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
     Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
@@ -134,6 +134,7 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+    Route::any('post/other/{id}', [PostsController::class, 'detail_other'])->name('post.detail_other');
 
     // いいね機能
     Route::get('post/{post_id}/likes', [LikesController::class, 'store'])->name('store');

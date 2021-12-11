@@ -156,6 +156,27 @@ class PostsController extends Controller
         return $view;
     }
 
+    public function detail_other(Request $request, int $id)
+    {
+        $form = new Form();
+        $service = new PostService();
+        $data = $service->get($id);
+        //dd($data);
+        $user = Auth::user();
+
+        if (!$data) {
+            return redirect()->route('member.post.search');
+        }
+        $rows = $service->getList($data);
+        $view = view('member.post.detail_other');
+        $view->with('form', $form->getHtml($data->toArray()));
+        //dd($form->getHtml($data->toArray()));
+        $view->with('rows', $rows);
+        $view->with('user', $user);
+
+        return $view;
+    }
+
     public function profile(Request $request)
     {
         $search = new Search();
