@@ -134,6 +134,7 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+    Route::any('post/other/{id}', [PostsController::class, 'detail_other'])->name('post.detail_other');
 
     // いいね機能
     Route::get('post/{post_id}/likes', [LikesController::class, 'store'])->name('store');
