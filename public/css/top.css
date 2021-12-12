@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 html {
     font-size: 100%;
 }
@@ -36,7 +37,6 @@ li {
     font-size: 0.875rem;
     text-align: center;
     padding-bottom: 30px;
-    width: 90%;
 }
 
 /*
@@ -90,7 +90,7 @@ header
 */
 
 /*==================================================
-機能編 　5-1-11 クリックしたらナビが上から下に出現
+クリックしたらナビが上から下に出現
 ===================================*/
 
 @media screen and (max-width: 960px) {
@@ -108,10 +108,12 @@ header
         /*動き*/
         transition: all 0.6s;
     }
+
     /*アクティブクラスがついたら位置を0に*/
     #f-nav.panelactive {
         top: 0;
     }
+
     /*ナビゲーションの縦スクロール*/
     #f-nav.panelactive #f-nav-list {
         /*ナビの数が増えた場合縦スクロール*/
@@ -123,21 +125,25 @@ header
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     /*ナビゲーション*/
     #f-nav ul {
         /*ナビゲーション天地中央揃え*/
         width: 90%;
         margin: 100px auto 0 auto;
     }
+
     #f-nav ul ul {
         width: 100%;
         margin: 0;
     }
+
     /*リストのレイアウト設定*/
     #f-nav li {
         list-style: none;
         text-align: center;
     }
+
     #f-nav li a {
         color: #aaa;
         text-decoration: none;
@@ -150,7 +156,7 @@ header
 }
 
 /*==================================================
-　機能編 5-2-7 3本線が奥行きを持って回転して×に
+3本線が奥行きを持って回転して×に
 ===================================*/
 
 .f-nav-openbtn {
@@ -169,10 +175,12 @@ header
         width: 50px;
         height: 50px;
     }
+
     /*ボタン内側*/
     .f-nav-openbtn .openbtn-area {
         transition: all .4s;
     }
+
     .f-nav-openbtn span {
         display: inline-block;
         transition: all .4s;
@@ -184,29 +192,36 @@ header
         background: #fff;
         width: 45%;
     }
+
     .f-nav-openbtn span:nth-of-type(1) {
         top: 15px;
     }
+
     .f-nav-openbtn span:nth-of-type(2) {
         top: 23px;
     }
+
     .f-nav-openbtn span:nth-of-type(3) {
         top: 31px;
     }
+
     /*activeクラスが付与されると
 線と周りのエリアが回転して×になる*/
     .f-nav-openbtn.active .openbtn-area {
         transform: rotateY(-360deg);
     }
+
     .f-nav-openbtn.active span:nth-of-type(1) {
         top: 18px;
         left: 18px;
         transform: translateY(6px) rotate(-135deg);
         width: 30%;
     }
+
     .f-nav-openbtn.active span:nth-of-type(2) {
         opacity: 0;
     }
+
     .f-nav-openbtn.active span:nth-of-type(3) {
         top: 30px;
         left: 18px;
@@ -290,7 +305,7 @@ container
 }
 
 main {
-    width: 90%;
+    width: 70%;
     margin: 30px auto;
 }
 
@@ -315,7 +330,24 @@ main li {
 }
 
 main .text {
-    padding: 10px 40px 30px 40px;
+    text-align: start;
+    padding: 40px 60px 40px;
+}
+
+.top {
+    margin-left: -15rem;
+    margin-bottom: 40px;
+}
+
+.top p {
+    width: 220px;
+    font-size: 20px;
+    border-left: 4px solid #000;
+    border-bottom: 4px solid #000;
+    padding: 1rem 3rem;
+    margin-left: 30px;
+    padding-top: 30px;
+    margin-top: 5px;
 }
 
 /*-------------------------------------------
@@ -461,16 +493,19 @@ SP
 -------------------------------------------*/
 
 @media screen and (max-width: 767px) {
+
     /*-------------------------------------------
   header
   -------------------------------------------*/
     #header .site-title {
         padding: 20px 16px;
     }
+
     #navi {
         /* 横スクロールを表示 */
         overflow-x: scroll;
     }
+
     /*-------------------------------------------
   pickup
   -------------------------------------------*/
@@ -478,19 +513,23 @@ SP
         flex-direction: column;
         padding-top: 140px;
     }
+
     #pickup article {
         width: 100%;
         margin-bottom: 30px;
     }
+
     /*-------------------------------------------
   container
   -------------------------------------------*/
     #container {
         flex-direction: column;
     }
+
     main {
         width: 100%;
     }
+
     /*-------------------------------------------
   aside
   -------------------------------------------*/
@@ -498,12 +537,14 @@ SP
         width: 100%;
         padding: 0;
     }
+
     /*-------------------------------------------
   footer
   -------------------------------------------*/
     #footer .content {
         flex-direction: column;
     }
+
     #footer .item {
         width: 100%;
         margin-bottom: 30px;
@@ -512,26 +553,27 @@ SP
     /*-------------------------------------------
   gallery
   -------------------------------------------*/
-    #gallery{
+    #gallery {
         columns: 0;
     }
 
     /*-------------------------------------------
   lib-wrap
   -------------------------------------------*/
-  .lib-wrap{
-      opacity: 0;
-  }
-  #search-wrap{
-    width: 0%;
-  }
+    .lib-wrap {
+        opacity: 0;
+    }
+
+    #search-wrap {
+        width: 0%;
+    }
 }
 
 .header {
     height: 75px;
     width: 100%;
     background: #fff;
-    
+
 }
 
 .header .header_inner {
@@ -570,7 +612,6 @@ SP
     display: inline-block;
     padding: 0 12px;
     font-size: 13px;
-    background: url(//webassets.gunosy.com/assets/separate-dcb03fb2a406d3c7fd670a48f8ae7dea8fccc6bce00cc3d208b8c96882191e32.png) no-repeat 0 50%
 }
 
 .header .header_list li:first-child {

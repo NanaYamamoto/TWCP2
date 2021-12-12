@@ -195,7 +195,7 @@ class AdministratorController extends Controller
      */
     public function regist_complete(Request $request)
     {
-        $view = view('sample.admin_complete');
+        $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
@@ -310,7 +310,7 @@ class AdministratorController extends Controller
      */
     public function update_complete(Request $request)
     {
-        $view = view('sample.admin_complete');
+        $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');

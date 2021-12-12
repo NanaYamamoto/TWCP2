@@ -13,7 +13,7 @@
 @section('content')
 <!--記事作成-->
 
-<div class="top" style="margin-bottom: 40px;">
+<div class="top" style="margin: 0 0 40px;">
     <p>記事検索</p>
 </div>
 
@@ -34,7 +34,7 @@
     @foreach( $rows as $row )
     <li class="bgextend bgLRextendTrigger zoomInRotate">
         <div class="bgappearTrigger">
-            <a href="{{route('member.post.detail', $row->id)}}" data-lightbox="gallery-group">
+            <a href="{{route('member.post.detail_other', $row->id)}}" data-lightbox="gallery-group">
                 @if (!empty($row->img))
                 <img src="{{$row->img}}" style="object-fit: cover; width: 200px; height: 200px;">
                 @else
@@ -53,6 +53,8 @@
         </div>
     </li>
     @endforeach
+    @else
+    <span>ヒットする記事がありません</span>
     @endif
 </ul>
 

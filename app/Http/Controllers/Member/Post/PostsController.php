@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
@@ -155,6 +156,27 @@ class PostsController extends Controller
         return $view;
     }
 
+    public function detail_other(Request $request, int $id)
+    {
+        $form = new Form();
+        $service = new PostService();
+        $data = $service->get($id);
+        //dd($data);
+        $user = Auth::user();
+
+        if (!$data) {
+            return redirect()->route('member.post.search');
+        }
+        $rows = $service->getList($data);
+        $view = view('member.post.detail_other');
+        $view->with('form', $form->getHtml($data->toArray()));
+        //dd($form->getHtml($data->toArray()));
+        $view->with('rows', $rows);
+        $view->with('user', $user);
+
+        return $view;
+    }
+
     public function profile(Request $request)
     {
         $search = new Search();
@@ -164,11 +186,14 @@ class PostsController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
-        $db = Post::all()->count();
 
+        $db = Post::all()->where('user_id',\Auth::id())->count();
+        $arcive = Like::query()->where('user_id',\Auth::id())->count();
+        
         $view = view('member.post.profile');
         $view->with('user', $user);
         $view->with('db', $db);
+        $view->with('arcive', $arcive);
         return $view;
     }
 

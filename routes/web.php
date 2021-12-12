@@ -42,61 +42,61 @@ Route::get('/', function () {
 Route::any('top', [PostsController::class, 'top'])->name('top');
 
 //管理者ページ
-// Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'operate.'], function () {
-Route::any('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::any('members/regist', [MembersController::class, 'regist'])->name('members.regist');
-Route::post('members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('members.regist.confirm');
-Route::post('members/regist/proc', [MembersController::class, 'regist_proc'])->name('members.regist.proc');
-Route::any('members/regist/complete', [MembersController::class, 'regist_complete'])->name('members.regist.complete');
+Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'operate.'], function () {
+    Route::any('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::any('members/regist', [MembersController::class, 'regist'])->name('members.regist');
+    Route::post('members/regist/confirm', [MembersController::class, 'regist_confirm'])->name('members.regist.confirm');
+    Route::post('members/regist/proc', [MembersController::class, 'regist_proc'])->name('members.regist.proc');
+    Route::any('members/regist/complete', [MembersController::class, 'regist_complete'])->name('members.regist.complete');
 
-Route::post('members/update/confirm', [MembersController::class, 'update_confirm'])->name('members.update.confirm');
-Route::post('members/update/proc', [MembersController::class, 'update_proc'])->name('members.update.proc');
-Route::any('members/update/complete', [MembersController::class, 'update_complete'])->name('members.update.complete');
-Route::any('members/update/{id}', [MembersController::class, 'update'])->name('members.update');
+    Route::post('members/update/confirm', [MembersController::class, 'update_confirm'])->name('members.update.confirm');
+    Route::post('members/update/proc', [MembersController::class, 'update_proc'])->name('members.update.proc');
+    Route::any('members/update/complete', [MembersController::class, 'update_complete'])->name('members.update.complete');
+    Route::any('members/update/{id}', [MembersController::class, 'update'])->name('members.update');
 
-Route::post('members/delete/proc', [MembersController::class, 'delete_proc'])->name('members.delete.proc');
-Route::any('members/delete/complete', [MembersController::class, 'delete_complete'])->name('members.delete.complete');
-Route::any('members/delete/{id}', [MembersController::class, 'delete_confirm'])->name('members.delete.confirm');
+    Route::post('members/delete/proc', [MembersController::class, 'delete_proc'])->name('members.delete.proc');
+    Route::any('members/delete/complete', [MembersController::class, 'delete_complete'])->name('members.delete.complete');
+    Route::any('members/delete/{id}', [MembersController::class, 'delete_confirm'])->name('members.delete.confirm');
 
-Route::any('members/{id}', [MembersController::class, 'detail'])->name('members.detail');
+    Route::any('members/{id}', [MembersController::class, 'detail'])->name('members.detail');
 
-Route::any('members', [MembersController::class, 'index'])->name('members');
+    Route::any('members', [MembersController::class, 'index'])->name('members');
 
-Route::any('admin/regist', [AdministratorController::class, 'regist'])->name('admin.regist');
-Route::post('admin/regist/confirm', [AdministratorController::class, 'regist_confirm'])->name('admin.regist.confirm');
-Route::post('admin/regist/proc', [AdministratorController::class, 'regist_proc'])->name('admin.regist.proc');
-Route::any('admin/regist/complete', [AdministratorController::class, 'regist_complete'])->name('admin.regist.complete');
+    Route::any('admin/regist', [AdministratorController::class, 'regist'])->name('admin.regist');
+    Route::post('admin/regist/confirm', [AdministratorController::class, 'regist_confirm'])->name('admin.regist.confirm');
+    Route::post('admin/regist/proc', [AdministratorController::class, 'regist_proc'])->name('admin.regist.proc');
+    Route::any('admin/regist/complete', [AdministratorController::class, 'regist_complete'])->name('admin.regist.complete');
 
-Route::post('admin/update/confirm', [AdministratorController::class, 'update_confirm'])->name('admin.update.confirm');
-Route::post('admin/update/proc', [AdministratorController::class, 'update_proc'])->name('admin.update.proc');
-Route::any('admin/update/complete', [AdministratorController::class, 'update_complete'])->name('admin.update.complete');
-Route::any('admin/update/{id}', [AdministratorController::class, 'update'])->name('admin.update');
+    Route::post('admin/update/confirm', [AdministratorController::class, 'update_confirm'])->name('admin.update.confirm');
+    Route::post('admin/update/proc', [AdministratorController::class, 'update_proc'])->name('admin.update.proc');
+    Route::any('admin/update/complete', [AdministratorController::class, 'update_complete'])->name('admin.update.complete');
+    Route::any('admin/update/{id}', [AdministratorController::class, 'update'])->name('admin.update');
 
-Route::post('admin/delete/proc', [AdministratorController::class, 'delete_proc'])->name('admin.delete.proc');
-Route::any('admin/delete/complete', [AdministratorController::class, 'delete_complete'])->name('admin.delete.complete');
-Route::any('admin/delete/{id}', [AdministratorController::class, 'delete_confirm'])->name('admin.delete.confirm');
+    Route::post('admin/delete/proc', [AdministratorController::class, 'delete_proc'])->name('admin.delete.proc');
+    Route::any('admin/delete/complete', [AdministratorController::class, 'delete_complete'])->name('admin.delete.complete');
+    Route::any('admin/delete/{id}', [AdministratorController::class, 'delete_confirm'])->name('admin.delete.confirm');
 
-Route::any('admin/profile', [AdministratorController::class, 'profile'])->name('admin.profile');
-Route::any('admin/{id}', [AdministratorController::class, 'detail'])->name('admin.detail');
-Route::any('admin', [AdministratorController::class, 'index'])->name('admin');
+    Route::any('admin/profile', [AdministratorController::class, 'profile'])->name('admin.profile');
+    Route::any('admin/{id}', [AdministratorController::class, 'detail'])->name('admin.detail');
+    Route::any('admin', [AdministratorController::class, 'index'])->name('admin');
 
-Route::any('category/regist', [CategoryController::class, 'regist'])->name('category.regist');
-Route::post('category/regist/confirm', [CategoryController::class, 'regist_confirm'])->name('category.regist.confirm');
-Route::post('category/regist/proc', [CategoryController::class, 'regist_proc'])->name('category.regist.proc');
-Route::any('category/regist/complete', [CategoryController::class, 'regist_complete'])->name('category.regist.complete');
+    Route::any('category/regist', [CategoryController::class, 'regist'])->name('category.regist');
+    Route::post('category/regist/confirm', [CategoryController::class, 'regist_confirm'])->name('category.regist.confirm');
+    Route::post('category/regist/proc', [CategoryController::class, 'regist_proc'])->name('category.regist.proc');
+    Route::any('category/regist/complete', [CategoryController::class, 'regist_complete'])->name('category.regist.complete');
 
-Route::post('category/update/confirm', [CategoryController::class, 'update_confirm'])->name('category.update.confirm');
-Route::post('category/update/proc', [CategoryController::class, 'update_proc'])->name('category.update.proc');
-Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
-Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::post('category/update/confirm', [CategoryController::class, 'update_confirm'])->name('category.update.confirm');
+    Route::post('category/update/proc', [CategoryController::class, 'update_proc'])->name('category.update.proc');
+    Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
+    Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
-Route::get('category', [CategoryController::class, 'index'])->name('category');
-Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
-Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
-Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
-Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
-Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
-//});
+    Route::any('category', [CategoryController::class, 'index'])->name('category');
+    Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
+    Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
+    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
+    Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
+    Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
+});
 
 //管理者のログイン、新規登録
 Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');
@@ -134,6 +134,7 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
     Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+    Route::any('post/other/{id}', [PostsController::class, 'detail_other'])->name('post.detail_other');
 
     // いいね機能
     Route::get('post/{post_id}/likes', [LikesController::class, 'store'])->name('store');

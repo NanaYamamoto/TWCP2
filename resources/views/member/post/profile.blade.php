@@ -19,7 +19,7 @@
             {{-- アバター画像 --}}
             <span class="icon_url-form image-picker">
                 <div class="form-group mt-5 text-center">
-                <img src="/storage/members/{{$user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 120px; height: 120px;">
+                    <img src="/storage/members/{{$user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 120px; height: 120px;">
                 </div>
             </span>
 
@@ -32,16 +32,22 @@
             <div class="form-group mt-4">
                 <div class="text-center">{{ $db }}件投稿しています</div>
             </div>
+            <div class="form-group mt-4">
+                <div class="text-center">{{ $arcive }}件の投稿をアーカイブしています</div>
+            </div>
 
-            <div class="form-group mb-0 mt-4 text-center">
-                <a href="{{ route('member.post.profile_edit') }}">
-                    <button class="btn btn-block btn-primary">
-                        プロフィールを編集する
-                    </button>
+            <div class="form-group mt-4 text-center">
+                <a href="{{ route('member.archive') }}" class="btn btn-block btn-primary" style="background-color: rgb(56 159 9); border-color: rgb(56 159 9);">
+                    アーカイブページに移動する
                 </a>
             </div>
-            <div class="form-group mb-0 mt-3 text-center">
-                <a href="{{route('member.mypage')}}" class="btn btn-block btn-secondary mt-2" style="padding: 5px 45px;">投稿一覧に戻る</a>
+            <div class="form-group mb-0 mt-2 text-center">
+                <a href="{{ route('member.post.profile_edit') }}" class="btn btn-block btn-primary" style="padding: .375rem 1.8rem;">
+                    プロフィールを編集する
+                </a>
+            </div>
+            <div class="form-group mb-0 mt-2 text-center">
+                <a href="{{route('member.mypage')}}" class="btn btn-block btn-secondary" style="padding: .375rem 4.0rem;">投稿一覧に戻る</a>
             </div>
 
         </div>
