@@ -24,7 +24,7 @@ class PostsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * マイページ画面
      * @param Request $request
@@ -78,7 +78,7 @@ class PostsController extends Controller
     public function top(Request $request)
     {
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
         $view = view('toppage');
         $view->with('user', $user);
 
@@ -186,6 +186,7 @@ class PostsController extends Controller
         if (!$user) {
             return redirect()->route('login');
         }
+
         $db = Post::all()->where('user_id',\Auth::id())->count();
         $arcive = Like::query()->where('user_id',\Auth::id())->count();
         
@@ -462,7 +463,7 @@ class PostsController extends Controller
         }
 
         $data['img'] = $read_temp_path ?? '';
-        
+
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {

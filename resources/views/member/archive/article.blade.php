@@ -33,10 +33,11 @@
     <div id="contents" class="cp_iptxt">
         <label for="content" class="d-flex">記事内容</label>
         <!--画像あったら表示-->
-        @if (!empty($row->img))
-        <img src="{{$row->img}}" style="object-fit: cover; width: 200px; height: 200px;">
+        @if (!empty($post->img))
+            <div>
+                <img src="{{ $post->img }}" style="object-fit: cover; width: 400px; height: 400px;">
+            </div>
         @endif
-
         {{ $post->content }}
         @error('content')
         <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
