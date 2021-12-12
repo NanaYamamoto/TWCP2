@@ -23,7 +23,7 @@ class PostsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * マイページ画面
      * @param Request $request
@@ -77,7 +77,7 @@ class PostsController extends Controller
     public function top(Request $request)
     {
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
         $view = view('toppage');
         $view->with('user', $user);
 
@@ -165,7 +165,7 @@ class PostsController extends Controller
             return redirect()->route('login');
         }
         $db = Post::all()->count();
-        
+
         $view = view('member.post.profile');
         $view->with('user', $user);
         $view->with('db', $db);
@@ -438,7 +438,7 @@ class PostsController extends Controller
         }
 
         $data['img'] = $read_temp_path ?? '';
-        
+
         //バリデーション
         $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         if ($ret !== true) {

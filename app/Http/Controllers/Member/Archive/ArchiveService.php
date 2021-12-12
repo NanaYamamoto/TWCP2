@@ -26,7 +26,7 @@ class ArchiveService extends CommonService
         foreach ($categories as $cat) {
 
             $data = Like::query()
-                ->join('posts', 'likes.post_id', '=', 'posts.id')
+                ->leftjoin('posts', 'likes.post_id', '=', 'posts.id')
                 ->where('posts.category_id', $cat->id)
                 ->where('likes.user_id', $user->id)
                 ->orderBy('created_at', 'DESC')
@@ -35,7 +35,26 @@ class ArchiveService extends CommonService
             $ret[$cat->id] = $data;
         }
 
-        //dd($ret);
+        return $ret;
+    }
+
+    public function countLikes($user)
+    {
+        $ret = [];
+        $categories = Category::where('active', 1)->get(); //active=1の全てのカテゴリーを取得
+
+        foreach ($categories as $cat) {
+
+            $num = Like::query()
+                ->leftjoin('posts', 'likes.post_id', '=', 'posts.id')
+                ->where('posts.category_id', $cat->id)
+                ->where('likes.user_id', $user->id)
+                ->orderBy('created_at', 'DESC')
+                ->count();
+
+            $ret[$cat->id] = $num;
+        }
+
         return $ret;
     }
 

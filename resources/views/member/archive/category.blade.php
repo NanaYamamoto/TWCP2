@@ -3,7 +3,10 @@
 @section('content')
 
     <div class="top" style="margin-top: 40px;">
-        <p>記事検索</p>
+        @foreach ($datas as $data)
+        <p>{{ $data->category->name }}</p>
+        @break
+        @endforeach
     </div>
 
         <!--タイムライン(ループ処理使う)-->
@@ -15,7 +18,11 @@
                         @foreach ($datas as $data)
                             @if (!is_null($data))
                                 <li class="item">
-                                    <img src="/images/画像/インテリア.png" alt="インテリア">
+                                    @if (!empty($data->img))                                       
+                                            <img src="{{ $data->img }}" style="object-fit: cover;">  
+                                    @else   <img src="/images/画像/nologo.png">                                    
+                                    @endif
+                                    
                                     <a href="{{ Route('member.archive.article', $data->post_id) }}">{{ $data->title }}</a>
                                     <p>{{ $data->updated_at }}</p>             
                                 </li>      

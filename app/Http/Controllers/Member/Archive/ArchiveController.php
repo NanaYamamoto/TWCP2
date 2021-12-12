@@ -26,8 +26,11 @@ class ArchiveController extends Controller
 
         $data = $service->getLikes($user);
 
+        $num = $service->countLikes($user); //カテゴリーごとのarchive記事数を取得
+
         $view = view('member.archive.archive');
         $view->with('datas', $data);
+        $view->with('nums', $num);
         return $view;
     }
 

@@ -17,13 +17,16 @@
                                 @if (!is_null($data))
                                     <li class="item">
 
-                                    <h1>{{ $data->category_id }}</h1>
+                                    <h1>{{ $data->category->name }}</h1>
                                     <a href="{{ Route('member.archive.category', $data->category_id) }}">
                                         <span class="category" href="#">1件</span>
                                     </a>  
-                                    {{-- {{ $data->img }} --}}
-                                    {{-- <i class="far fa-image"></i> --}}
-                                    <img src="/images/画像/インテリア.png" alt="インテリア">
+                                    
+                                    @if (!empty($data->img))                                       
+                                            <img src="{{ $data->img }}" style="object-fit: cover;">  
+                                    @else   <img src="/images/画像/nologo.png">                                    
+                                    @endif
+                                    
                                     <a href="{{ Route('member.archive.article', $data->post_id) }}">{{ $data->title }}</a>
                                     <p>{{ $data->updated_at }}</p>
 
