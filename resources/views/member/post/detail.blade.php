@@ -18,15 +18,16 @@
         @enderror
         <span class="focus_line"></span>
     </div>
+    @if( count($rows) )
+    @foreach( $rows as $row )
     <div id="contents" class="cp_iptxt">
         <label for="category_id" class="d-flex">カテゴリー</label>
-        {!! $form['category_id'] !!}
-        @error('category_id')
-        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
-        @enderror
-        <!--この部分だけ赤線を排除-->
+        {{ $row->category->name }}
+        
         <span class="focus_line-z"></span>
     </div>
+    @endforeach
+    @endif
 
     <div id="contents" class="cp_iptxt">
         <label for="content" class="d-flex">記事内容</label>
