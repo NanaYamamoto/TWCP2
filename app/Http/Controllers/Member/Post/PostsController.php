@@ -7,6 +7,7 @@ use App\Http\TakemiLibs\SimpleForm;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
@@ -68,12 +69,75 @@ class PostsController extends Controller
         return $view;
     }
 
-    public function top(Request $request)
+    public function toppage(Request $request)
     {
         $user = Auth::user();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
+        $data = new Category();  // "Category"の全データ取得
+        
+        //$categories = Category::select('id','name')->get()->pluck('name','id');
+
+        //$data = Category::where('category_id',1) ->orderBy('created_at','DESC') ->get); //->get();
+        //$name = Category::find([1,2,3]);
+            
+        
+        //記事の値を取得
+        $post_title = Post::select('title')
+            ->orderBy('created_at' ,'DESC')
+            ->get();  
+        $post_title = json_decode($post_title,true);
+
+        $post_img = Post::select('img')
+            ->orderBy('created_at' ,'DESC')
+            ->get();  
+        $post_img= json_decode($post_img,true);
+        //画像パスを変更
+        $post_img = str_replace('public/', '', $post_img);
+        
+        $post_category = Post::select('category_id')
+            ->orderBy('created_at' ,'DESC')
+            ->get();
+        $post_category = json_decode($post_category,true);
+        //dd($post_category);
+        //記事を配列化
+        $post_array = array('title'=>$post_title ,'img'=>$post_img ,'category'=>$post_category);
+        //dd($post_array);
+
+        //配列を分解
+        $post_title = array_column($post_title, 'title');
+        $post_img = array_column($post_img, 'img');
+        $post_category = array_column($post_category, 'category_id');
+        //dd($post_array);
+        
+        //カテゴリーの値を取得
+        $category_name = Category::select('name')
+            ->orderBy('created_at' ,'DESC') 
+            ->get();
+        $category_name = json_decode($category_name,true);
+
+        $category_img = Category::select('img')
+            ->orderBy('created_at' ,'DESC') 
+            ->get();  
+        $category_img = json_decode($category_img,true);
+        //画像パスを変更
+        //dd($category_img);
+
+        //カテゴリーを配列化
+        $category_array = array('name'=>$category_name ,'img'=>$category_img);
+        //dd($category_array);
+
+        //配列を分解
+        $category_name = array_column($category_name, 'name');
+        $category_img = array_column($category_img, 'img');
+        //dd($category_name);
+
         $view = view('toppage');
         $view->with('user', $user);
+
+        $view->with('post_title',$post_title);
+        $view->with('post_img',$post_img);
+        $view->with('post_category',$post_category);
+        $view->with('category_name',$category_name);
+        $view->with('category_img',$category_img);
 
         return $view;
     }

@@ -53,6 +53,7 @@
     <!--/box--></section>
 
     <!--タイムライン(ループ処理使う)-->
+    <!--posttable created_at orderby-->
     <section id="box3" class="box" data-section-name="check new post">
         <section id="contents">
         <div class="tag">
