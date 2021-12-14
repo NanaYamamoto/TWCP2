@@ -33,9 +33,6 @@
     <!-- モーダルウィンドウ用 -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
 
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
-
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -57,7 +54,6 @@
 
 <body style="background-color: white;">
     <header class="header">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3 ml-4 pl-5">
             <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
@@ -94,7 +90,7 @@
                     </li>
                     @else
                     @endauth
-                    <li class="nav-item open-btn" style="
+                    <!-- <li class="nav-item open-btn" style="
                             position: static;
                             display: flex;
                             justify-content: center;
@@ -105,7 +101,7 @@
                             color: #fff;">
                         <i class="fas fa-search">
                         </i>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -120,7 +116,7 @@
 
 
 
-    <div id="search-wrap">
+    <!-- <div id="search-wrap">
         <div class="close-btn"><span></span><span></span></div>
         <div class="search-area">
             <form role="search" method="post">
@@ -129,7 +125,6 @@
                 <input type="submit" id="searchsubmit" name="btnSearch" value="検索">
             </form>
         </div>
-        <!--/search-wrap-->
     </div>
 
     <footer id="globalfooter">
@@ -138,7 +133,6 @@
                 <div class="openbtn" style="left: 0; background: #5ea0ae!important;"><span></span><span></span><span></span></div>
                 <nav id="g-nav" class="">
                     <div id="category-list">
-                        <!--ナビの数が増えた場合縦スクロールするためのdiv-->
                         <ul>
                             <li><i class="fas fa-tags mb-2"></i>タグ</li>
                             @if( count($categories) )
@@ -208,10 +202,8 @@
 
     </div>
 
-    <footer id="footer">
-
-
-        <p class="copyright">&copy; TWCP</p>
+    <footer class="text-center bg-dark text-white">
+        <p class="py-3">teamM.jp</p>
     </footer>
 
     <!-- JavaScript Bundle with Popper -->
