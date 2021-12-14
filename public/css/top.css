@@ -7,7 +7,6 @@ html {
 body {
     color: #333;
     font-size: 1rem;
-    font-family: 'Noto Sans', 'Noto Sans JP', sans-serif;
 }
 
 a {
@@ -347,7 +346,7 @@ main .text {
     padding: 1rem 3rem;
     margin-left: 30px;
     padding-top: 30px;
-    margin-top: 5px;
+    margin-top: 40px;
 }
 
 /*-------------------------------------------
@@ -570,7 +569,7 @@ SP
 }
 
 .header {
-    height: 75px;
+    height: 100px;
     width: 100%;
     background: #fff;
 
@@ -624,7 +623,7 @@ SP
     /*絶対配置で位置を指定*/
     position: absolute;
     top: 45px !important;
-    right: 50px;
+    left: -35px;
     z-index: 4;
     /*形状を指定*/
     background: rgba(255, 255, 255, 0.5);
