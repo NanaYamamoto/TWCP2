@@ -21,12 +21,13 @@
 
 <body>
     <!--ページトップ(黒帯)-->
+    <header class="header">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3" width:1400px;>
         <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('member.post.profile') }}">プロフィール</a>
+                    <a class="nav-link" href="{{ route('member.post.profile') }}">マイページ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
@@ -42,7 +43,33 @@
                 </li>
             </ul>
         </div>
+
+        <div class="header_list">
+            <ul>
+                @auth
+                <li class="has-child"><a href="#" class="nav-link"><i class="fas fa-user-alt"></i></a>
+                    <ul>
+                        <li><button form="mypage-button" class="dropdown-item" type="submit">
+                                プロフィール
+                            </button></li>
+                        <li><button form="logout-button" class="dropdown-item" type="submit">
+                                ログアウト
+                            </button></li>
+                    </ul>
+                </li>
+                @else
+                @endauth
+            </ul>
+        </div>
+
+        <form id="mypage-button" method="POST" action="{{ route('member.post.profile_edit') }}" style="width: 0em;">
+            @csrf
+        </form>
+        <form id="logout-button" method="POST" action="{{ route('logout') }}" style="width: 0em;">
+            @csrf
+        </form>
     </nav>
+    </header>
 
     @yield('content')
 
