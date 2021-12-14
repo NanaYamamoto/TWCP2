@@ -4,7 +4,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"><i class="fas fa-user-lock"></i> 記事管理</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{route('operate.admin.regist')}}" class="btn btn-sm btn-outline-primary">新規作成</a>
     </div>
 </div>
 
@@ -19,8 +18,12 @@
             @csrf
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">キーワード</label>
-                <div class="col-sm-10">
+                <div class="col">
                     {!! $form['keyword'] !!}
+                </div>
+                <label for="category" class="col-sm-2 col-form-label">カテゴリ</label>
+                <div class="col">
+                    {!! $form['category'] !!}
                 </div>
             </div>
             <div class="form-group row">
@@ -62,7 +65,6 @@
                     <td>{{Str::limit($row->content, 30 * 3, '...' )}}</td>
                     <td>{{$row->updated_at}}<br />{{$row->created_at}}</td>
                     <td>
-                        <a href="{{route('operate.admin.detail', $row->id)}}" class="btn btn-outline-primary">詳細</a>
                         <a href="{{route('operate.admin.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
                     </td>
                 </tr>

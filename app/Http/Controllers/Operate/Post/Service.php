@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Operate\Post;
 
 use App\Http\TakemiLibs\CommonService;
+use App\Models\Category;
 use App\Models\Post;
 
 class Service extends CommonService {
@@ -14,6 +15,8 @@ class Service extends CommonService {
     public function getList($data = [], $offset = 30)
     {
         $db = Post::query();
+
+        $db->where('active', 1 );
 
         if( !empty($data['keyword']) ) {
             $keyword = $data['keyword'];
@@ -32,6 +35,14 @@ class Service extends CommonService {
             $db->where( 'created_at', '<=', $data['end_at'] );
         }
 
+        if( !empty($data['category']) ) {
+            $db->where( 'category_id', '<=', $data['category'] );
+        }
+
         return $db->paginate( $offset );
+    }
+
+    public static function getCagetoryItems(){
+        return Category::where('active',1)->pluck('name')->toArray();
     }
 }

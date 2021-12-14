@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Operate\Post;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 /**
@@ -31,9 +32,14 @@ class PostController extends Controller {
         $data = session()->get( $ses_key, [] );
 
         $view = view('operate.post.list');
-        $view->with('rows', $service->getList( $data ) );
+        $view->with('rows', $service->getList( $data, 20 ) );
         $view->with('form', $search->build( $data ) );
 
         return $view;
+    }
+
+    public function delete( Request $request, $id ){
+        $data = Post::find( $id );
+        if( !$data ) return redirect()->route('operate.post');
     }
 }
