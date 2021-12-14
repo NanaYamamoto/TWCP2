@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('icon_url')->nullable()->comment('アイコン');
             $table->rememberToken()->comment('パスワード再発行トークン');
             //追加
-            $table->string('email_verify_token')->comment('メール認証トークン');
+            $table->string('email_verify_token')->comment('メール認証トークン')->nullable();
             $table->timestamps();
         });
     }

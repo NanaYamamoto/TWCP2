@@ -92,7 +92,8 @@ class AdministratorController extends Controller
         }
         // dd($data);
         $view = view('operate.administrator.detail');
-        $view->with('form', $data);
+        $view->with('form', $form->getHtml($data->toArray()));
+        
 
         return $view;
     }
@@ -125,25 +126,18 @@ class AdministratorController extends Controller
     {
         $form = new Form();
         $ses_key = $this->session_key . '.regist';
-        $data = $request->except('icon_url');
-        //dd($request->file('icon_url'));
-        //$imagefile = $request->file('icon_url');
-        //storage/app/public/tempファイルに保存
+        
         if ($request->has('icon_url')) {
-            date_default_timezone_set('Asia/Tokyo');
-            $originalName = $request->file('icon_url')->getClientOriginalName();
-            $fileName =  date("Ymd_His") . '.' . $originalName;
-            $temp_path = $request->file('icon_url')->storeAs('public/temp', $fileName);
-            $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
+            $icon_image = $request->file('icon_url');
+            $temp_path = $form->store($icon_image);
         }
         //dd($fileName);
         $data = array(
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            'icon_url' => $read_temp_path ?? '',
+            'icon_url' => $temp_path ?? '',
         );
-        //var_dump($data);
         //バリデーション
         $request->validate($form->getRuleRegist($data));
         //dd($data);
@@ -176,6 +170,8 @@ class AdministratorController extends Controller
         }
 
         //バリデーション
+        //バリデーション
+        $form->getRuleRegist($data);
         // $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
         // if ($ret !== true) {
         //     //入力画面にリダイレクト
@@ -199,7 +195,7 @@ class AdministratorController extends Controller
      */
     public function regist_complete(Request $request)
     {
-        $view = view('sample.admin_complete');
+        $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '新規登録');
@@ -232,6 +228,7 @@ class AdministratorController extends Controller
         }
         $view = view('operate.administrator.update');
         $view->with('form', $form->build($input));
+        $view->with('icon', $form->getHtml($data->toArray()));
         $view->with('data', $data);
 
         return $view;
@@ -313,7 +310,7 @@ class AdministratorController extends Controller
      */
     public function update_complete(Request $request)
     {
-        $view = view('sample.admin_complete');
+        $view = view('sample.complete');
 
         $view->with('func_name', 'お知らせ管理');
         $view->with('mode_name', '更新');

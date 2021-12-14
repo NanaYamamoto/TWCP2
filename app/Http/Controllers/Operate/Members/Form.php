@@ -42,14 +42,11 @@ class Form implements InterfaceForm
 
     public function getRule(array $data = []): array
     {
-        $rule = [];
-        $rule['name'] = ['required', 'max:50'];
-        //$rule['email'] = ['required', 'unique:users,email' . $data['id'] . ',id', 'max:30'];
-        //$rule['email'] = ['required', Rule::unique('users')->ignore($this->id), 'max:30'];
+
+        $rule = $this->getRuleRegist($data);
+
         $rule['email'] = ['required', "unique:users,email,{$data['id']},id", 'max:30'];
         $rule['password'] = ['nullable', 'min:8', 'max:20'];
-        $rule['icon_url'] = ['image', 'mimes:jpeg,png,jpg,bmb'];
-
         return $rule;
     }
 

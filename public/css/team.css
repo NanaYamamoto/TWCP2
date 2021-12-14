@@ -468,8 +468,8 @@ p.tag_design.search {
 
 /*コンテンツ*/
 #contents {
-    width: 1360px;
-    padding: 3px 0px 0px 60px;
+  width: 1360px;
+  padding: 30px 0px 0px 50px;
 }
 
 .contents p {

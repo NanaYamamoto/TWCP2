@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Member\Post;
+namespace App\Http\Controllers\Member\Archive;
 
 use App\Http\TakemiLibs\SimpleForm;
 use App\Http\TakemiLibs\InterfaceForm;
@@ -13,13 +13,13 @@ class Form implements InterfaceForm
     {
         // $user = User::query();
         $user = \Auth::id();
-        $categories = Category::select('id','name')->get()->pluck('name','id');
-        
+        $categories = Category::select('id', 'name')->get()->pluck('name', 'id');
+
         $form = [];
         $opt = ['class' => 'form-control', 'autocomplete' => 'off'];
 
         $form['id'] = FormF::hidden('id', $data['id'] ?? '', $opt);
-        
+
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
         $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt, ['style' => 'display:block; width: 20rem; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; border: 1px solid #ced4da; border-radius: 0.25rem;']);
@@ -27,7 +27,7 @@ class Form implements InterfaceForm
         $form['title'] = FormF::text('title', $data['title'] ?? '', $opt, ['style' => 'width: 80%;']);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
-        
+
         $form['user_id'] = FormF::hidden('user_id', $user ?? '', $opt);
         $form['img'] = FormF::file('img', $opt, $data['img'] ?? '');
 
@@ -58,7 +58,7 @@ class Form implements InterfaceForm
 
         $rule['img'] = ['nullable'];
 
-        
+
         return $rule;
     }
 
@@ -69,9 +69,9 @@ class Form implements InterfaceForm
      */
     public function getHtml(array $data = [])
     {
-        
+
         $data['user_id'] = FormF::hidden('user_id');
-        
+
         //画像をURL化
         if ($data['img']) {
             $file_path = Url('') . '/' . str_replace('public/', 'storage/', $data['img']);
@@ -79,7 +79,7 @@ class Form implements InterfaceForm
         } else {
             $data['img'] = "<pre>選択されていません<pre>";
         }
-        
+
         return $data;
     }
 

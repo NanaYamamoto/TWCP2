@@ -22,7 +22,7 @@
 <body>
     <!--ページトップ(黒帯)-->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3" width:1400px;>
-        <a class="navbar-brand" href="/">teamM.jp</a>
+        <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item active">
@@ -32,10 +32,10 @@
                     <a class="nav-link" href="{{ route('member.post.regist') }}">記事作成</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#searchpost">記事検索</a>
+                    <a class="nav-link" href="{{ route('member.post.search') }}">記事検索</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#archive">アーカイブ</a>
+                    <a class="nav-link" href="{{ route('member.archive') }}">アーカイブ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#follower">フォロワー</a>
@@ -61,6 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
     <!--JSを読み込み-->
     <script src="{{ asset('js/newpost.js') }}"></script>
+    <script src="{{ asset('js/team.js') }}"></script>
 
     @yield('scripts')
 </body>

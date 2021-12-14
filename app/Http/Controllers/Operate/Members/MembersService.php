@@ -46,6 +46,9 @@ class MembersService extends CommonService
      */
     public function regist($data = [])
     {
+        $file_path = null;
+        //dd($data);
+
         //画像を移動
         if ($data['icon_url']) {
 

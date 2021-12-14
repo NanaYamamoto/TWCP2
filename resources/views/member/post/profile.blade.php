@@ -3,53 +3,53 @@
 <!-- @section('css') -->
 
 @section('title')
-プロフィール編集
+マイページ
 @endsection
 
 @section('content')
 <div id="profile-edit-form" class="container" style="grid-template-columns:none;">
 
     <div class="row">
-        <div class="bg-white"><!-- col-10 -->
+        <div class="bg-white">
+            <!-- col-10 -->
 
-            <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
-
-            <form method="POST" action="{{ route('member.post.editProfile') }}" class="p-5" enctype="multipart/form-data">
-                @csrf
+            <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">マイページ</div>
 
 
-                {{-- アバター画像 --}}
-                <span class="icon_url-form image-picker">
-                    <input type="file" name="icon_url" class="d-none" accept="image/png,image/jpeg,image/gif" id="icon_url" />
-                    <label for="icon_url" class="d-inline-block">
-                        @if (!empty($user->icon_url))
-                        <img src="/storage/members/{{$user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                        @else
-                        <img src="/images/blank_profile.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                        @endif
-                    </label>
-                </span>
-
-                {{-- ニックネーム --}}
-                <div class="form-group mt-3">
-                    <label for="name" style="letter-spacing: 5.5px;">ニックネーム</label>
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
-                    @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+            {{-- アバター画像 --}}
+            <span class="icon_url-form image-picker">
+                <div class="form-group mt-5 text-center">
+                    <img src="/storage/members/{{$user->icon_url}}" class="rounded-circle" style="object-fit: cover; width: 120px; height: 120px;">
                 </div>
+            </span>
 
-                <div class="form-group mb-0 mt-4 text-center">
-                    <button type="submit" class="btn btn-block btn-primary" style="padding: 6px 37px;">
-                        保存
-                    </button>
-                </div>
-                <div class="form-group mb-0 mt-3 text-center">
-                    <a href="{{route('member.mypage')}}" class="btn btn-block btn-secondary mt-2">一覧に戻る</a>
-                </div>
-            </form>
+            {{-- ニックネーム --}}
+            <div class="form-group mt-4">
+                <div class="text-center" style="font-size: 1.5rem; font-weight: bold;">{{ $user->name }}</div>
+            </div>
+
+            {{-- 投稿数 --}}
+            <div class="form-group mt-4">
+                <div class="text-center">{{ $db }}件投稿しています</div>
+            </div>
+            <div class="form-group mt-4">
+                <div class="text-center">{{ $arcive }}件の投稿をアーカイブしています</div>
+            </div>
+
+            <div class="form-group mt-4 text-center">
+                <a href="{{ route('member.archive') }}" class="btn btn-block btn-primary" style="background-color: rgb(56 159 9); border-color: rgb(56 159 9);">
+                    アーカイブページに移動する
+                </a>
+            </div>
+            <div class="form-group mb-0 mt-2 text-center">
+                <a href="{{ route('member.post.profile_edit') }}" class="btn btn-block btn-primary" style="padding: .375rem 1.8rem;">
+                    プロフィールを編集する
+                </a>
+            </div>
+            <div class="form-group mb-0 mt-2 text-center">
+                <a href="{{route('member.mypage')}}" class="btn btn-block btn-secondary" style="padding: .375rem 4.0rem;">投稿一覧に戻る</a>
+            </div>
+
         </div>
     </div>
 </div>
