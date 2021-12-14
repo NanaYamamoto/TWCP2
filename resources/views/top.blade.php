@@ -54,7 +54,6 @@
 
 <body style="background-color: white;">
     <header class="header">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
             <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
@@ -151,7 +150,7 @@
                 </nav>
             </div>
         </div>
-    </footer> -->
+    </footer>
 
 
     <div id="container" class="wrapper">

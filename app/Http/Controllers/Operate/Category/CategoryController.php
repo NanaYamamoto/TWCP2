@@ -372,4 +372,6 @@ class CategoryController extends Controller
 
         return redirect()->route('operate.category.update.complete');
     }
-}
+
+    }
+
