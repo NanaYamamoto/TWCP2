@@ -13,8 +13,7 @@ use App\Http\Controllers\Operate\Administrator\AdministratorsController;
 use App\Http\Controllers\Member\Post\PostsController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
-
+use App\Http\Controllers\Operate\Post\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +91,10 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
     Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
+
+    //記事管理
+    Route::any ('post', [PostController::class, 'index'])->name('post');
+    Route::any ('post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
 });
 
 //管理者のログイン、新規登録

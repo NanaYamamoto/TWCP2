@@ -1,6 +1,7 @@
 @extends('sample.layout')
 
 @section('contents')
+{{--
 <div id="search-wrap">
         <div class="close-btn"><span></span><span></span></div>
         <div class="search-area">
@@ -174,5 +175,5 @@
         </aside>
     </div>
 
-
+--}}
 @endsection

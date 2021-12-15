@@ -125,7 +125,15 @@
                 カテゴリ管理
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{route('operate.post')}}">
+                <span data-feather="categories"></span>
+                記事管理
+              </a>
+            </li>
           </ul>
+
         </div>
       </nav>
 
