@@ -54,6 +54,7 @@
 
 <body style="background-color: white;">
     <header class="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
             <a class="navbar-brand" href="{{ route('member.mypage') }}">teamM.jp</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
@@ -90,18 +91,6 @@
                     </li>
                     @else
                     @endauth
-                    <!-- <li class="nav-item open-btn" style="
-                            position: static;
-                            display: flex;
-                            justify-content: center;
-                            flex-direction: column;
-                            height: auto;
-                            cursor: pointer;
-                            z-index: 999;
-                            color: #fff;">
-                        <i class="fas fa-search">
-                        </i>
-                    </li> -->
                 </ul>
             </div>
 
@@ -113,44 +102,6 @@
             </form>
         </nav>
     </header>
-
-
-
-    <!-- <div id="search-wrap">
-        <div class="close-btn"><span></span><span></span></div>
-        <div class="search-area">
-            <form role="search" method="post">
-                @csrf
-                <input type="text" value="" name="keyword" id="search-text" placeholder="search">
-                <input type="submit" id="searchsubmit" name="btnSearch" value="検索">
-            </form>
-        </div>
-    </div>
-
-    <footer id="globalfooter">
-        <div class="lib-wrap">
-            <div class="box-lid-menu">
-                <div class="openbtn" style="left: 0; background: #5ea0ae!important;"><span></span><span></span><span></span></div>
-                <nav id="g-nav" class="">
-                    <div id="category-list">
-                        <ul>
-                            <li><i class="fas fa-tags mb-2"></i>タグ</li>
-                            @if( count($categories) )
-                            @foreach( $categories as $category )
-                            <li><a href="#">{{ $category }}</a></li>
-                            @endforeach
-                            <li>etc...</li>
-                            @else
-                            <span>タグがありません</span>
-                            @endif
-                        </ul>
-
-                    </div>
-
-                </nav>
-            </div>
-        </div>
-    </footer>
 
 
     <div id="container" class="wrapper">
@@ -194,6 +145,7 @@
                 <div class="readmore"><a href="{{route('member.post.detail', $row->id)}}">READ MORE</a></div>
                 @endforeach
             </article>
+            {{$rows->links()}}
             @else
             <span>記事がありません</span>
             @endif

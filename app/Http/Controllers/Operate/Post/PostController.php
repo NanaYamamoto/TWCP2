@@ -20,6 +20,7 @@ class PostController extends Controller {
         $rows = [];
 
         $data = $request->all();
+        
         if( $data ) {
             session()->put( $ses_key, $data);
         }
@@ -27,7 +28,6 @@ class PostController extends Controller {
         if( $request->has('btnSearchClear') ) {
             session()->forget( $ses_key );
         }
-
 
         $data = session()->get( $ses_key, [] );
 
@@ -38,8 +38,65 @@ class PostController extends Controller {
         return $view;
     }
 
-    public function delete( Request $request, $id ){
+        /**
+     * 削除：確認画面
+     * @param Request $request
+     * @param int $id
+     * @return void
+     */
+    public function delete_confirm(int $id)
+    {
+        $ses_key = 'operate.post.delete';
+        $service = new Service();
         $data = Post::find( $id );
-        if( !$data ) return redirect()->route('operate.post');
+
+        if (!$data) {
+            return redirect()->route('operate.post');
+        }
+        session()->put("{$ses_key}.id", $id);
+
+        $view = view('operate.post.delete_confirm');
+        $view->with('form', $data);
+
+        return $view;
+    }
+
+    /**
+     * 更新：登録処理
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function delete_proc(Request $request)
+    {
+        $service = new Service();
+
+        $ses_key = 'operate.post.delete';
+
+        $id = session()->get("{$ses_key}.id", null);
+
+        //データがない場合は入寮画面に戻る
+        if (empty($id)) {
+            return redirect()->route('operate.post');
+        }
+
+        //削除処理
+        $service->delete($id);
+
+        //セッション削除
+        session()->forget("{$ses_key}");
+
+        return redirect()->route('operate.post.delete.complete');
+    }
+
+    public function delete_complete(Request $request)
+    {
+        $view = view('sample.complete');
+
+        $view->with('func_name', '記事管理');
+        $view->with('mode_name', '削除');
+        $view->with('back', route('operate.post'));
+
+        return $view;
     }
 }

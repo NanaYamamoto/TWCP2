@@ -53,6 +53,7 @@
         </div>
     </li>
     @endforeach
+    {{$rows->links()}}
     @else
     <span>ヒットする記事がありません</span>
     @endif
