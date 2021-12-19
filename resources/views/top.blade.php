@@ -145,6 +145,7 @@
                 <div class="readmore"><a href="{{route('member.post.detail', $row->id)}}">READ MORE</a></div>
                 @endforeach
             </article>
+            {{$rows->links()}}
             @else
             <span>記事がありません</span>
             @endif

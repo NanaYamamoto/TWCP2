@@ -16,7 +16,7 @@ class PostService extends CommonService
      * @param array $data 検索条件を値を配列で取得
      * @return void
      */
-    public function getList($data = [], $offset = 30)
+    public function getList($data = [], $offset = 10)
     {
         $db = Post::query();
         $users = User::query();
@@ -46,10 +46,10 @@ class PostService extends CommonService
             
             // キーワードが入力されていない場合
         } else{
-            return $db->orderby('id','DESC')->paginate();
+            return $db->orderby('id','DESC')->paginate($offset);
             exit;
         }
-        return $keyword;
+        return $keyword->paginate($offset);
     }
 
     /**
@@ -57,7 +57,7 @@ class PostService extends CommonService
      * @param array $data 検索条件を値を配列で取得
      * @return void
      */
-    public function myPostGet($data = [], $offset = 30)
+    public function myPostGet($data = [], $offset = 10)
     {
         $db = Post::query();
         $users = User::query();
@@ -88,10 +88,10 @@ class PostService extends CommonService
             
             // キーワードが入力されていない場合
         } else{
-            return $db->orderby('id','DESC')->paginate();
+            return $db->orderby('id','DESC')->paginate($offset);
             exit;
         }
-        return $keyword;
+        return $keyword->paginate($offset);
     }
 
     /**

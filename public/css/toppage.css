@@ -644,6 +644,7 @@ nav ul ul {
 /*下の階層のulや矢印の基点にするためliにrelativeを指定*/
 nav ul li {
     position: relative;
+    margin: 0;
 }
 
 /*ナビゲーションのリンク設定*/
