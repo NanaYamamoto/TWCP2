@@ -21,9 +21,9 @@ class Service extends CommonService {
         if( !empty($data['keyword']) ) {
             $keyword = $data['keyword'];
             //OR検索処理の書き方
-            $db->where( function( $query ) use ( $keyword ) {
+            $db->where(function( $query ) use ( $keyword ) {
                 $query->where('title', 'LIKE', "%{$keyword}%");
-                $query->OrWhere('content', 'LIKE', "%{$keyword}%");
+                $query->orwhere('content', 'LIKE', "%{$keyword}%");
             });
         }
 
@@ -44,5 +44,9 @@ class Service extends CommonService {
 
     public static function getCagetoryItems(){
         return Category::where('active',1)->pluck('name')->toArray();
+    }
+
+    public function delete($id) {
+        return Post::where('id', $id)->update(['active' => 2]);
     }
 }

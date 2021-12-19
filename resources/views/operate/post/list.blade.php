@@ -13,11 +13,11 @@
             <i class="fas fa-search mr-2"></i>検索条件
         </div>
     </div>
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" role="search" method="post">
         <div class="card-body">
             @csrf
             <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">キーワード</label>
+                <label for="keyword" class="col-sm-2 col-form-label">キーワード</label>
                 <div class="col">
                     {!! $form['keyword'] !!}
                 </div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">投稿日</label>
+                <label for="begin_at" class="col-sm-2 col-form-label">投稿日</label>
                 <div class="col-sm-10 form-inline">
                     {!! $form['begin_at'] !!}&nbsp;～&nbsp;{!! $form['end_at'] !!}
                 </div>
@@ -65,7 +65,7 @@
                     <td>{{Str::limit($row->content, 30 * 3, '...' )}}</td>
                     <td>{{$row->updated_at}}<br />{{$row->created_at}}</td>
                     <td>
-                        <a href="{{route('operate.admin.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
+                        <a href="{{route('operate.post.delete.confirm', $row->id)}}" class="btn btn-outline-primary">削除</a>
                     </td>
                 </tr>
                 @endforeach

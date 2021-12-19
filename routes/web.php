@@ -94,7 +94,9 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
 
     //記事管理
     Route::any ('post', [PostController::class, 'index'])->name('post');
-    Route::any ('post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
+    Route::post('post/delete/proc', [PostController::class, 'delete_proc'])->name('post.delete.proc');
+    Route::any('post/delete/complete', [PostController::class, 'delete_complete'])->name('post.delete.complete');
+    Route::any ('post/delete/{id}', [PostController::class, 'delete_confirm'])->name('post.delete.confirm');
 });
 
 //管理者のログイン、新規登録
