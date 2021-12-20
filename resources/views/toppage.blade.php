@@ -23,11 +23,25 @@
 
     <meta name="description" content="ユーザー専用間ページ" />
 </head>
-<div class="wrap">
 <body>
-
     <!--タイトル壁紙-->
     <section id="box1" class="box" data-section-name="title">
+        <div class="header_list">
+            <ul style="background-color: blanchedalmond;
+                        background-size: 10px;
+                        width: 180px;
+                        height: 70px;
+                        border-radius: 33px;
+                        margin: 10px 0px 0px 1230px;">
+                <button form="mypage-button" class="dropdown-item" type="submit">
+                        マイページ
+                </button>
+                <button form="logout-button" class="dropdown-item" type="submit">
+                        ログアウト
+                </button>
+            </ul>
+        </div>
+
         <div class="wallpaper">
             <!--タイトル文字-->
             <div class="title">
@@ -38,8 +52,6 @@
             <div class="scrolldown1" style="z-index:2"><span>Scroll</span></div>
         
     <!--/box--></section>
-
-    
 
     <section id="box2" class="box" data-section-name="about">
         <div class="box-area">
@@ -61,6 +73,22 @@
         <div id="contents" class="contents">
                 <div id="main">
                     <ul id="pic">
+                        <!--記事クリックしたらログイン画面へ　urlは記事詳細へ--->
+                        @foreach( $data as $row )
+                        @if( !$row ) @continue @endif
+                        <a href="#contents"><li class="item"> 
+                            <h1 class="slider category">{{$row->title}}</h1>
+                            <img src="{{$row->category->img}}" alt="{{$row->category->name}}">
+                        </a>
+                                <span class="category" href="#">{{$row->category->name}}</span>
+                                {{-- <figure>
+                                    <a target="_blank" href="#" title="{{$row->category->name}}">
+                                    {{$row->title}}
+                                    </a>
+                                </figure> --}}
+                        </li></a>
+                        @endforeach
+                        {{--
                         @foreach ($post_title as $title)
                             @foreach ($post_img as $img)
                                 @foreach ($post_category as $category)
@@ -78,10 +106,10 @@
                                 @endforeach
                             @endforeach
                         @endforeach
-                        
-                        <a href="#contents"><li class="item"> 
+                        --}}
+                        {{-- <a href="#contents"><li class="item"> 
                             <h1 class="slider category">インテリア収納</h1>
-                            <img src="images/画像/living.png" alt="インテリア">
+                            <img src="storage/app/public/画像/キッチン.jpeg" alt="インテリア">
                         </a>
                                 <span class="category" href="#">インテリア</span>
                                 <figure>
@@ -92,7 +120,7 @@
                         </li></a>
                         <a href="#contents"><li class="item">
                             <h1 class="slider category">キッチン収納</h1>
-                            <img src="images/画像/キッチン.jpeg" alt="キッチン">
+                            <img src="{{ asset('public/images/画像/キッチン.jpeg') }}" alt="キッチン">
                         </a>
                                 <span class="category" href="#">キッチン</span>
                                 <figure>
@@ -100,7 +128,7 @@
                                         
                                     </a>
                                 </figure>
-                        </li></a>
+                        </li></a> --}}
                         {{-- <a href="#contents"><li class="item"> --}}
                             {{-- <h1 class="slider category">効率のいい筋トレ方法</h1> --}}
                             {{-- <img src="images/画像/筋トレ.jpg" alt="筋トレ"> --}}
@@ -167,10 +195,13 @@
                 <input type="text" size="25" placeholder="キーワード検索"><input type="submit" value="&#xf002">
             </form>
             <ul class="slider">
-                @foreach ($category_name as $name)
-                @foreach ($category_img as $img)
-                    <a href="#top"><li><h1 class="slider category">{{ $name }}</h1><img src={{ str_replace('public/','',$img) }} alt=""></li></a>
-                @endforeach
+                {{-- @foreach( $data as $row )
+                        @if( !$row ) @continue @endif
+                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
+                @endforeach --}}
+                @foreach( $data as $row )
+                        @if( !$row ) @continue @endif
+                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{$row->category->img}}" alt=""></li></a>
                 @endforeach
                 {{-- <a href="#top"><li><h1 class="slider category">リビング</h1><img src="images/画像/living.png" alt=""></li></a>
                 <a href="#top"><li><h1 class="slider category">ゲーム</h1><img src="images/画像/ゲーム.jpg" alt=""></li></a>
