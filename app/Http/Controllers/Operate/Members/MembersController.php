@@ -254,6 +254,9 @@ class MembersController extends Controller
         $input = $request->all();
         session()->put("{$ses_key}.input", $input);
 
+
+        //バリデーション
+        $request->validate($form->getRule($input));
         //
         $data = $service->get(session()->get("{$ses_key}.id"));
 
@@ -286,7 +289,7 @@ class MembersController extends Controller
         }
 
         //バリデーション
-        $ret = SimpleForm::validation($data, $form->getRuleRegist($data));
+        $ret = SimpleForm::validation($data, $form->getRule($data));
         if ($ret !== true) {
             //入力画面にリダイレクト
             return redirect()->route('operate.members.update')->withErrors($ret);

@@ -16,14 +16,14 @@ class PostService extends CommonService
      * @param array $data 検索条件を値を配列で取得
      * @return void
      */
-    public function getList($data = [], $offset = 30)
+    public function getList($data = [], $offset = 10)
     {
         $db = Post::query();
         $users = User::query();
         $categories = Category::query();
-        
-
         $postModel = new Post();
+
+        $db->where('user_id', '<>' ,\Auth::id());
 
         if (!empty($data['category_id'])) $db->where('category_id', $data['category_id']);
 
@@ -32,6 +32,8 @@ class PostService extends CommonService
         if (!empty($data['content'])) $db->where('content', $data['content']);
 
         if (!empty($data['active'] = 1)) $db->where('active', $data['active']);
+
+        if (!empty($data['img'])) $db->where('img', $data['img']);
 
         // if( !empty($data['type']) ) $db->where( 'type', $data['type'] );
 
@@ -44,15 +46,52 @@ class PostService extends CommonService
             
             // キーワードが入力されていない場合
         } else{
-            return $db->paginate();
+            return $db->orderby('id','DESC')->paginate($offset);
             exit;
         }
+        return $keyword->paginate($offset);
+    }
 
-        return $keyword;
-        
-        
-        // return $all;
+    /**
+     * 検索処理
+     * @param array $data 検索条件を値を配列で取得
+     * @return void
+     */
+    public function myPostGet($data = [], $offset = 10)
+    {
+        $db = Post::query();
+        $users = User::query();
+        $user_id = \Auth::id();
+        $categories = Category::query();
+        $postModel = new Post();
 
+        $db->where('user_id', $user_id);
+
+        if (!empty($data['category_id'])) $db->where('category_id', $data['category_id']);
+
+        if (!empty($data['title'])) $db->where('title', $data['title']);
+        
+        if (!empty($data['content'])) $db->where('content', $data['content']);
+
+        if (!empty($data['active'] = 1)) $db->where('active', $data['active']);
+
+        if (!empty($data['img'])) $db->where('img', $data['img']);
+
+        // if( !empty($data['type']) ) $db->where( 'type', $data['type'] );
+
+        if (!empty($data['name'])) $users->where('name', $data['name']);
+        if (!empty($data['name'])) $db->categories()->select('id', 'name')->where('name', $data['name'])->get()->toArray();
+
+        // もしキーワードが入力されている場合
+        if (!empty($data['keyword'])) {
+            $keyword = $postModel->myContent($data['keyword']);
+            
+            // キーワードが入力されていない場合
+        } else{
+            return $db->orderby('id','DESC')->paginate($offset);
+            exit;
+        }
+        return $keyword->paginate($offset);
     }
 
     /**
@@ -64,10 +103,7 @@ class PostService extends CommonService
     {
         $data = Post::find($id);
         $users = User::query();
-        if ($data->type == 2) {
-            $data->url = $data->content;
-            $data->content = '';
-        }
+        
 
         return $data;
     }

@@ -14,10 +14,10 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('post_id')->comment('記事ID');
             $table->bigInteger('user_id')->comment('いいねしたユーザID');
-
-            $table->primary(['post_id', 'user_id']);
+            //$table->timestamps();
         });
     }
 

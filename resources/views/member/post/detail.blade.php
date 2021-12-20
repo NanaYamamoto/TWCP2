@@ -1,16 +1,74 @@
-@extends('layouts.team.team2')
+@extends('layouts.member')
 
-@section('contents')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">投稿詳細</h1>
+@section('title')
+新規記事作成
+@endsection
+
+@section('content')
+<div class="top">
+    <p>記事詳細</p>
 </div>
 
-<div class="row">
-    <!-- <form action="{{route('post.regist')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"> -->
-        @include('member.post.form')
-        <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('post.home')}}" class="btn btn-secondary">一覧に戻る</a>
-        </div>
-    <!-- </form> -->
-</div>
+<form class="form-horizontal form-label-left" enctype="multipart/form-data">
+    <div id="contents" class="cp_iptxt">
+        <label for="title" class="d-flex">タイトル</label>
+        {!! $form['title'] !!}
+        @error('title')
+        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+        @enderror
+        <span class="focus_line"></span>
+    </div>
+    @if( count($rows) )
+    @foreach( $rows as $row )
+    <div id="contents" class="cp_iptxt">
+        <label for="category_id" class="d-flex">カテゴリー</label>
+        {{ $row->category->name }}
+        
+        <span class="focus_line-z"></span>
+    </div>
+    @endforeach
+    @endif
+
+    <div id="contents" class="cp_iptxt">
+        <label for="content" class="d-flex">記事内容</label>
+        {!! $form['content'] !!}
+        @error('content')
+        <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+        @enderror
+        <span class="focus_line"></span>
+    </div>
+
+    @if( count($rows) )
+    @foreach( $rows as $row )
+    <div id="contents" class="cp_iptxt">
+        <label for="img" class="d-flex">画像</label>
+        @if (!empty($row->img))
+        <img src="{{$row->img}}" style="object-fit: cover; width: 1000px; height: 1000px;">
+        @else
+        <img src="/images/blank_profile.png" style="object-fit: cover; width: 1000px; height: 1000px;">
+        @endif
+    </div>
+    @endforeach
+    @endif
+    <div class="" style="margin:10px; display: flex;justify-content: center;align-items: center;">
+        <a href="{{route('member.mypage')}}" class="btn btn-svg" style="margin:0px">
+            <svg>
+                <rect x="2" y="2" rx="0" fill="none" width=200 height="50"></rect>
+            </svg>
+            <span>一覧に戻る</span>
+        </a>
+        <a href="{{route('member.post.update', $form['id'])}}" class="btn btn-svg" style="margin:0px">
+            <svg>
+                <rect x="2" y="2" rx="0" fill="none" width=200 height="50"></rect>
+            </svg>
+            <span>編集</span>
+        </a>
+        <a href="{{route('member.post.delete.proc', $form['id'])}}" class="btn btn-svg" style="margin:0px">
+            <svg>
+                <rect x="2" y="2" rx="0" fill="none" width=200 height="50"></rect>
+            </svg>
+            <span>削除</span>
+        </a>
+    </div>
+</form>
 @endsection

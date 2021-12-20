@@ -4,18 +4,16 @@ use App\Http\Controllers\Operate\DashboardController;
 use App\Http\Controllers\Operate\Members\MembersController;
 use App\Http\Controllers\Operate\Administrator\AdministratorController;
 use App\Http\Controllers\Operate\Category\CategoryController;
-use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Member\Archive\ArchiveController;
+use App\Http\Controllers\Member\Archive\LikesController;
+use App\Http\Controllers\Login\LoginController;
 use Illuminate\Support\Facades\Route;
-
-
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Operate\Administrator\AdministratorsController;
 use App\Http\Controllers\Member\Post\PostsController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
-
+use App\Http\Controllers\Operate\Post\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +29,6 @@ use App\Http\Controllers\Auth\RegisterController;
 //Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/', function () {
-//     return view('toppage');
-// });
 
 Route::get('/', [PostsController::class, 'toppage'])->name('top');
 
@@ -91,12 +85,18 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
     Route::any('category/update/complete', [CategoryController::class, 'update_complete'])->name('category.update.complete');
     Route::any('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
-    Route::get('category', [CategoryController::class, 'index'])->name('category');
+    Route::any('category', [CategoryController::class, 'index'])->name('category');
     Route::post('category/delete/proc', [CategoryController::class, 'delete_proc'])->name('category.delete.proc');
     Route::any('category/delete/complete', [CategoryController::class, 'delete_complete'])->name('category.delete.complete');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
     Route::get('category/{id}', [CategoryController::class, 'details'])->name('category.details');
     Route::any('category/delete/{id}', [CategoryController::class, 'delete_confirm'])->name('category.delete.confirm');
+
+    //記事管理
+    Route::any ('post', [PostController::class, 'index'])->name('post');
+    Route::post('post/delete/proc', [PostController::class, 'delete_proc'])->name('post.delete.proc');
+    Route::any('post/delete/complete', [PostController::class, 'delete_complete'])->name('post.delete.complete');
+    Route::any ('post/delete/{id}', [PostController::class, 'delete_confirm'])->name('post.delete.confirm');
 });
 
 //管理者のログイン、新規登録
@@ -128,16 +128,23 @@ Route::group(['prefix' => 'member', 'as' => 'member.'], function () {
 
     Route::any('post/delete/proc/{id}', [PostsController::class, 'delete_proc'])->name('post.delete.proc');
     Route::any('post/delete/complete', [PostsController::class, 'delete_complete'])->name('post.delete.complete');
-    // Route::any('post/delete/{id}', [PostsController::class, 'delete_confirm'])->name('post.delete.confirm');
 
     Route::any('post/profile', [PostsController::class, 'profile'])->name('post.profile');
-    Route::post('post/profile/edit', [PostsController::class, 'editProfile'])->name('post.editProfile');
+    Route::any('post/profile/edit', [PostsController::class, 'profile_edit'])->name('post.profile_edit');
+    Route::post('post/profile/proc', [PostsController::class, 'profile_proc'])->name('post.profile_proc');
     Route::any('post/profile/complete', [PostsController::class, 'profile_complete'])->name('post.profile.complete');
-    // Route::post('post/postprofile', [PostsController::class, 'postprofile'])->name('post.postprofile');
-    Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
 
+    Route::any('post/search', [PostsController::class, 'search'])->name('post.search');
+    Route::any('post/{id}', [PostsController::class, 'detail'])->name('post.detail');
+    Route::any('post/other/{id}', [PostsController::class, 'detail_other'])->name('post.detail_other');
+
+    // いいね機能
+    Route::get('post/{post_id}/likes', [LikesController::class, 'store'])->name('store');
+    Route::get('like/{like_id}', [LikesController::class, 'delete'])->name('delete');
     //アーカイブページ
     Route::any('archive', [ArchiveController::class, 'index'])->name('archive');
+    Route::any('archive/category/{id}', [ArchiveController::class, 'category'])->name('archive.category');
+    Route::any('archive/article/{id}', [ArchiveController::class, 'article'])->name('archive.article');
 });
 
 //アーカイブページ

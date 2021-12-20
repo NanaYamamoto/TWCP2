@@ -1,5 +1,5 @@
 <div id="contents" class="cp_iptxt">
-    <label for="title" class="">タイトル</label>
+    <label for="title" class="d-flex">タイトル</label>
     {!! $form['title'] !!}
     @error('title')
     <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
@@ -7,7 +7,7 @@
     <span class="focus_line"></span>
 </div>
 <div id="contents" class="cp_iptxt">
-    <label for="category_id" class="padding">カテゴリー</label>
+    <label for="category_id" class="d-flex">カテゴリー</label>
     {!! $form['category_id'] !!}
     @error('category_id')
     <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
@@ -27,7 +27,7 @@
 
 
 <div id="contents" class="cp_iptxt">
-    <label for="img" class="">画像</label>
+    <label for="img" class="d-flex">画像</label>
     {!! $form['img'] !!}
     @error('img')
     <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>

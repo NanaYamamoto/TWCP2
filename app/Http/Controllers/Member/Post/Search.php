@@ -16,6 +16,7 @@ class Search implements InterfaceSearch
     {
         $form = [];
         $opt = ['class' => 'form_control'];
+        $style = ['style' => "width: 80%; margin: auto; border-radius: 20px; border: 1px solid; padding-left: 10px;"];
         $users = User::query();
 
         //お知らせタイトル
@@ -28,6 +29,8 @@ class Search implements InterfaceSearch
         $form['type'] = SimpleForm::radio('type', $data['type'] ?? '', __('define.info.type'), $opt);
 
         $form['name'] = Form::text('name', $data['name'] ?? '', $opt);
+
+        $form['keyword'] = Form::text('keyword', $data['keyword'] ?? '', $style);
 
         return $form;
     }
