@@ -22,9 +22,10 @@ class Post extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function categories()
+
+    public function category()
     {
-        return $this->hasMany('App\Models\Category');
+        return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
 
     public function myContent($data)

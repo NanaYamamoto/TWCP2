@@ -102,6 +102,7 @@ Route::group(['middleware' => 'web_operate', 'prefix' => 'operate', 'as' => 'ope
 //管理者のログイン、新規登録
 Route::get('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::post('login/admin', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin']);
+Route::get('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register');
 
 

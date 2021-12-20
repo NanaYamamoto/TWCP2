@@ -24,11 +24,25 @@
 
     <meta name="description" content="ユーザー専用間ページ" />
 </head>
-<div class="wrap">
 <body>
-
     <!--タイトル壁紙-->
     <section id="box1" class="box" data-section-name="title">
+        <div class="header_list">
+            <ul style="background-color: blanchedalmond;
+                        background-size: 10px;
+                        width: 180px;
+                        height: 70px;
+                        border-radius: 33px;
+                        margin: 10px 0px 0px 1230px;">
+                <button form="mypage-button" class="dropdown-item" type="submit">
+                        マイページ
+                </button>
+                <button form="logout-button" class="dropdown-item" type="submit">
+                        ログアウト
+                </button>
+            </ul>
+        </div>
+
         <div class="wallpaper">
             <!--タイトル文字-->
             <div class="title">
@@ -39,8 +53,6 @@
             <div class="scrolldown1" style="z-index:2"><span>Scroll</span></div>
         
     <!--/box--></section>
-
-    
 
     <section id="box2" class="box" data-section-name="about">
         <div class="box-area">
@@ -62,72 +74,53 @@
         <div id="contents" class="contents">
                 <div id="main">
                     <ul id="pic">
-                        <li class="item">
-                            <h1>インテリア収納</h1>
-                            <img src="images/画像/living.png" alt="インテリア">
+                        <!--記事クリックしたらログイン画面へ　urlは記事詳細へ--->
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
+                        <a href="#contents"><li class="item"> 
+                            <h1 class="slider category"><?php echo e($row->title); ?></h1>
+                            <img src="<?php echo e($row->category->img); ?>" alt="<?php echo e($row->category->name); ?>">
+                        </a>
+                                <span class="category" href="#"><?php echo e($row->category->name); ?></span>
+                                
+                        </li></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                        
+                        
                             
-                                <span class="category" href="#">インテリア</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="インテリア">
-                                        
-                                    </a>
-                                </figure>
-                        </li>
-                        <li class="item">
-                            <h1>キッチン収納</h1>
-                            <img src="images/画像/キッチン.jpeg" alt="キッチン">
                             
-                                <span class="category" href="#">キッチン</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="キッチン">
+                        
+                                
+                                
+                                
+                                    
                                         
-                                    </a>
-                                </figure>
-                        </li>
-                        <li class="item">
-                            <h1>効率のいい筋トレ方法</h1>
-                            <img src="images/画像/筋トレ.jpg" alt="筋トレ">
+                                    
+                                
+                        
+                        
                             
-                                <span class="category" href="#">筋トレ</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="筋トレ">
-                                        
-                                    </a>
-                                </figure>
-                        </li>
-                        <li class="item">
-                            <h1>犬のしつけ方</h1>
-                            <img src="images/画像/犬.jpg" alt="インテリア">
                             
-                                <span class="category" href="#">ペット</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="ペット">
-                                        
-                                    </a>
-                                </figure>
-                        </li>
-                        <li class="item">
-                            <h1>おすすめゲーム</h1>
-                            <img src="images/画像/ゲーム.jpg" alt="ゲーム">
                             
-                                <span class="category" href="#">ゲーム</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="ゲーム">
+                                
+                                
+                                    
                                         
-                                    </a>
-                                </figure>
-                        </li>
-                        <li class="item">
-                            <h1>便利なスマホアプリ5選</h1>
-                            <img src="images/画像/スマホ.jpg" alt="スマホ">
+                                    
+                                
+                        
+                        
                             
-                                <span class="category" href="#">スマホ</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="スマホ">
+                            
+                            
+                                
+                                
+                                    
                                         
-                                    </a>
-                                </figure>
-                        </li>
+                                    
+                                
+                        
                     </ul>
                 </div>
 
@@ -147,15 +140,16 @@
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
             <form method="get" action="#" class="search_container">
-                <input type="text" size="25" placeholder="　キーワード検索"><input type="submit" value="&#xf002">
+                <input type="text" size="25" placeholder="キーワード検索"><input type="submit" value="&#xf002">
             </form>
             <ul class="slider">
-                <li><img src="images/画像/living.png" alt=""></li>
-                <li><img src="images/画像/ゲーム.jpg" alt=""></li>
-                <li><img src="images/画像/スマホ.jpg" alt=""></li>
-                <li><img src="images/画像/宇宙.jpg" alt=""></li>
-                <li><img src="images/画像/犬2.jpg" alt=""></li>
-                <!--/slider--></ul>
+                
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
+                    <a href="#top"><li><h1 class="slider category"><?php echo e($row->category->name); ?></h1><img src="<?php echo e($row->category->img); ?>" alt=""></li></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                
+            <!--/slider--></ul>
         </div>
     </section>
 

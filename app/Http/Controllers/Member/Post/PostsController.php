@@ -78,8 +78,31 @@ class PostsController extends Controller
 
         //$data = Category::where('category_id',1) ->orderBy('created_at','DESC') ->get); //->get();
         //$name = Category::find([1,2,3]);
+
+        //各カテゴリの記事を一件表示したい
+        $posts = Category::where('active',1)->get();
+        //dd( $posts );
+        $data = [];
+        foreach( $posts as $post ){
+            $data[$post->id] = Post::where('category_id', $post->id)
+                                ->where('active',1)
+                                ->orderby('created_at','DESC')
+                                ->first();
+        }
+        //dd($data);
+
+        //各カテゴリを表示したい
+        $cats = Post::where('active',1)->get();
+        //dd( $cats );
+        $posts_data = [];
+        foreach( $cats as $cat ){
+            $posts_data[$cat->id] = Category::where('id', $cat->id)
+                                ->where('active',1)
+                                ->orderby('created_at','DESC')
+                                ->first();
+        }
+        //dd($posts_data);
             
-        
         //記事の値を取得
         $post_title = Post::select('title')
             ->orderBy('created_at' ,'DESC')
@@ -106,7 +129,7 @@ class PostsController extends Controller
         $post_title = array_column($post_title, 'title');
         $post_img = array_column($post_img, 'img');
         $post_category = array_column($post_category, 'category_id');
-        //dd($post_array);
+        //dd($post_title);
         
         //カテゴリーの値を取得
         $category_name = Category::select('name')
@@ -138,6 +161,9 @@ class PostsController extends Controller
         $view->with('post_category',$post_category);
         $view->with('category_name',$category_name);
         $view->with('category_img',$category_img);
+
+        $view->with('categories', $cats );
+        $view->with('data', $data );
 
         return $view;
     }
