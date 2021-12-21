@@ -1,23 +1,8 @@
-@charset "utf-8";
-.wrap {
-	overflow: hidden;
-}
-
-body,
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-/*ログイン・会員登録ボタン*/
-
-/*========= 壁紙 ===============*/
-#box1 {
-    background: url("images/画像/table.jpeg") no-repeat center;
-    background-size: cover;
-}
-
-.wallpaper {
+@charset "utf-8"; /* Loading背景画面設定*/
+#splash {
+    /*fixedで全面に固定*/
+    position: fixed;
+    z-index: 999;
     width: 100%;
     height: 100%;
     background: #333;

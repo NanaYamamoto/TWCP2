@@ -131,9 +131,8 @@
                 <div style="display: block; text-align: center;">
                     <a href="{{route('member.post.detail', $row->id)}}" data-lightbox="gallery-group">
                         @if (!empty($row->img))
-                        <img src="{{$row->img}}" style="object-fit: cover; width: 600px; height: 600px;">
+                        <img src="{{$row->img}}" style="object-fit: cover; width: 350px; height: 350px;">
                         @else
-                        <img src="/images/blank_profile.png" style="object-fit: cover; width: 600px; height: 600px;">
                         @endif
                     </a>
                     <p class="text">

@@ -22,9 +22,9 @@ class Form implements InterfaceForm
         
         $form['name'] = FormF::text('name', $data['name'] ?? '', $opt);
 
-        $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt, ['style' => 'display:block; width: 20rem; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; border: 1px solid #ced4da; border-radius: 0.25rem;']);
+        $form['category_id'] = FormF::select('category_id', $categories  ?? '', $opt, ['style' => 'display:block; width: 20rem; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; background-color: #fff; line-height: 1.5; border: 1px solid #ced4da; border-radius: 0.25rem;']);
 
-        $form['title'] = FormF::text('title', $data['title'] ?? '', $opt, ['style' => 'width: 80%;']);
+        $form['title'] = FormF::text('title', $data['title'] ?? '', $opt);
 
         $form['content'] = FormF::textarea('content', $data['content'] ?? '', $opt);
         

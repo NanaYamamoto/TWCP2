@@ -45,7 +45,7 @@
         </div>
 
         <div class="header_list">
-            <ul>
+            <ul style="left: -90px;">
                 @auth
                 <li class="has-child"><a href="#" class="nav-link"><i class="fas fa-user-alt"></i></a>
                     <ul>

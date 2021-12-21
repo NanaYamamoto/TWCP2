@@ -489,7 +489,7 @@ p.tag_design.search {
 
 /*コンテンツ*/
 #contents {
-  width: 1360px;
+  /* width: 1360px; */
   padding: 30px 0px 0px 50px;
 }
 
@@ -995,11 +995,11 @@ body {
   /*絶対配置で位置を指定*/
   position: absolute;
   top: 45px !important;
-  left: -75px;
+  left: -75px !important;
   z-index: 4;
   /*形状を指定*/
   background: rgba(255, 255, 255, 0.5);
-  width: 9rem;
+  width: 9rem !important;
   /*はじめは非表示*/
   visibility: hidden;
   opacity: 0;
