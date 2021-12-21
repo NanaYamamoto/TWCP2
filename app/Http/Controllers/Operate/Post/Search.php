@@ -23,7 +23,7 @@ class Search implements InterfaceSearch
         $form['keyword']  = Form::text('keyword', $data['keyword'] ?? '', $opt);
         $form['begin_at'] = Form::date('begin_at', $data['begin_at'] ?? '', $opt);
         $form['end_at']   = Form::date('end_at', $data['end_at'] ?? '', $opt);
-        $form['category'] = Form::select('category', $cats, $data['category'] ?? '', $opt);
+        $form['category_id'] = Form::select('category_id', $cats, $data['category_id'] ?? '', $opt);
 
         return $form;
     }

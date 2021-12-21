@@ -23,7 +23,7 @@
                 </div>
                 <label for="category" class="col-sm-2 col-form-label">カテゴリ</label>
                 <div class="col">
-                    {!! $form['category'] !!}
+                    {!! $form['category_id'] !!}
                 </div>
             </div>
             <div class="form-group row">

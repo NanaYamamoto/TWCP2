@@ -35,15 +35,15 @@ class Service extends CommonService {
             $db->where( 'created_at', '<=', $data['end_at'] );
         }
 
-        if( !empty($data['category']) ) {
-            $db->where( 'category_id', '<=', $data['category'] );
+        if( !empty($data['category_id']) ) {
+            $db->where( 'category_id', '=', $data['category_id'] );
         }
 
         return $db->paginate( $offset );
     }
 
     public static function getCagetoryItems(){
-        return Category::where('active',1)->pluck('name')->toArray();
+        return Category::where('active',1)->pluck('name', 'id')->toArray();
     }
 
     public function delete($id) {
