@@ -662,7 +662,7 @@ SP
 }
 
 .gallery {
-    columns: 4;
+    columns: 3;
     padding: 150px 15px 0 70px;
     margin: 0 16px 5% 16px;
 }
