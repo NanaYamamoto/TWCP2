@@ -34,7 +34,7 @@
     @foreach( $rows as $row )
     <li class="bgextend bgLRextendTrigger zoomInRotate">
         <div class="bgappearTrigger">
-            <a href="{{route('member.post.detail_other', $row->id)}}" data-lightbox="gallery-group">
+            <a href="{{route('member.post.detail_other', $row->id)}}" class="d-block" data-lightbox="gallery-group">
                 @if (!empty($row->img))
                 <img src="{{$row->img}}" style="object-fit: cover; width: 200px; height: 200px;">
                 @else
