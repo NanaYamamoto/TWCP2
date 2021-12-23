@@ -50,4 +50,9 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Post');
     }
+
+    public function hasRowNumber()
+    {
+        return DB::table('posts')->where('category_id', $this->id)->where('active', 1)->count();
+    }
 }

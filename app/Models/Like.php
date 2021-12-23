@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Like extends Model
 
@@ -33,5 +35,12 @@ class Like extends Model
     public function category()
     {
         return $this->hasOne('App\Models\Category', 'id', 'category_id');
+    }
+
+    public function myCategoryHasNumber($category_id)
+    {
+        return DB::table('likes')->join('posts', 'post_id', 'posts.id')
+
+            ->where('likes.user_id', Auth::id())->where('category_id', $category_id)->count();
     }
 }
