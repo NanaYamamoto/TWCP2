@@ -489,7 +489,7 @@ p.tag_design.search {
 
 /*コンテンツ*/
 #contents {
-  /* width: 1360px; */
+  width: 1360px;
   padding: 30px 0px 0px 50px;
 }
 
@@ -560,8 +560,7 @@ figure {
     height: 214px;
     overflow: hidden;
     display: block;
-    /*vertical-align: bottom;*/
-
+    vertical-align: bottom;
 }
 
 a {
@@ -586,6 +585,19 @@ a {
   padding-bottom: 1.5rem !important;
   padding-left: 60px;
   overflow: hidden;
+} */
+
+/*アーカイブページ*/
+#archive .archive-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+#archive li {
+  list-style: none;
+}
+#archive img {
+  width: 30%;
+  height: 210px;
 }
 
 /*もっとみるボタン*/

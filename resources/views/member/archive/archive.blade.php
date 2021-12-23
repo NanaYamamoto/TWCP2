@@ -19,7 +19,7 @@
                                         <div style="display: flex;">
                                             <h1 style="font-size: 18px;">{{ $data->category->name }}</h1>
                                             <a href="{{ Route('member.archive.category', $data->category_id) }}">
-                                                <span class="category" href="#">1件</span>
+                                                <span class="category" href="#">{{ $data->myCategoryHasNumber($data->category_id)}}件</span>
                                             </a>  
                                         </div>
                                     
@@ -41,6 +41,6 @@
                 </div>
 
         </div>
-        
-
+    
+    
 @endsection
