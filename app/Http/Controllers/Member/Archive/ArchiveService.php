@@ -34,7 +34,7 @@ class ArchiveService extends CommonService
 
             $ret[$cat->id] = $data;
         }
-        dd($ret);
+
         return $ret;
     }
 
