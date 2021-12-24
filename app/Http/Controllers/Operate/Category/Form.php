@@ -18,7 +18,7 @@ class Form implements InterfaceForm
 
         $form['active'] = SimpleForm::radio('active', $data['active'] ?? '', __('define.publish'), []);
 
-        $form['img'] = FormF::file('img', $opt);
+        $form['img'] = FormF::file('img', $opt, $data['img'] ?? '');
         //$form['img'] = FormF::input('file', 'img', $data['img'] ?? '', $opt);
 
         return $form;
@@ -39,7 +39,8 @@ class Form implements InterfaceForm
         $rule = [];
         $rule['name'] = ['required', 'max:20'];
         $rule['active'] = ['required'];
-        $rule['img'] = ['image', 'file', 'mimes:jpeg,png,jpg,bmb'];
+        $rule['img'] = ['file', 'mimes:jpeg,png,jpg,bmb', 'max:2048'];
+        // $rule['img'] = ['image', 'file', 'mimes:jpeg,png,jpg,bmb'];
 
         return $rule;
     }

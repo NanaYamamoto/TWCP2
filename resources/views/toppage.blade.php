@@ -27,13 +27,18 @@
     <!--タイトル壁紙-->
     <section id="box1" class="box" data-section-name="title">
         <div class="header_list">
+            
             <ul style="background-color: blanchedalmond;
                         background-size: 10px;
                         width: 180px;
                         height: 70px;
                         border-radius: 33px;
                         margin: 10px 0px 0px 1230px;">
-                <button form="mypage-button" class="dropdown-item" type="submit">
+                {{-- <i class="bi bi-person-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1px" height="1px" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 1 1">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  </svg> --}}
+                <button form="mypage-button" class="dropdown-item" type="submit" href="/login">
                         マイページ
                 </button>
                 <button form="logout-button" class="dropdown-item" type="submit">
@@ -78,101 +83,11 @@
                         @if( !$row ) @continue @endif
                         <a href="#contents"><li class="item"> 
                             <h1 class="slider category">{{$row->title}}</h1>
-                            <img src="{{$row->category->img}}" alt="{{$row->category->name}}">
+                            <img src="{{ Storage::url($row->category->img) }}" alt="{{$row->category->name}}">
                         </a>
-                                <span class="category" href="#">{{$row->category->name}}</span>
-                                {{-- <figure>
-                                    <a target="_blank" href="#" title="{{$row->category->name}}">
-                                    {{$row->title}}
-                                    </a>
-                                </figure> --}}
+                                <span class="category" href="/login">{{$row->category->name}}</span>
                         </li></a>
                         @endforeach
-                        {{--
-                        @foreach ($post_title as $title)
-                            @foreach ($post_img as $img)
-                                @foreach ($post_category as $category)
-                                    <a href="#contents"><li class="item">
-                                        <h1 class="slider category">{{$title}} </h1>
-                                        <img src={{ str_replace('public/','',$img) }} alt={{$category}}>
-                                    </a>    
-                                            <span class="category" href="#">{{$title}}</span>
-                                            <figure>
-                                                <a target="_blank" href="#" title="{{$category}}">
-
-                                                </a>
-                                            </figure>
-                                    </li></a>
-                                @endforeach
-                            @endforeach
-                        @endforeach
-                        --}}
-                        {{-- <a href="#contents"><li class="item"> 
-                            <h1 class="slider category">インテリア収納</h1>
-                            <img src="storage/app/public/画像/キッチン.jpeg" alt="インテリア">
-                        </a>
-                                <span class="category" href="#">インテリア</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="インテリア">
-                                    
-                                    </a>
-                                </figure>
-                        </li></a>
-                        <a href="#contents"><li class="item">
-                            <h1 class="slider category">キッチン収納</h1>
-                            <img src="{{ asset('public/images/画像/キッチン.jpeg') }}" alt="キッチン">
-                        </a>
-                                <span class="category" href="#">キッチン</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="キッチン">
-                                        
-                                    </a>
-                                </figure>
-                        </li></a> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">効率のいい筋トレ方法</h1> --}}
-                            {{-- <img src="images/画像/筋トレ.jpg" alt="筋トレ"> --}}
-                        {{-- </a>     --}}
-                                {{-- <span class="category" href="#">筋トレ</span> 
-                                <figure> 
-                                    <a target="_blank" href="#" title="筋トレ">
-                                        
-                                    </a>
-                                </figure>
-                        </li>
-                        <a href="#contents"><li class="item">
-                            <h1 class="slider category">犬のしつけ方</h1>
-                            <img src="images/画像/犬.jpg" alt="インテリア">
-                        </a> --}}
-                                {{-- <span class="category" href="#">ペット</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="ペット"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">おすすめゲーム</h1> --}}
-                            {{-- <img src="images/画像/ゲーム.jpg" alt="ゲーム"> --}}
-                            {{--  --}}
-                                {{-- <span class="category" href="#">ゲーム</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="ゲーム"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li></a> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">便利なスマホアプリ5選</h1> --}}
-                            {{-- <img src="images/画像/スマホ.jpg" alt="スマホ"> --}}
-                            {{--  --}}
-                                {{-- <span class="category" href="#">スマホ</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="スマホ"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li></a> --}}
                     </ul>
                 </div>
 
@@ -195,19 +110,10 @@
                 <input type="text" size="25" placeholder="キーワード検索"><input type="submit" value="&#xf002">
             </form>
             <ul class="slider">
-                {{-- @foreach( $data as $row )
-                        @if( !$row ) @continue @endif
-                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
-                @endforeach --}}
                 @foreach( $data as $row )
                         @if( !$row ) @continue @endif
-                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{$row->category->img}}" alt=""></li></a>
+                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
                 @endforeach
-                {{-- <a href="#top"><li><h1 class="slider category">リビング</h1><img src="images/画像/living.png" alt=""></li></a>
-                <a href="#top"><li><h1 class="slider category">ゲーム</h1><img src="images/画像/ゲーム.jpg" alt=""></li></a>
-                <a href="#top"><li><h1 class="slider category">スマホ</h1><img src="images/画像/スマホ.jpg" alt=""></li></a>
-                <a href="#top"><li><h1 class="slider category">宇宙</h1><img src="images/画像/宇宙.jpg" alt=""></li></a>
-                <a href="#top"><li><h1 class="slider category">犬</h1><img src="images/画像/犬2.jpg" alt=""></li></a> --}}
             <!--/slider--></ul>
         </div>
     </section>
