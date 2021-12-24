@@ -18,8 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="css/team.css">
-
+    <link href="<?php echo e(asset('css/team.css')); ?>" rel="stylesheet">
     <title>teamM.jp</title>
 
     <meta name="description" content="ユーザー専用間ページ" />
@@ -28,13 +27,15 @@
     <!--タイトル壁紙-->
     <section id="box1" class="box" data-section-name="title">
         <div class="header_list">
+            
             <ul style="background-color: blanchedalmond;
                         background-size: 10px;
                         width: 180px;
                         height: 70px;
                         border-radius: 33px;
                         margin: 10px 0px 0px 1230px;">
-                <button form="mypage-button" class="dropdown-item" type="submit">
+                
+                <button form="mypage-button" class="dropdown-item" type="submit" href="/login">
                         マイページ
                 </button>
                 <button form="logout-button" class="dropdown-item" type="submit">
@@ -79,48 +80,11 @@
                         <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
                         <a href="#contents"><li class="item"> 
                             <h1 class="slider category"><?php echo e($row->title); ?></h1>
-                            <img src="<?php echo e($row->category->img); ?>" alt="<?php echo e($row->category->name); ?>">
+                            <img src="<?php echo e(Storage::url($row->category->img)); ?>" alt="<?php echo e($row->category->name); ?>">
                         </a>
-                                <span class="category" href="#"><?php echo e($row->category->name); ?></span>
-                                
+                                <span class="category" href="/login"><?php echo e($row->category->name); ?></span>
                         </li></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        
-                        
-                        
-                            
-                            
-                        
-                                
-                                
-                                
-                                    
-                                        
-                                    
-                                
-                        
-                        
-                            
-                            
-                            
-                                
-                                
-                                    
-                                        
-                                    
-                                
-                        
-                        
-                            
-                            
-                            
-                                
-                                
-                                    
-                                        
-                                    
-                                
-                        
                     </ul>
                 </div>
 
@@ -143,12 +107,10 @@
                 <input type="text" size="25" placeholder="キーワード検索"><input type="submit" value="&#xf002">
             </form>
             <ul class="slider">
-                
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
-                    <a href="#top"><li><h1 class="slider category"><?php echo e($row->category->name); ?></h1><img src="<?php echo e($row->category->img); ?>" alt=""></li></a>
+                    <a href="#top"><li><h1 class="slider category"><?php echo e($row->category->name); ?></h1><img src="<?php echo e(Storage::url($row->category->img)); ?>" alt=""></li></a>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                
             <!--/slider--></ul>
         </div>
     </section>
