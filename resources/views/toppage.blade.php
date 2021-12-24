@@ -19,7 +19,7 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link href="{{ asset('css/team.css') }}" rel="stylesheet">
-    <title>teamM.jp</title>
+    <title href="{{ route('toppage') }}">teamM.jp</title>
 
     <meta name="description" content="ユーザー専用間ページ" />
 </head>
@@ -38,10 +38,10 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="1px" height="1px" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 1 1">
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                   </svg> --}}
-                <button form="mypage-button" class="dropdown-item" type="submit" href="/login">
+                <button form="mypage-button" class="dropdown-item" type="submit" href="{{ route('login') }}">
                         マイページ
                 </button>
-                <button form="logout-button" class="dropdown-item" type="submit">
+                <button form="logout-button" class="dropdown-item" type="submit" href="{{ route('toppage') }}">
                         ログアウト
                 </button>
             </ul>
@@ -85,14 +85,14 @@
                             <h1 class="slider category">{{$row->title}}</h1>
                             <img src="{{ Storage::url($row->category->img) }}" alt="{{$row->category->name}}">
                         </a>
-                                <span class="category" href="/login">{{$row->category->name}}</span>
+                                <span class="category" href="{{ route('login') }}">{{$row->category->name}}</span>
                         </li></a>
                         @endforeach
                     </ul>
                 </div>
 
                 <section>
-                    <a href="#" class="btn_02">もっとみる</a>
+                    <a href="{{ route('login') }}" class="btn_02">もっとみる</a>
                 </section>
         </div>
         </section>
@@ -112,7 +112,7 @@
             <ul class="slider">
                 @foreach( $data as $row )
                         @if( !$row ) @continue @endif
-                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
+                    <a href="{{ route('toppage') }}"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
                 @endforeach
             <!--/slider--></ul>
         </div>
