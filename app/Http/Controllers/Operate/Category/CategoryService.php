@@ -80,7 +80,7 @@ class CategoryService extends CommonService {
             $data['content'] = $data['url'];
         }
 
-        $recode = Category::find($id);
+        $recode = Category::where('id', $id)->find($id);
         if( !$recode ) return null;
 
         $recode->fill( $data );

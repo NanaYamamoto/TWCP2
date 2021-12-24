@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <form action="{{route('category.regist.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+    <form action="{{route('operate.category.regist.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">ID</label>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="form-group form-inline" style="margin-top:10px;">
-            <a href="{{route('category')}}" class="btn btn-secondary">一覧に戻る</a>
+            <a href="{{route('operate.category')}}" class="btn btn-secondary">一覧に戻る</a>
         </div>
     </form>
 </div>
