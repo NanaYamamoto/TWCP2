@@ -78,14 +78,13 @@
         <div id="contents" class="contents">
                 <div id="main">
                     <ul id="pic">
-                        <!--記事クリックしたらログイン画面へ　urlは記事詳細へ--->
                         @foreach( $data as $row )
                         @if( !$row ) @continue @endif
                         <a href="#contents"><li class="item"> 
                             <h1 class="slider category">{{$row->title}}</h1>
                             <img src="{{ Storage::url($row->category->img) }}" alt="{{$row->category->name}}">
                         </a>
-                                <span class="category" href="/login">{{$row->category->name}}</span>
+                                <span class="category" href="#">{{$row->category->name}}</span>
                         </li></a>
                         @endforeach
                     </ul>
