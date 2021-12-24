@@ -73,7 +73,6 @@
         <div id="contents" class="contents">
                 <div id="main">
                     <ul id="pic">
-                        <!--記事クリックしたらログイン画面へ　urlは記事詳細へ--->
                         @foreach( $data as $row )
                         @if( !$row ) @continue @endif
                         <a href="#contents"><li class="item"> 
@@ -81,98 +80,8 @@
                             <img src="{{$row->category->img}}" alt="{{$row->category->name}}">
                         </a>
                                 <span class="category" href="#">{{$row->category->name}}</span>
-                                {{-- <figure>
-                                    <a target="_blank" href="#" title="{{$row->category->name}}">
-                                    {{$row->title}}
-                                    </a>
-                                </figure> --}}
                         </li></a>
                         @endforeach
-                        {{--
-                        @foreach ($post_title as $title)
-                            @foreach ($post_img as $img)
-                                @foreach ($post_category as $category)
-                                    <a href="#contents"><li class="item">
-                                        <h1 class="slider category">{{$title}} </h1>
-                                        <img src={{ str_replace('public/','',$img) }} alt={{$category}}>
-                                    </a>    
-                                            <span class="category" href="#">{{$title}}</span>
-                                            <figure>
-                                                <a target="_blank" href="#" title="{{$category}}">
-
-                                                </a>
-                                            </figure>
-                                    </li></a>
-                                @endforeach
-                            @endforeach
-                        @endforeach
-                        --}}
-                        {{-- <a href="#contents"><li class="item"> 
-                            <h1 class="slider category">インテリア収納</h1>
-                            <img src="storage/app/public/画像/キッチン.jpeg" alt="インテリア">
-                        </a>
-                                <span class="category" href="#">インテリア</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="インテリア">
-                                    
-                                    </a>
-                                </figure>
-                        </li></a>
-                        <a href="#contents"><li class="item">
-                            <h1 class="slider category">キッチン収納</h1>
-                            <img src="{{ asset('public/images/画像/キッチン.jpeg') }}" alt="キッチン">
-                        </a>
-                                <span class="category" href="#">キッチン</span>
-                                <figure>
-                                    <a target="_blank" href="#" title="キッチン">
-                                        
-                                    </a>
-                                </figure>
-                        </li></a> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">効率のいい筋トレ方法</h1> --}}
-                            {{-- <img src="images/画像/筋トレ.jpg" alt="筋トレ"> --}}
-                        {{-- </a>     --}}
-                                {{-- <span class="category" href="#">筋トレ</span> 
-                                <figure> 
-                                    <a target="_blank" href="#" title="筋トレ">
-                                        
-                                    </a>
-                                </figure>
-                        </li>
-                        <a href="#contents"><li class="item">
-                            <h1 class="slider category">犬のしつけ方</h1>
-                            <img src="images/画像/犬.jpg" alt="インテリア">
-                        </a> --}}
-                                {{-- <span class="category" href="#">ペット</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="ペット"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">おすすめゲーム</h1> --}}
-                            {{-- <img src="images/画像/ゲーム.jpg" alt="ゲーム"> --}}
-                            {{--  --}}
-                                {{-- <span class="category" href="#">ゲーム</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="ゲーム"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li></a> --}}
-                        {{-- <a href="#contents"><li class="item"> --}}
-                            {{-- <h1 class="slider category">便利なスマホアプリ5選</h1> --}}
-                            {{-- <img src="images/画像/スマホ.jpg" alt="スマホ"> --}}
-                            {{--  --}}
-                                {{-- <span class="category" href="#">スマホ</span> --}}
-                                {{-- <figure> --}}
-                                    {{-- <a target="_blank" href="#" title="スマホ"> --}}
-                                        {{--  --}}
-                                    {{-- </a> --}}
-                                {{-- </figure> --}}
-                        {{-- </li></a> --}}
                     </ul>
                 </div>
 
