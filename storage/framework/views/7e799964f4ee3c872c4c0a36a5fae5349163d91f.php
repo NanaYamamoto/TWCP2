@@ -35,12 +35,12 @@
                         border-radius: 33px;
                         margin: 10px 0px 0px 1230px;">
                 
-                <button form="mypage-button" class="dropdown-item" type="submit" href="/login">
+                <a form="mypage-button" class="dropdown-item" type="submit" href="<?php echo e(route('login')); ?>">
                         マイページ
-                </button>
-                <button form="logout-button" class="dropdown-item" type="submit">
+                </a>
+                <a form="logout-button" class="dropdown-item" type="submit" href="<?php echo e(route('login')); ?>">
                         ログアウト
-                </button>
+                </a>
             </ul>
         </div>
 
@@ -75,21 +75,20 @@
         <div id="contents" class="contents">
                 <div id="main">
                     <ul id="pic">
-                        <!--記事クリックしたらログイン画面へ　urlは記事詳細へ--->
                         <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
-                        <a href="#contents"><li class="item"> 
+                        <a href="<?php echo e(route('login')); ?>"><li class="item"> 
                             <h1 class="slider category"><?php echo e($row->title); ?></h1>
-                            <img src="<?php echo e(Storage::url($row->category->img)); ?>" alt="<?php echo e($row->category->name); ?>">
+                            <img src="<?php echo e(Storage::url($row->category->img)); ?>" alt="<?php echo e($row->category->name); ?>" href="<?php echo e(route('login')); ?>">
                         </a>
-                                <span class="category" href="/login"><?php echo e($row->category->name); ?></span>
+                                <span class="category" href="<?php echo e(route('login')); ?>"><?php echo e($row->category->name); ?></span>
                         </li></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
 
                 <section>
-                    <a href="#" class="btn_02">もっとみる</a>
+                    <a href="<?php echo e(route('login')); ?>" class="btn_02">もっとみる</a>
                 </section>
         </div>
         </section>
@@ -109,7 +108,7 @@
             <ul class="slider">
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if( !$row ): ?> <?php continue; ?> <?php endif; ?>
-                    <a href="#top"><li><h1 class="slider category"><?php echo e($row->category->name); ?></h1><img src="<?php echo e(Storage::url($row->category->img)); ?>" alt=""></li></a>
+                    <a href="#top"><li><h1 class="slider category" href="<?php echo e(route('login')); ?>"><?php echo e($row->category->name); ?></h1><img src="<?php echo e(Storage::url($row->category->img)); ?>" href="<?php echo e(route('login')); ?>"></li></a>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <!--/slider--></ul>
         </div>
@@ -120,50 +119,50 @@
         <section class="primary">
           <div class="flex">
             <div class="left">
-              <p class="logo"><a href="#">team M</a></p>
+              <p class="logo"><a href="<?php echo e(route('login')); ?>">team M</a></p>
               <p class="address">
                 〒000-0000 JAPAN<br>
                 TEL : 000-000-000 / FAX : 000-000-0000
               </p>
               <ul class="sns-navi">
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="<?php echo e(route('login')); ?>"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="<?php echo e(route('login')); ?>"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="<?php echo e(route('login')); ?>"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="<?php echo e(route('login')); ?>"><i class="fab fa-facebook"></i></a></li>
               </ul>
             </div>
             <div class="right">
               <div class="navi-section">
-                <p class="parent"><a href="#">SITE</a></p>
+                <p class="parent"><a href="<?php echo e(route('login')); ?>">SITE</a></p>
                 <ul class="navi">
-                  <li><a href="#">about</a></li>
-                  <li><a href="#">new post</a></li>
-                  <li><a href="#">search</a></li>
-                  <li><a href="#">???</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">about</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">new post</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">search</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">???</a></li>
                 </ul>
               </div>
               <div class="navi-section">
-                <p class="parent"><a href="#">企業情報</a></p>
+                <p class="parent"><a href="<?php echo e(route('login')); ?>">企業情報</a></p>
                 <ul class="navi">
-                  <li><a href="#">会社案内</a></li>
-                  <li><a href="#">information</a></li>
-                  <li><a href="#">IR</a></li>
-                  <li><a href="#">CSR</a></li>
-                  <li><a href="#">採用情報</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">会社案内</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">information</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">IR</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">CSR</a></li>
+                  <li><a href="<?php echo e(route('login')); ?>">採用情報</a></li>
                 </ul>
               </div>
               <div class="navi-section">
-                <p class="parent"><a href="#">キャンペーン情報</a></p>
-                <p class="parent"><a href="#">CMギャラリー</a></p>
-                <p class="parent"><a href="#">お問い合わせ</a></p>
+                <p class="parent"><a href="<?php echo e(route('login')); ?>">キャンペーン情報</a></p>
+                <p class="parent"><a href="<?php echo e(route('login')); ?>">CMギャラリー</a></p>
+                <p class="parent"><a href="<?php echo e(route('login')); ?>">お問い合わせ</a></p>
               </div>
             </div>
           </div>
         </section>
         <section class="secondary">
           <ul class="sitenavi">
-            <li><a href="#">サイトマップ</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="<?php echo e(route('login')); ?>">サイトマップ</a></li>
+            <li><a href="<?php echo e(route('login')); ?>">プライバシーポリシー</a></li>
           </ul>
           <p class="copyright">Copyright TEAM M,Inc. All rights reserved.</p>
         </section>

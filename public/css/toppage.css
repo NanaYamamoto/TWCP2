@@ -13,10 +13,9 @@
 /*====== スクロール =======*/
 /*スクロールダウン位置*/
 .scrolldown1 {
-    position: absolute;
-    left: 50%;
-    bottom: 170px;
-    /* height: 180px; */
+    position: relative;
+    left: 705px;
+    top: 653px;
 }
 
 /*Scrollテキストの描写*/
