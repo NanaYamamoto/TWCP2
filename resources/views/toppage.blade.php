@@ -34,16 +34,13 @@
                         height: 70px;
                         border-radius: 33px;
                         margin: 10px 0px 0px 1230px;">
-                {{-- <i class="bi bi-person-fill"></i>
-                <svg xmlns="http://www.w3.org/2000/svg" width="1px" height="1px" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 1 1">
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                  </svg> --}}
-                <button form="mypage-button" class="dropdown-item" type="submit" href="/login">
+                
+                <a form="mypage-button" class="dropdown-item" type="submit" href="{{ route('login') }}">
                         マイページ
-                </button>
-                <button form="logout-button" class="dropdown-item" type="submit">
+                </a>
+                <a form="logout-button" class="dropdown-item" type="submit" href="{{ route('login') }}">
                         ログアウト
-                </button>
+                </a>
             </ul>
         </div>
 
@@ -80,18 +77,18 @@
                     <ul id="pic">
                         @foreach( $data as $row )
                         @if( !$row ) @continue @endif
-                        <a href="#contents"><li class="item"> 
+                        <a href="{{ route('login') }}"><li class="item"> 
                             <h1 class="slider category">{{$row->title}}</h1>
-                            <img src="{{ Storage::url($row->category->img) }}" alt="{{$row->category->name}}">
+                            <img src="{{ Storage::url($row->category->img) }}" alt="{{$row->category->name}}" href="{{ route('login') }}">
                         </a>
-                                <span class="category" href="#">{{$row->category->name}}</span>
+                                <span class="category" href="{{ route('login') }}">{{$row->category->name}}</span>
                         </li></a>
                         @endforeach
                     </ul>
                 </div>
 
                 <section>
-                    <a href="#" class="btn_02">もっとみる</a>
+                    <a href="{{ route('login') }}" class="btn_02">もっとみる</a>
                 </section>
         </div>
         </section>
@@ -111,7 +108,7 @@
             <ul class="slider">
                 @foreach( $data as $row )
                         @if( !$row ) @continue @endif
-                    <a href="#top"><li><h1 class="slider category">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" alt=""></li></a>
+                    <a href="#top"><li><h1 class="slider category" href="{{ route('login') }}">{{$row->category->name}}</h1><img src="{{ Storage::url($row->category->img) }}" href="{{ route('login') }}"></li></a>
                 @endforeach
             <!--/slider--></ul>
         </div>
@@ -122,50 +119,50 @@
         <section class="primary">
           <div class="flex">
             <div class="left">
-              <p class="logo"><a href="#">team M</a></p>
+              <p class="logo"><a href="{{ route('login') }}">team M</a></p>
               <p class="address">
                 〒000-0000 JAPAN<br>
                 TEL : 000-000-000 / FAX : 000-000-0000
               </p>
               <ul class="sns-navi">
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="{{ route('login') }}"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="{{ route('login') }}"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="{{ route('login') }}"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="{{ route('login') }}"><i class="fab fa-facebook"></i></a></li>
               </ul>
             </div>
             <div class="right">
               <div class="navi-section">
-                <p class="parent"><a href="#">SITE</a></p>
+                <p class="parent"><a href="{{ route('login') }}">SITE</a></p>
                 <ul class="navi">
-                  <li><a href="#">about</a></li>
-                  <li><a href="#">new post</a></li>
-                  <li><a href="#">search</a></li>
-                  <li><a href="#">???</a></li>
+                  <li><a href="{{ route('login') }}">about</a></li>
+                  <li><a href="{{ route('login') }}">new post</a></li>
+                  <li><a href="{{ route('login') }}">search</a></li>
+                  <li><a href="{{ route('login') }}">???</a></li>
                 </ul>
               </div>
               <div class="navi-section">
-                <p class="parent"><a href="#">企業情報</a></p>
+                <p class="parent"><a href="{{ route('login') }}">企業情報</a></p>
                 <ul class="navi">
-                  <li><a href="#">会社案内</a></li>
-                  <li><a href="#">information</a></li>
-                  <li><a href="#">IR</a></li>
-                  <li><a href="#">CSR</a></li>
-                  <li><a href="#">採用情報</a></li>
+                  <li><a href="{{ route('login') }}">会社案内</a></li>
+                  <li><a href="{{ route('login') }}">information</a></li>
+                  <li><a href="{{ route('login') }}">IR</a></li>
+                  <li><a href="{{ route('login') }}">CSR</a></li>
+                  <li><a href="{{ route('login') }}">採用情報</a></li>
                 </ul>
               </div>
               <div class="navi-section">
-                <p class="parent"><a href="#">キャンペーン情報</a></p>
-                <p class="parent"><a href="#">CMギャラリー</a></p>
-                <p class="parent"><a href="#">お問い合わせ</a></p>
+                <p class="parent"><a href="{{ route('login') }}">キャンペーン情報</a></p>
+                <p class="parent"><a href="{{ route('login') }}">CMギャラリー</a></p>
+                <p class="parent"><a href="{{ route('login') }}">お問い合わせ</a></p>
               </div>
             </div>
           </div>
         </section>
         <section class="secondary">
           <ul class="sitenavi">
-            <li><a href="#">サイトマップ</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="{{ route('login') }}">サイトマップ</a></li>
+            <li><a href="{{ route('login') }}">プライバシーポリシー</a></li>
           </ul>
           <p class="copyright">Copyright TEAM M,Inc. All rights reserved.</p>
         </section>
