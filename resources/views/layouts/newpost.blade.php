@@ -35,9 +35,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#archive">アーカイブ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#follower">フォロワー</a>
-                </li>
             </ul>
         </div>
     </nav>
