@@ -130,7 +130,7 @@
                         @if (!empty($row->img))
                         <img src="{{$row->img}}" style="object-fit: cover; width: 350px; height: 350px;">
                         @else
-                        <img src="/storage/temp/{{ $row->category->img}}" style="object-fit: cover; width: 350px; height: 350px;">
+                        <img src="{{ $row->category->img}}" style="object-fit: cover; width: 350px; height: 350px;">
                         @endif
                     </a>
                     <p class="text">

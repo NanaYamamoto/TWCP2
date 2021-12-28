@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\TakemiLibs\SimpleForm;
 use App\Models\Category;
+
 /**
  * カテゴリー管理コントローラー`
  */
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     {
         $this->categoryService = $category_service;
     }
-    */
+     */
 
     /**
      * 検索一覧画面
@@ -67,7 +68,6 @@ class CategoryController extends Controller
 
         return view('operate.category.category', ['categorie' => $categorie]);
         */
-
     }
 
     /**
@@ -244,22 +244,39 @@ class CategoryController extends Controller
 
         $ses_key = $this->session_key . '.update';
 
+
+        $update = $request->except('img');
+
+        //storage/app/public/tempファイルに保存
+        if ($request->has('img')) {
+            date_default_timezone_set('Asia/Tokyo');
+            $originalName = $request->file('img')->getClientOriginalName();
+
+            $temp_path = $request->file('img')->storeAs('public/temp', $originalName);
+            $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
+        }
+        //dd($read_temp_path);
+        $update = array(
+            'name' => $request->name,
+            'active' => $request->active,
+            'img' => $read_temp_path ?? ''
+        );
+
         //入力値をセッションに保存
-        $input = $request->all();
-        session()->put("{$ses_key}.input", $input);
+        session()->put("{$ses_key}.input", $update);
 
         //
         $data = $service->get(session()->get("{$ses_key}.id"));
-        $input['id'] = $data->id;
+        $update['id'] = $data->id;
 
         //dd($input);
 
         //バリデーション
-        $request->validate($form->getRule($input));
+        $request->validate($form->getRule($update));
 
         //確認画面表示
         $view = view('operate.category.update_confirm');
-        $view->with('form', $request);
+        $view->with('form', $update);
         $view->with('data', $data);
 
         return $view;
@@ -371,6 +388,4 @@ class CategoryController extends Controller
 
         return redirect()->route('operate.category.update.complete');
     }
-
-    }
-
+}

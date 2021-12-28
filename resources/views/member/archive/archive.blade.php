@@ -24,7 +24,7 @@
                 </div>
 
                 @if (!empty($data->category->img))
-                <img src="/storage/temp/{{ $data->category->img }}" style="object-fit: cover;">
+                <img src="{{ $data->category->img }}" style="object-fit: cover;">
                 @else
                 <img src="/images/画像/nologo.png">
                 @endif

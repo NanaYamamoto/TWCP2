@@ -5,7 +5,7 @@
     <h1 class="h2"><i class="fas fa-user-edit"></i> 編集</h1>
 </div>
 <div class="row">
-    <form action="{{route('operate.category.update.confirm')}}" class="form-horizontal form-label-left" method="post">
+    <form action="{{route('operate.category.update.confirm')}}" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
         @csrf
         @include('operate.category.form')
         <div class="form-group form-inline" style="margin-top:10px;">
