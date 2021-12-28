@@ -133,15 +133,15 @@ class CategoryController extends Controller
         if ($request->has('img')) {
             date_default_timezone_set('Asia/Tokyo');
             $originalName = $request->file('img')->getClientOriginalName();
-            $fileName =  date("Ymd_His") . '.' . $originalName;
-            $temp_path = $request->file('img')->storeAs('app/images', $fileName);
-            $read_temp_path = Url('') . '/' . str_replace('public/', 'images/', $temp_path);
+
+            $temp_path = $request->file('img')->storeAs('public/temp', $originalName);
+            $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
         }
         //dd($read_temp_path);
         $data = array(
             'name' => $request->name,
             'active' => $request->active,
-            'img' => $temp_path ?? ''
+            'img' => $read_temp_path ?? ''
         );
 
         //バリデーション

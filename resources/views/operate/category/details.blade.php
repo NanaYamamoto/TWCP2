@@ -45,13 +45,10 @@
         <div class="form-group row">
             <label for="icon_url" class="col-sm-2 col-form-label">カテゴリー画像</label>
             <div class="col-sm-10">
-                @if ($form['img'])
-                <p>
-                    <img src="{{ asset('images/$form->img')}}" width="100" height="100">
-                </p>
-                @else
-                <img class="round-img" src="{{ asset('/images/blank_profile.png') }}" width="100" height="100">
-                @endif
+                {!! $form['img'] !!}
+                @error('email')
+                <span id="name-error" class="error invalid-feedback" style="display:block">{{$message}}</span>
+                @enderror
             </div>
         </div>
 
