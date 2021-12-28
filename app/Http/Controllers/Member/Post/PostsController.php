@@ -421,8 +421,8 @@ class PostsController extends Controller
         if ($request->has('img')) {
             date_default_timezone_set('Asia/Tokyo');
             $originalName = $request->file('img')->getClientOriginalName();
-            $fileName =  date("Ymd_His") . '.' . $originalName;
-            $temp_path = $request->file('img')->storeAs('public/temp', $fileName);
+            
+            $temp_path = $request->file('img')->storeAs('public/temp', $originalName);
             $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
         }
         //dd($fileName);
@@ -547,8 +547,8 @@ class PostsController extends Controller
         if ($request->has('img')) {
             date_default_timezone_set('Asia/Tokyo');
             $originalName = $request->file('img')->getClientOriginalName();
-            $fileName =  date("Ymd_His") . '.' . $originalName;
-            $temp_path = $request->file('img')->storeAs('public/temp', $fileName);
+            
+            $temp_path = $request->file('img')->storeAs('public/temp', $originalName);
             $read_temp_path = Url('') . '/' . str_replace('public/', 'storage/', $temp_path);
         }
 

@@ -38,12 +38,12 @@
                 @if (!empty($row->img))
                 <img src="{{$row->img}}" style="object-fit: cover; width: 200px; height: 200px;">
                 @else
-                <img src="/images/blank_profile.png" style="object-fit: cover; width: 200px; height: 200px;">
+                <img src="/storage/temp/{{ $row->category->img}}" style="object-fit: cover; width: 200px; height: 200px;">
                 @endif
             </a>
             <p style="display: inline-block;">{{ $row->title }}<br>
                 {{ $row->created_at }}<br>
-                {{-- {{ $row->user->name }}さんの投稿 --}}
+                {{ $row->user->name }}さんの投稿
             </p>
             @if ($row->likedBy(Auth::user())->count() > 0)
             <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/member/like/{{ $row->likedBy(Auth::user())->firstOrFail()->id }}"><i class="fas fa-heart" style="color: red; display: inline-block; padding-left: 10px;"></i></a>
